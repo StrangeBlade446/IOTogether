@@ -48,25 +48,25 @@ export function DemoRoleSwitcher({ currentUserId }: DemoRoleSwitcherProps) {
       <button
         onClick={() => setIsOpen(!isOpen)}
         disabled={isPending}
-        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#263447] border border-[#263447] hover:border-[#67C7D4]/50 text-xs font-medium text-[#F1E7D0] transition-all shadow-sm"
+        className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-white border border-slate-200 hover:border-[#0891B2]/50 text-xs font-medium text-slate-800 transition-all shadow-sm"
         title="Switch between Demo Profiles (Keeper, Seeker, Auditor)"
       >
-        <span className="flex items-center justify-center w-2 h-2 rounded-full bg-[#67C7D4] animate-pulse" />
-        <span className="text-[#F1E7D0]/60 hidden sm:inline">Role:</span>
-        <span className="font-semibold text-[#F1E7D0] truncate max-w-[140px]">{currentUser.name}</span>
-        <ChevronDown className={`w-3.5 h-3.5 text-[#F1E7D0]/60 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
+        <span className="flex items-center justify-center w-2 h-2 rounded-full bg-[#0891B2] animate-pulse" />
+        <span className="text-slate-500 hidden sm:inline">Role:</span>
+        <span className="font-semibold text-slate-900 truncate max-w-[140px]">{currentUser.name}</span>
+        <ChevronDown className={`w-3.5 h-3.5 text-slate-500 transition-transform ${isOpen ? 'rotate-180' : ''}`} />
       </button>
 
       {isOpen && (
         <>
           <div className="fixed inset-0 z-40" onClick={() => setIsOpen(false)} />
-          <div className="absolute right-0 mt-2 w-80 rounded-xl bg-[#141821] border border-[#263447] shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-            <div className="px-3 py-2 border-b border-[#263447] mb-1 flex items-center justify-between">
-              <span className="text-xs font-semibold text-[#F1E7D0]/80 uppercase tracking-wider flex items-center gap-1.5">
+          <div className="absolute right-0 mt-2 w-80 rounded-xl bg-white border border-slate-200 shadow-2xl p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="px-3 py-2 border-b border-slate-100 mb-1 flex items-center justify-between">
+              <span className="text-xs font-semibold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
                 <Sparkles className="w-3.5 h-3.5 text-[#C49A55]" />
                 Institutional Personas
               </span>
-              <span className="text-[10px] bg-[#263447] text-[#67C7D4] border border-[#67C7D4]/40 px-1.5 py-0.5 rounded font-mono">
+              <span className="text-[10px] bg-cyan-50 text-[#0891B2] border border-cyan-200 px-1.5 py-0.5 rounded font-mono font-medium">
                 2 Colleges • 1 School
               </span>
             </div>
@@ -80,27 +80,27 @@ export function DemoRoleSwitcher({ currentUserId }: DemoRoleSwitcherProps) {
                     onClick={() => handleSelect(user.id)}
                     className={`w-full text-left p-2.5 rounded-lg transition-all flex items-start gap-3 ${
                       isSelected
-                        ? 'bg-[#263447] border border-[#67C7D4]/60 text-[#F1E7D0]'
-                        : 'hover:bg-[#263447]/60 text-[#F1E7D0]/80'
+                        ? 'bg-amber-50/80 border border-amber-300 text-slate-900'
+                        : 'hover:bg-slate-50 text-slate-700'
                     }`}
                   >
-                    <div className="mt-0.5 p-1 rounded-md bg-[#141821] border border-[#263447]">
+                    <div className="mt-0.5 p-1 rounded-md bg-slate-100 border border-slate-200 text-slate-700">
                       {getRoleIcon(user.category)}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center justify-between">
-                        <p className="text-xs font-semibold text-[#F1E7D0] truncate">{user.name}</p>
-                        {isSelected && <UserCheck className="w-3.5 h-3.5 text-[#67C7D4] shrink-0" />}
+                        <p className="text-xs font-semibold text-slate-900 truncate">{user.name}</p>
+                        {isSelected && <UserCheck className="w-3.5 h-3.5 text-[#0891B2] shrink-0" />}
                       </div>
-                      <p className="text-[11px] font-medium text-[#C49A55] truncate">{user.roleLabel}</p>
-                      <p className="text-[10px] text-[#F1E7D0]/60 line-clamp-2 mt-0.5">{user.description}</p>
+                      <p className="text-[11px] font-medium text-[#A17A38] truncate">{user.roleLabel}</p>
+                      <p className="text-[10px] text-slate-500 line-clamp-2 mt-0.5">{user.description}</p>
                     </div>
                   </button>
                 );
               })}
             </div>
 
-            <div className="mt-2 pt-2 border-t border-[#263447] px-2 py-1 text-[11px] text-[#F1E7D0]/60 text-center">
+            <div className="mt-2 pt-2 border-t border-slate-100 px-2 py-1 text-[11px] text-slate-500 text-center font-mono">
               Switching instantly updates session and permissions.
             </div>
           </div>

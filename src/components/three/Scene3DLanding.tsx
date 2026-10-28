@@ -136,7 +136,7 @@ function Bulb3D({
       {/* Wall Bracket / Base Fitting */}
       <mesh position={[0, 0.85, -0.3]}>
         <boxGeometry args={[0.7, 0.7, 0.2]} />
-        <meshStandardMaterial color="#1a2330" roughness={0.4} metalness={0.8} />
+        <meshStandardMaterial color="#334155" roughness={0.4} metalness={0.8} />
       </mesh>
 
       {/* Gooseneck Pipe to Bulb Base */}
@@ -157,7 +157,7 @@ function Bulb3D({
         <meshStandardMaterial
           color={active ? '#ffffff' : color}
           emissive={active ? color : '#000000'}
-          emissiveIntensity={active ? 4.5 : 0}
+          emissiveIntensity={active ? 5 : 0}
           roughness={0.1}
           metalness={0.9}
         />
@@ -167,14 +167,14 @@ function Bulb3D({
       <mesh position={[0, 0, 0]} castShadow receiveShadow>
         <sphereGeometry args={[0.62, 36, 36]} />
         <meshPhysicalMaterial
-          color={active ? color : '#2a3b50'}
+          color={active ? color : '#E2E8F0'}
           emissive={active ? color : '#000000'}
-          emissiveIntensity={active ? 1.8 : 0}
-          roughness={0.08}
-          transmission={0.85}
+          emissiveIntensity={active ? 2.2 : 0}
+          roughness={0.06}
+          transmission={0.88}
           thickness={0.5}
           transparent
-          opacity={active ? 0.95 : 0.45}
+          opacity={active ? 0.95 : 0.6}
         />
       </mesh>
     </group>
@@ -205,7 +205,7 @@ function Socket3D({
       <mesh position={[0, 0, -0.05]} castShadow receiveShadow>
         <boxGeometry args={[1.5, 1.5, 0.16]} />
         <meshStandardMaterial
-          color={active ? '#1c2836' : '#141821'}
+          color={active ? '#334155' : '#1E293B'}
           roughness={0.35}
           metalness={0.8}
         />
@@ -345,9 +345,9 @@ function CableAndPlug3D({
       <mesh ref={tubeMeshRef} castShadow receiveShadow>
         <tubeGeometry args={[curve, 44, 0.075, 12, false]} />
         <meshStandardMaterial
-          color="#1a222e"
+          color="#334155"
           roughness={0.5}
-          metalness={0.4}
+          metalness={0.3}
         />
       </mesh>
 
@@ -378,14 +378,14 @@ function CableAndPlug3D({
         {/* Jack Sleeve Ring */}
         <mesh position={[0, 0.02, 0]}>
           <cylinderGeometry args={[0.11, 0.11, 0.1, 24]} />
-          <meshStandardMaterial color="#7a8c9e" metalness={0.9} roughness={0.2} />
+          <meshStandardMaterial color="#94A3B8" metalness={0.95} roughness={0.2} />
         </mesh>
 
         {/* Ergonomic Rubber Handle Barrel (Grip) */}
         <mesh position={[0, -0.32, 0]} castShadow>
           <cylinderGeometry args={[0.18, 0.16, 0.58, 24]} />
           <meshStandardMaterial
-            color="#141821"
+            color="#1E293B"
             roughness={0.4}
             metalness={0.7}
           />
@@ -406,7 +406,7 @@ function CableAndPlug3D({
         {/* Flexible Strain Relief Boot */}
         <mesh position={[0, -0.7, 0]}>
           <coneGeometry args={[0.14, 0.25, 24]} />
-          <meshStandardMaterial color="#1c2430" roughness={0.6} />
+          <meshStandardMaterial color="#334155" roughness={0.6} />
         </mesh>
       </group>
     </group>
@@ -530,22 +530,26 @@ function Scene({
       </mesh>
 
       {/* 3D Atmospheric Lighting */}
-      <ambientLight intensity={0.45} />
+      <ambientLight intensity={0.85} />
       <directionalLight
-        position={[0, 8, 6]}
-        intensity={1.2}
+        position={[2, 9, 6]}
+        intensity={1.5}
         castShadow
         shadow-mapSize-width={1024}
         shadow-mapSize-height={1024}
+      />
+      <directionalLight
+        position={[-4, 5, 4]}
+        intensity={0.5}
       />
 
       {/* 3D Laboratory Back Wall (Receives shadows and light) */}
       <mesh position={[0, 1.2, -0.6]} receiveShadow>
         <planeGeometry args={[20, 10]} />
         <meshStandardMaterial
-          color="#141821"
-          roughness={0.7}
-          metalness={0.3}
+          color="#EDF2F7"
+          roughness={0.85}
+          metalness={0.1}
         />
       </mesh>
 
@@ -553,16 +557,16 @@ function Scene({
       <mesh position={[0, -2.5, 2]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
         <planeGeometry args={[20, 10]} />
         <meshStandardMaterial
-          color="#0f131a"
-          roughness={0.6}
-          metalness={0.5}
+          color="#CBD5E1"
+          roughness={0.4}
+          metalness={0.3}
         />
       </mesh>
 
       {/* Cable Ground Terminal Junction Box */}
       <mesh position={[CABLE_ANCHOR.x, -2.4, CABLE_ANCHOR.z]} castShadow receiveShadow>
         <boxGeometry args={[0.8, 0.2, 0.6]} />
-        <meshStandardMaterial color="#263447" roughness={0.3} metalness={0.8} />
+        <meshStandardMaterial color="#94A3B8" roughness={0.25} metalness={0.8} />
       </mesh>
 
       {/* 3D Bulbs */}
@@ -648,26 +652,26 @@ export function Scene3DLanding() {
       {/* OVERLAY HEADER: TITLE & INTERACTIVE STATUS */}
       {/* ===================================================================== */}
       <div className="relative z-20 pt-6 px-4 text-center max-w-2xl mx-auto space-y-2 pointer-events-none">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#263447]/90 border border-[#C49A55]/40 text-[#F1E7D0] text-xs font-semibold shadow-sm backdrop-blur-md">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border border-slate-200 text-slate-800 text-xs font-semibold shadow-sm backdrop-blur-md">
           <span className="w-2 h-2 rounded-full bg-[#C49A55] animate-pulse" />
-          <span className="tracking-wider uppercase text-[11px] font-mono text-[#C49A55]">
+          <span className="tracking-wider uppercase text-[11px] font-mono text-[#A17A38]">
             3D Electronics Exchange Chamber
           </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#67C7D4]" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#0891B2]" />
         </div>
 
         <div className="flex items-center justify-center font-serif text-5xl sm:text-7xl font-bold tracking-tight">
           <TextRoll className="text-[#C49A55]">IO</TextRoll>
-          <TextRoll className="text-[#F1E7D0]">Together</TextRoll>
+          <TextRoll className="text-[#0F172A]">Together</TextRoll>
         </div>
 
-        <p className="font-serif text-base text-[#F1E7D0]/90 font-medium">
+        <p className="font-serif text-base text-slate-700 font-medium">
           Share Resources. Build Possibilities.
         </p>
 
         {/* Live Interactive Status Pill */}
         <div className="pt-1 flex items-center justify-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-[#141821]/90 border border-[#263447] text-xs text-[#F1E7D0] font-mono shadow-xl backdrop-blur-md pointer-events-auto">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border border-slate-300 text-xs text-slate-800 font-mono shadow-md backdrop-blur-md pointer-events-auto">
             <Plug className="w-3.5 h-3.5 text-[#C49A55] animate-bounce" />
             <span>{statusText}</span>
           </span>
@@ -698,27 +702,27 @@ export function Scene3DLanding() {
         {/* Terminal Quick Access Cards */}
         <div className="grid grid-cols-2 gap-4 w-full">
           {/* Left Keeper Station Label */}
-          <div className="p-3 rounded-2xl bg-[#141821]/80 backdrop-blur-md border border-[#C49A55]/40 text-center shadow-lg">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-[#C49A55] font-bold block">
+          <div className="p-3 rounded-2xl bg-white/95 backdrop-blur-md border border-amber-300 text-center shadow-md">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-amber-800 font-bold block">
               WALL SOCKET 01
             </span>
-            <span className="font-serif text-sm font-bold text-[#F1E7D0] block">
+            <span className="font-serif text-sm font-bold text-slate-900 block">
               Keeper Portal
             </span>
-            <span className="text-[10px] text-[#F1E7D0]/60 block">
+            <span className="text-[10px] text-slate-500 block">
               Lab Heads &amp; Equipment Custodians
             </span>
           </div>
 
           {/* Right Seeker Station Label */}
-          <div className="p-3 rounded-2xl bg-[#141821]/80 backdrop-blur-md border border-[#67C7D4]/40 text-center shadow-lg">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-[#67C7D4] font-bold block">
+          <div className="p-3 rounded-2xl bg-white/95 backdrop-blur-md border border-cyan-300 text-center shadow-md">
+            <span className="text-[10px] uppercase font-mono tracking-wider text-cyan-800 font-bold block">
               WALL SOCKET 02
             </span>
-            <span className="font-serif text-sm font-bold text-[#F1E7D0] block">
+            <span className="font-serif text-sm font-bold text-slate-900 block">
               Seeker Portal
             </span>
-            <span className="text-[10px] text-[#F1E7D0]/60 block">
+            <span className="text-[10px] text-slate-500 block">
               Students, Teachers &amp; Innovators
             </span>
           </div>
@@ -729,7 +733,7 @@ export function Scene3DLanding() {
           <button
             type="button"
             onClick={() => setShowDemoTray(!showDemoTray)}
-            className="inline-flex items-center gap-1.5 text-xs text-[#F1E7D0]/70 hover:text-[#C49A55] transition font-mono bg-[#141821]/80 px-3 py-1 rounded-full border border-[#263447] backdrop-blur-md"
+            className="inline-flex items-center gap-1.5 text-xs text-slate-700 hover:text-amber-800 transition font-mono bg-white/90 hover:bg-white px-3 py-1 rounded-full border border-slate-300 backdrop-blur-md shadow-xs"
           >
             <UserCheck className="w-3.5 h-3.5 text-[#C49A55]" />
             <span>{showDemoTray ? 'Hide Demo Profiles' : 'One-Click Demo Profiles (2 Colleges • 1 School)'}</span>
@@ -737,10 +741,10 @@ export function Scene3DLanding() {
         </div>
 
         {showDemoTray && (
-          <div className="p-4 rounded-2xl bg-[#141821]/95 border border-[#263447] shadow-2xl text-left space-y-3 w-full backdrop-blur-xl">
+          <div className="p-4 rounded-2xl bg-white/98 border border-slate-200 shadow-2xl text-left space-y-3 w-full backdrop-blur-xl">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
               <div>
-                <span className="text-[10px] font-mono text-[#C49A55] font-bold uppercase block mb-1">
+                <span className="text-[10px] font-mono text-amber-800 font-bold uppercase block mb-1">
                   Keepers (Lab Heads)
                 </span>
                 <div className="space-y-1">
@@ -749,20 +753,20 @@ export function Scene3DLanding() {
                       key={u.id}
                       onClick={() => handleDemoLogin(u.id, '/sender')}
                       disabled={loadingDemoId !== null}
-                      className="w-full text-left p-2 rounded-xl bg-[#263447]/60 hover:bg-[#263447] border border-[#263447] hover:border-[#C49A55]/60 text-xs flex items-center justify-between group"
+                      className="w-full text-left p-2 rounded-xl bg-slate-50 hover:bg-amber-50/80 border border-slate-200 hover:border-amber-400 text-xs flex items-center justify-between group transition"
                     >
                       <div className="truncate">
-                        <span className="font-bold text-[#F1E7D0] group-hover:text-[#C49A55]">{u.name}</span>
-                        <span className="text-[9px] text-[#F1E7D0]/60 block truncate">{u.instituteName}</span>
+                        <span className="font-bold text-slate-900 group-hover:text-amber-800">{u.name}</span>
+                        <span className="text-[9px] text-slate-500 block truncate">{u.instituteName}</span>
                       </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#F1E7D0]/40 group-hover:text-[#C49A55] shrink-0" />
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-800 shrink-0" />
                     </button>
                   ))}
                 </div>
               </div>
 
               <div>
-                <span className="text-[10px] font-mono text-[#67C7D4] font-bold uppercase block mb-1">
+                <span className="text-[10px] font-mono text-cyan-800 font-bold uppercase block mb-1">
                   Seekers (Students &amp; Mentors)
                 </span>
                 <div className="space-y-1">
@@ -771,13 +775,13 @@ export function Scene3DLanding() {
                       key={u.id}
                       onClick={() => handleDemoLogin(u.id, '/receiver')}
                       disabled={loadingDemoId !== null}
-                      className="w-full text-left p-2 rounded-xl bg-[#263447]/60 hover:bg-[#263447] border border-[#263447] hover:border-[#67C7D4]/60 text-xs flex items-center justify-between group"
+                      className="w-full text-left p-2 rounded-xl bg-slate-50 hover:bg-cyan-50/80 border border-slate-200 hover:border-cyan-400 text-xs flex items-center justify-between group transition"
                     >
                       <div className="truncate">
-                        <span className="font-bold text-[#F1E7D0] group-hover:text-[#67C7D4]">{u.name}</span>
-                        <span className="text-[9px] text-[#F1E7D0]/60 block truncate">{u.instituteName}</span>
+                        <span className="font-bold text-slate-900 group-hover:text-cyan-800">{u.name}</span>
+                        <span className="text-[9px] text-slate-500 block truncate">{u.instituteName}</span>
                       </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-[#F1E7D0]/40 group-hover:text-[#67C7D4] shrink-0" />
+                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-800 shrink-0" />
                     </button>
                   ))}
                 </div>

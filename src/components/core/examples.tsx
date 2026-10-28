@@ -40,7 +40,7 @@ export function TextMorphButton({
       onClick={handleClick}
       className={
         className ||
-        'flex h-10 w-[140px] shrink-0 items-center justify-center rounded-full bg-[#C49A55] px-4 text-xs font-bold text-[#141821] shadow-md transition-all hover:bg-[#d4aa65]'
+        'flex h-10 w-[140px] shrink-0 items-center justify-center rounded-full bg-[#C49A55] px-4 text-xs font-bold text-white shadow-md transition-all hover:bg-[#d4aa65]'
       }
     >
       <TextMorph>{text}</TextMorph>
@@ -50,7 +50,7 @@ export function TextMorphButton({
 
 export function TextRollBasic({
   text = 'motion-primitives',
-  className = 'text-4xl text-[#F1E7D0]',
+  className = 'text-4xl text-[#0F172A]',
 }: {
   text?: string;
   className?: string;
@@ -146,11 +146,11 @@ export function AppleStyleDock({
 }) {
   return (
     <div className="relative max-w-full">
-      <Dock orientation="horizontal" className="items-end pb-2 bg-[#141821]/90 border border-[#263447]">
+      <Dock orientation="horizontal" className="items-end pb-2 bg-white/95 border border-slate-200 shadow-lg">
         {data.map((item, idx) => (
           <DockItem
             key={idx}
-            className="aspect-square rounded-full bg-[#263447] border border-[#263447] hover:border-[#67C7D4]/50"
+            className="aspect-square rounded-full bg-slate-100 border border-slate-200 hover:border-[#0891B2]"
           >
             <DockLabel>{item.title}</DockLabel>
             <DockIcon>{item.icon}</DockIcon>

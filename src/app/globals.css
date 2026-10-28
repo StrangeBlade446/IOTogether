@@ -5,18 +5,18 @@
 @tailwind utilities;
 
 :root {
-  --background: #141821;
-  --foreground: #F1E7D0;
-  --surface: #263447;
-  --surface-hover: #2f3e53;
+  --background: #F8FAFC;
+  --foreground: #0F172A;
+  --surface: #FFFFFF;
+  --surface-hover: #F1F5F9;
   --primary: #C49A55;
-  --accent: #67C7D4;
-  --border: #263447;
+  --accent: #0891B2;
+  --border: #E2E8F0;
 }
 
 body {
-  color: #F1E7D0;
-  background: #141821;
+  color: #0F172A;
+  background: #F8FAFC;
   font-feature-settings: "cv02", "cv03", "cv04", "cv11";
   min-height: 100vh;
 }
@@ -27,11 +27,11 @@ body {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #141821;
+  background: #F1F5F9;
 }
 ::-webkit-scrollbar-thumb {
-  background: #263447;
-  border: 1px solid rgba(196, 154, 85, 0.2);
+  background: #CBD5E1;
+  border: 1px solid rgba(196, 154, 85, 0.25);
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
@@ -41,42 +41,44 @@ body {
 /* Blueprint Grid Pattern */
 .blueprint-grid {
   background-image: 
-    linear-gradient(to right, rgba(103, 199, 212, 0.05) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(103, 199, 212, 0.05) 1px, transparent 1px);
+    linear-gradient(to right, rgba(8, 145, 178, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8, 145, 178, 0.08) 1px, transparent 1px);
   background-size: 32px 32px;
 }
 
 .blueprint-grid-fine {
   background-image: 
-    linear-gradient(to right, rgba(103, 199, 212, 0.08) 1px, transparent 1px),
-    linear-gradient(to bottom, rgba(103, 199, 212, 0.08) 1px, transparent 1px);
+    linear-gradient(to right, rgba(8, 145, 178, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(8, 145, 178, 0.1) 1px, transparent 1px);
   background-size: 16px 16px;
 }
 
 /* Engraved Brass Borders */
 .engraved-card {
-  border: 1px solid rgba(196, 154, 85, 0.28);
-  box-shadow: inset 0 1px 0 rgba(241, 231, 208, 0.08), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(196, 154, 85, 0.35);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+  background-color: #FFFFFF;
 }
 
 .engraved-card:hover {
-  border-color: rgba(196, 154, 85, 0.6);
-  box-shadow: inset 0 1px 0 rgba(241, 231, 208, 0.15), 0 0 25px -3px rgba(196, 154, 85, 0.2);
+  border-color: rgba(196, 154, 85, 0.7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 0 25px -3px rgba(196, 154, 85, 0.25);
 }
 
 .engraved-card-accent {
-  border: 1px solid rgba(103, 199, 212, 0.3);
-  box-shadow: inset 0 1px 0 rgba(103, 199, 212, 0.1), 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(8, 145, 178, 0.3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8), 0 4px 20px -2px rgba(15, 23, 42, 0.06);
+  background-color: #FFFFFF;
 }
 
 .engraved-card-accent:hover {
-  border-color: rgba(103, 199, 212, 0.7);
-  box-shadow: inset 0 1px 0 rgba(103, 199, 212, 0.2), 0 0 25px -3px rgba(103, 199, 212, 0.25);
+  border-color: rgba(8, 145, 178, 0.7);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95), 0 0 25px -3px rgba(8, 145, 178, 0.25);
 }
 
 /* Forge Glow */
 .forge-glow-hover:hover {
-  box-shadow: 0 0 25px rgba(196, 154, 85, 0.45);
+  box-shadow: 0 0 25px rgba(196, 154, 85, 0.35);
 }
 
 @layer utilities {

@@ -37,12 +37,12 @@ export function Logo({ size = 'md', showTagline = false, className = '' }: LogoP
       </div>
 
       <div className="flex flex-col">
-        <div className={`font-serif font-bold tracking-tight text-[#F1E7D0] flex items-center ${textSizes[size]}`}>
+        <div className={`font-serif font-bold tracking-tight text-[#0F172A] flex items-center ${textSizes[size]}`}>
           <span>IO</span>
           <span className="text-[#C49A55]">Together</span>
         </div>
         {showTagline && (
-          <span className="text-[10px] tracking-wider uppercase text-[#67C7D4] font-medium font-mono">
+          <span className="text-[10px] tracking-wider uppercase text-[#0891B2] font-semibold font-mono">
             Share Resources. Build Possibilities.
           </span>
         )}

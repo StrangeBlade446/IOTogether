@@ -72,7 +72,7 @@ export function Dock({
         onMouseMove={handleMouseMove}
         onMouseLeave={handleMouseLeave}
         className={cn(
-          'flex gap-2.5 p-2 rounded-2xl bg-[#141821]/80 backdrop-blur-xl border border-[#263447]/90 shadow-2xl',
+          'flex gap-2.5 p-2 rounded-2xl bg-white/90 backdrop-blur-xl border border-slate-200/90 shadow-xl',
           orientation === 'vertical' ? 'flex-col items-center' : 'flex-row items-end',
           className
         )}
@@ -153,7 +153,7 @@ export function DockLabel({ className, children }: DockLabelProps) {
           exit={{ opacity: 0, scale: 0.9, transition: { duration: 0.1 } }}
           className={cn(
             'absolute z-50 px-2.5 py-1 text-xs font-semibold whitespace-nowrap rounded-lg shadow-xl pointer-events-none',
-            'bg-[#263447] text-[#F1E7D0] border border-[#C49A55]/40 font-mono',
+            'bg-white/95 text-slate-900 border border-slate-200 font-mono shadow-slate-200/50',
             orientation === 'vertical'
               ? 'left-full top-1/2 -translate-y-1/2 ml-1'
               : 'bottom-full left-1/2 -translate-x-1/2 mb-1',

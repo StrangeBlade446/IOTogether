@@ -21,10 +21,10 @@ export default async function RootLayout({
   const unreadNotifs = db.getNotifications(session.user.id).filter((n) => !n.read_at).length;
 
   return (
-    <html lang="en" className="dark">
-      <body className="bg-[#141821] text-[#F1E7D0] flex flex-col min-h-screen antialiased selection:bg-[#C49A55]/30 selection:text-[#F1E7D0] font-sans relative">
+    <html lang="en" className="light">
+      <body className="bg-[#F8FAFC] text-[#0F172A] flex flex-col min-h-screen antialiased selection:bg-[#C49A55]/25 selection:text-[#0F172A] font-sans relative">
         {/* ========================================================================= */}
-        {/* ROTATED BACKGROUND ARTWORK (LANDSCAPE 16:9) WITH NOCTURNAL GRADIENT */}
+        {/* ROTATED BACKGROUND ARTWORK (LANDSCAPE 16:9) WITH LIGHT AMBIENT GRADIENT */}
         {/* ========================================================================= */}
         <div
           aria-hidden="true"
@@ -32,13 +32,13 @@ export default async function RootLayout({
         >
           {/* Rotated background artwork */}
           <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-40 mix-blend-screen scale-105 filter saturate-125"
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-25 scale-105 filter saturate-125 brightness-105"
             style={{ backgroundImage: `url('/background.jpg')` }}
           />
-          {/* Theme overlays for readability and contrast */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#141821]/80 via-[#141821]/90 to-[#141821] backdrop-blur-[1px]" />
-          <div className="absolute inset-0 blueprint-grid opacity-25" />
-          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#C49A55]/15 via-[#67C7D4]/10 to-transparent blur-3xl rounded-full" />
+          {/* Theme overlays for readability and light laboratory elegance */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-[#F8FAFC]/85 to-slate-100/90 backdrop-blur-[0.5px]" />
+          <div className="absolute inset-0 blueprint-grid opacity-30" />
+          <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#C49A55]/10 via-[#0891B2]/8 to-transparent blur-3xl rounded-full" />
         </div>
 
         {/* Side Dock Navigation (hidden on landing page, shown after login / on inner pages) */}

@@ -10,11 +10,11 @@ module.exports = {
     extend: {
       colors: {
         guild: {
-          bg: '#141821',
+          bg: '#F8FAFC',
           primary: '#C49A55',
-          secondary: '#263447',
-          accent: '#67C7D4',
-          text: '#F1E7D0',
+          secondary: '#E2E8F0',
+          accent: '#0891B2',
+          text: '#0F172A',
         },
         brand: {
           50: '#ecfeff',
