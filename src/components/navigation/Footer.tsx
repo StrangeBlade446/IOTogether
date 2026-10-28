@@ -1,11 +1,21 @@
+'use client';
+
 import React from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { Logo } from '@/components/brand/Logo';
 import { ShieldCheck, Heart } from 'lucide-react';
 
 export function Footer() {
+  const pathname = usePathname();
+  const isLanding = pathname === '/';
+
   return (
-    <footer className="w-full border-t border-[#263447] bg-[#141821]/90 backdrop-blur-md py-10 mt-auto md:pl-20 pb-28 md:pb-10 relative z-20">
+    <footer
+      className={`w-full border-t border-[#263447] bg-[#141821]/90 backdrop-blur-md py-10 mt-auto relative z-20 ${
+        isLanding ? 'px-4' : 'md:pl-24 pb-28 md:pb-10'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
           <div className="md:col-span-2">

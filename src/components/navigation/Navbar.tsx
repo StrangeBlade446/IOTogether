@@ -34,7 +34,7 @@ export async function Navbar() {
             <Link
               href="/sender"
               className="px-2.5 py-1 rounded-lg text-xs font-bold text-[#C49A55] hover:bg-[#C49A55]/15 transition flex items-center gap-1.5 border border-[#C49A55]/30"
-              title="Equipments Keepers (Lab Heads & Assigners)"
+              title="Equipment Keepers (Lab Heads & Assigners)"
             >
               <span className="w-2 h-2 rounded-full bg-[#C49A55] animate-pulse" />
               Keeper Portal
@@ -43,7 +43,7 @@ export async function Navbar() {
             <Link
               href="/receiver"
               className="px-2.5 py-1 rounded-lg text-xs font-bold text-[#67C7D4] hover:bg-[#67C7D4]/15 transition flex items-center gap-1.5 border border-[#67C7D4]/30"
-              title="Equipments Seekers (Students & Teachers)"
+              title="Equipment Seekers (Students & Teachers)"
             >
               <span className="w-2 h-2 rounded-full bg-[#67C7D4] animate-pulse" />
               Seeker Portal
