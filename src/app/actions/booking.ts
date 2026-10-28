@@ -12,6 +12,10 @@ export async function requestBookingAction(formData: {
   dueAt: string;
   purpose: string;
   rulesAcknowledged: boolean;
+  durationDays?: number;
+  durationHours?: number;
+  durationMinutes?: number;
+  idCardImageUrl?: string;
 }) {
   const session = await getSession();
   if (!session.user) {
@@ -42,16 +46,87 @@ export async function requestBookingAction(formData: {
     dueAt: formData.dueAt,
     purpose: formData.purpose,
     rulesAcknowledged: formData.rulesAcknowledged,
+    durationDays: formData.durationDays,
+    durationHours: formData.durationHours,
+    durationMinutes: formData.durationMinutes,
+    idCardImageUrl: formData.idCardImageUrl,
   });
 
   if (result.success) {
     revalidatePath('/my-bookings');
+    revalidatePath('/receiver/bookings');
     revalidatePath('/explore');
+    revalidatePath('/receiver/explore');
     revalidatePath(`/resources/${formData.resourceId}`);
     revalidatePath('/manage/requests');
+    revalidatePath('/sender/requests');
   }
 
   return result;
+}
+
+export async function verifyIdAndApproveBookingAction(
+  bookingId: string,
+  approvedDuration?: { days?: number; hours?: number; minutes?: number }
+) {
+  const session = await getSession();
+  const booking = db.getBooking(bookingId);
+  if (!booking || !booking.resource) {
+    return { success: false, error: 'Booking not found' };
+  }
+
+  if (!checkPermission(session, 'manage_institution', booking.resource.institution_id)) {
+    return { success: false, error: 'Forbidden: You do not have manager permissions for this institution' };
+  }
+
+  const res = db.verifyIdAndApproveBooking({
+    bookingId,
+    managerId: session.user.id,
+    approvedDuration,
+  });
+
+  if (res.success) {
+    revalidatePath('/manage/requests');
+    revalidatePath('/sender/requests');
+    revalidatePath('/manage/loans');
+    revalidatePath('/sender/loans');
+    revalidatePath('/my-bookings');
+    revalidatePath(`/my-bookings/${bookingId}`);
+    revalidatePath('/receiver/bookings');
+    revalidatePath(`/receiver/bookings/${bookingId}`);
+  }
+  return res;
+}
+
+export async function claimHandoverWithQrAction(bookingId: string, scannedQrToken: string) {
+  const session = await getSession();
+  if (!session.user) {
+    return { success: false, error: 'You must be logged in to claim handover' };
+  }
+
+  const booking = db.getBooking(bookingId);
+  if (!booking) {
+    return { success: false, error: 'Booking not found' };
+  }
+
+  const res = db.claimHandoverWithQr({
+    bookingId,
+    scannedQrToken,
+    receiverId: session.user.id,
+  });
+
+  if (res.success) {
+    revalidatePath('/my-bookings');
+    revalidatePath(`/my-bookings/${bookingId}`);
+    revalidatePath('/receiver/bookings');
+    revalidatePath(`/receiver/bookings/${bookingId}`);
+    revalidatePath('/manage/requests');
+    revalidatePath('/sender/requests');
+    revalidatePath('/manage/loans');
+    revalidatePath('/sender/loans');
+  }
+
+  return res;
 }
 
 export async function approveBookingAction(bookingId: string) {
@@ -68,9 +143,13 @@ export async function approveBookingAction(bookingId: string) {
   const res = db.approveBooking(bookingId, session.user.id);
   if (res.success) {
     revalidatePath('/manage/requests');
+    revalidatePath('/sender/requests');
     revalidatePath('/manage/loans');
+    revalidatePath('/sender/loans');
     revalidatePath('/my-bookings');
     revalidatePath(`/my-bookings/${bookingId}`);
+    revalidatePath('/receiver/bookings');
+    revalidatePath(`/receiver/bookings/${bookingId}`);
   }
   return res;
 }

@@ -318,6 +318,138 @@ async function runAllTests() {
     assert.strictEqual(resDuplicate.success, false, 'Duplicate active waitlist must be blocked');
   });
 
+  console.log('\n\x1b[36m--- 6. ID PHOTO VERIFICATION, LAB HEAD QR & LIVE COUNTDOWN TIMER ---\x1b[0m');
+  test('Borrower submits booking with ID photo and duration in days, hours, minutes', () => {
+    const start = new Date(Date.now() + 86400000 * 30);
+    const due = new Date(start.getTime() + 86400000 * 3 + 3600000 * 4 + 60000 * 30); // 3d 4h 30m
+
+    const res = db.createBookingAtomic({
+      resourceId: 'd0000001-0000-0000-0000-000000000001',
+      borrowerId: 'c0000000-0000-0000-0000-000000000001',
+      quantity: 1,
+      startAt: start.toISOString(),
+      dueAt: due.toISOString(),
+      durationDays: 3,
+      durationHours: 4,
+      durationMinutes: 30,
+      idCardImageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136',
+      purpose: 'IoT Edge Smart Farm prototype',
+      rulesAcknowledged: true,
+    });
+
+    assert.strictEqual(res.success, true);
+    assert(res.booking);
+    assert.strictEqual(res.booking.duration_days, 3);
+    assert.strictEqual(res.booking.duration_hours, 4);
+    assert.strictEqual(res.booking.duration_minutes, 30);
+    assert.strictEqual(res.booking.id_card_verified, false);
+    assert.strictEqual(res.booking.id_card_image_url, 'https://images.unsplash.com/photo-1544717305-2782549b5136');
+  });
+
+  test('Lab Head reviews ID photo, clicks Manual Verified, and Handover QR code is generated', () => {
+    const start = new Date(Date.now() + 86400000 * 35);
+    const due = new Date(start.getTime() + 86400000 * 2);
+
+    const bRes = db.createBookingAtomic({
+      resourceId: 'd0000001-0000-0000-0000-000000000001',
+      borrowerId: 'c0000000-0000-0000-0000-000000000001',
+      quantity: 1,
+      startAt: start.toISOString(),
+      dueAt: due.toISOString(),
+      durationDays: 2,
+      durationHours: 6,
+      durationMinutes: 0,
+      idCardImageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136',
+      purpose: 'Senior design project demo',
+      rulesAcknowledged: true,
+    });
+
+    assert(bRes.booking);
+    const bookingId = bRes.booking.id;
+
+    // Lab Head inspects ID and executes Manual Verified
+    const verifyRes = db.verifyIdAndApproveBooking({
+      bookingId,
+      managerId: 'b0000000-0000-0000-0000-000000000002', // Prof. Ananya Roy
+      approvedDuration: { days: 2, hours: 6, minutes: 0 },
+    });
+
+    assert.strictEqual(verifyRes.success, true);
+    assert(verifyRes.qrCode, 'Handover QR code must be generated for sender screen');
+    assert(verifyRes.qrCode.startsWith('IOT-HANDOVER:'));
+
+    const b = db.getBooking(bookingId);
+    assert(b);
+    assert.strictEqual(b.id_card_verified, true);
+    assert.strictEqual(b.status, 'approved');
+    assert.strictEqual(b.handover_qr_code, verifyRes.qrCode);
+
+    // Verify pickup notification was dispatched to borrower
+    const notifs = db.getNotifications('c0000000-0000-0000-0000-000000000001');
+    const pickupNotif = notifs.find(
+      (n) => n.related_booking_id === bookingId && n.message.includes('ONLY be handed over')
+    );
+    assert(pickupNotif, 'Notification must state equipment will ONLY be handed over to matching verified ID');
+  });
+
+  test('Receiver scans Lab Head QR code, handover is confirmed, and countdown timer activates', () => {
+    const start = new Date(Date.now() + 86400000 * 40);
+    const due = new Date(start.getTime() + 86400000 * 1);
+
+    const bRes = db.createBookingAtomic({
+      resourceId: 'd0000001-0000-0000-0000-000000000001',
+      borrowerId: 'c0000000-0000-0000-0000-000000000001',
+      quantity: 1,
+      startAt: start.toISOString(),
+      dueAt: due.toISOString(),
+      durationDays: 1,
+      durationHours: 12,
+      durationMinutes: 0,
+      idCardImageUrl: 'https://images.unsplash.com/photo-1544717305-2782549b5136',
+      purpose: 'Lab benchmark comparison',
+      rulesAcknowledged: true,
+    });
+
+    assert(bRes.booking);
+    const bookingId = bRes.booking.id;
+
+    // Sender manual verify
+    const verifyRes = db.verifyIdAndApproveBooking({
+      bookingId,
+      managerId: 'b0000000-0000-0000-0000-000000000002',
+    });
+    assert(verifyRes.qrCode);
+
+    // Attempt scan with wrong QR code token fails
+    const badScan = db.claimHandoverWithQr({
+      bookingId,
+      scannedQrToken: 'INVALID-FAKE-QR-TOKEN',
+      receiverId: 'c0000000-0000-0000-0000-000000000001',
+    });
+    assert.strictEqual(badScan.success, false);
+
+    // Receiver scans legitimate sender QR code token
+    const goodScan = db.claimHandoverWithQr({
+      bookingId,
+      scannedQrToken: verifyRes.qrCode,
+      receiverId: 'c0000000-0000-0000-0000-000000000001',
+    });
+
+    assert.strictEqual(goodScan.success, true);
+    assert(goodScan.deadlineAt);
+
+    const b = db.getBooking(bookingId);
+    assert(b);
+    assert.strictEqual(b.status, 'checked_out');
+    assert.strictEqual(b.timer_activated, true);
+    assert(b.deadline_at);
+
+    // Verify deadline timestamp matches the duration (1 day 12 hours)
+    const deadlineTime = new Date(b.deadline_at).getTime();
+    const expectedApprox = Date.now() + (1 * 86400000 + 12 * 3600000);
+    assert(Math.abs(deadlineTime - expectedApprox) < 5000, 'Deadline must match 1d 12h from now');
+  });
+
   console.log('\n============================================================');
   console.log(`  TEST RESULTS: ${passed} PASSED, ${failed} FAILED`);
   console.log('============================================================\n');

@@ -51,6 +51,9 @@ export interface Profile {
   avatar_url?: string;
   platform_role: PlatformRole;
   verification_status: VerificationStatus;
+  post?: string; // e.g. Student, Professor, Lab Head
+  id_number?: string; // Student ID or Teacher ID number
+  institute_name?: string; // Registered college / institute
   created_at: string;
   updated_at: string;
 }
@@ -148,6 +151,16 @@ export interface Booking {
   quantity: number;
   start_at: string;
   due_at: string;
+  duration_days?: number;
+  duration_hours?: number;
+  duration_minutes?: number;
+  deadline_at?: string; // Exact timestamp when timer expires
+  id_card_image_url?: string; // Student or Teacher ID picture uploaded by receiver
+  id_card_verified?: boolean; // Verified manually by Lab Head
+  id_card_verified_by?: string;
+  id_card_verified_at?: string;
+  handover_qr_code?: string; // QR token generated on Sender screen upon verification
+  timer_activated?: boolean;
   status: BookingStatus;
   daily_rate_snapshot_paise: number;
   deposit_snapshot_paise: number;

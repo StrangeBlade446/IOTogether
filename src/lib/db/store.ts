@@ -59,6 +59,9 @@ function getInitialData(): DatabaseData {
         email: 'admin@iotogether.edu',
         platform_role: 'platform_admin',
         verification_status: 'verified',
+        post: 'Network Platform Auditor',
+        id_number: 'ADMIN-IOT-001',
+        institute_name: 'National Electronics Academic Consortium',
         created_at: isoNow,
         updated_at: isoNow,
       },
@@ -68,6 +71,9 @@ function getInitialData(): DatabaseData {
         email: 'manager.nit@iotogether.edu',
         platform_role: 'staff',
         verification_status: 'verified',
+        post: 'Head of Electronics & Embedded Systems Lab',
+        id_number: 'FAC-NIT-104',
+        institute_name: 'Northstar Institute of Technology',
         created_at: isoNow,
         updated_at: isoNow,
       },
@@ -77,6 +83,9 @@ function getInitialData(): DatabaseData {
         email: 'manager.gec@iotogether.edu',
         platform_role: 'staff',
         verification_status: 'verified',
+        post: 'Makerspace Lead & Equipment Assigner',
+        id_number: 'STAFF-GEC-082',
+        institute_name: 'Greenfield Engineering College',
         created_at: isoNow,
         updated_at: isoNow,
       },
@@ -86,6 +95,21 @@ function getInitialData(): DatabaseData {
         email: 'student@iotogether.edu',
         platform_role: 'student',
         verification_status: 'verified',
+        post: 'B.Tech Electronics Student (Final Year)',
+        id_number: 'STU-NIT-2024-819',
+        institute_name: 'Northstar Institute of Technology',
+        created_at: isoNow,
+        updated_at: isoNow,
+      },
+      {
+        id: 'c0000000-0000-0000-0000-000000000003',
+        display_name: 'Dr. Rajesh Kulkarni (Teacher)',
+        email: 'rajesh.teacher@iotogether.edu',
+        platform_role: 'student',
+        verification_status: 'verified',
+        post: 'Assistant Professor & Robotics Mentor',
+        id_number: 'FAC-GEC-219',
+        institute_name: 'Greenfield Engineering College',
         created_at: isoNow,
         updated_at: isoNow,
       },
@@ -95,6 +119,9 @@ function getInitialData(): DatabaseData {
         email: 'priya.student@iotogether.edu',
         platform_role: 'student',
         verification_status: 'verified',
+        post: 'Embedded Systems Student',
+        id_number: 'STU-MMS-2024-402',
+        institute_name: 'Metro Makerspace',
         created_at: isoNow,
         updated_at: isoNow,
       },
@@ -495,6 +522,11 @@ function getInitialData(): DatabaseData {
         quantity: 1,
         start_at: addDays(now, 1),
         due_at: addDays(now, 5),
+        duration_days: 3,
+        duration_hours: 4,
+        duration_minutes: 0,
+        id_card_image_url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=400&q=80',
+        id_card_verified: false,
         status: 'pending',
         daily_rate_snapshot_paise: 0,
         deposit_snapshot_paise: 0,
@@ -512,6 +544,14 @@ function getInitialData(): DatabaseData {
         quantity: 1,
         start_at: isoNow,
         due_at: addDays(now, 4),
+        duration_days: 2,
+        duration_hours: 0,
+        duration_minutes: 0,
+        id_card_image_url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=400&q=80',
+        id_card_verified: true,
+        id_card_verified_by: 'b0000000-0000-0000-0000-000000000003',
+        id_card_verified_at: subDays(now, 1),
+        handover_qr_code: 'IOT-HANDOVER:b2222222-0000-0000-0000-000000000002',
         status: 'approved',
         daily_rate_snapshot_paise: 0,
         deposit_snapshot_paise: 0,
@@ -532,6 +572,14 @@ function getInitialData(): DatabaseData {
         quantity: 1,
         start_at: subDays(now, 2),
         due_at: addDays(now, 3),
+        duration_days: 3,
+        duration_hours: 12,
+        duration_minutes: 0,
+        id_card_image_url: 'https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=400&q=80',
+        id_card_verified: true,
+        handover_qr_code: 'IOT-HANDOVER:b3333333-0000-0000-0000-000000000003',
+        timer_activated: true,
+        deadline_at: addDays(now, 3),
         status: 'checked_out',
         daily_rate_snapshot_paise: 5000,
         deposit_snapshot_paise: 200000,
@@ -880,6 +928,36 @@ class Store {
     return newM;
   }
 
+  upsertMembership(membership: {
+    user_id: string;
+    institution_id: string;
+    role: Membership['role'];
+    status: Membership['status'];
+  }): Membership {
+    const data = this.load();
+    const existing = data.memberships.find(
+      (m) => m.institution_id === membership.institution_id && m.user_id === membership.user_id
+    );
+    const now = new Date().toISOString();
+    if (existing) {
+      existing.role = membership.role;
+      existing.status = membership.status;
+      this.persist();
+      return existing;
+    }
+    const newM: Membership = {
+      id: crypto.randomUUID(),
+      institution_id: membership.institution_id,
+      user_id: membership.user_id,
+      role: membership.role,
+      status: membership.status,
+      created_at: now,
+    };
+    data.memberships.push(newM);
+    this.persist();
+    return newM;
+  }
+
   verifyMembership(membershipId: string, managerId: string, status: 'verified' | 'rejected'): Membership | undefined {
     const data = this.load();
     const m = data.memberships.find((item) => item.id === membershipId);
@@ -1105,6 +1183,10 @@ class Store {
     dueAt: string;
     purpose: string;
     rulesAcknowledged: boolean;
+    durationDays?: number;
+    durationHours?: number;
+    durationMinutes?: number;
+    idCardImageUrl?: string;
   }): {
     success: boolean;
     conflict?: boolean;
@@ -1113,10 +1195,32 @@ class Store {
     availableQuantity?: number;
   } {
     const data = this.load();
-    const { resourceId, borrowerId, quantity, startAt, dueAt, purpose, rulesAcknowledged } = params;
+    const {
+      resourceId,
+      borrowerId,
+      quantity,
+      startAt,
+      dueAt,
+      purpose,
+      rulesAcknowledged,
+      durationDays: inputDays,
+      durationHours: inputHours,
+      durationMinutes: inputMinutes,
+      idCardImageUrl,
+    } = params;
 
     const startDate = new Date(startAt);
-    const dueDate = new Date(dueAt);
+    let dueDate = new Date(dueAt);
+
+    // If explicit days, hours, and minutes are provided, calculate exact due date
+    const totalCustomMinutes =
+      (inputDays !== undefined ? Number(inputDays) * 1440 : 0) +
+      (inputHours !== undefined ? Number(inputHours) * 60 : 0) +
+      (inputMinutes !== undefined ? Number(inputMinutes) : 0);
+
+    if (totalCustomMinutes > 0) {
+      dueDate = new Date(startDate.getTime() + totalCustomMinutes * 60 * 1000);
+    }
 
     if (isNaN(startDate.getTime()) || isNaN(dueDate.getTime()) || dueDate <= startDate) {
       return { success: false, error: 'Return date must be strictly after pickup start date' };
@@ -1135,11 +1239,11 @@ class Store {
       return { success: false, error: 'Resource is currently not active for borrowing' };
     }
 
-    const durationDays = Math.max(1, Math.ceil((dueDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)));
-    if (durationDays < resource.min_loan_duration) {
+    const effectiveDurationDays = Math.max(1, Math.ceil((dueDate.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24)));
+    if (effectiveDurationDays < resource.min_loan_duration) {
       return { success: false, error: `Minimum loan duration is ${resource.min_loan_duration} day(s)` };
     }
-    if (durationDays > resource.max_loan_duration) {
+    if (effectiveDurationDays > resource.max_loan_duration) {
       return { success: false, error: `Maximum loan duration is ${resource.max_loan_duration} day(s)` };
     }
 
@@ -1169,7 +1273,7 @@ class Store {
     // Price snapshot calculation
     const dailyRate = resource.daily_rate_paise;
     const deposit = resource.deposit_paise;
-    const rentalCharge = dailyRate * quantity * durationDays;
+    const rentalCharge = dailyRate * quantity * effectiveDurationDays;
     const depositTotal = deposit * quantity;
     const estimatedTotalPaise = rentalCharge + depositTotal;
     const paymentStatus = estimatedTotalPaise > 0 ? 'pending' : 'not_required';
@@ -1182,6 +1286,11 @@ class Store {
       quantity,
       start_at: startDate.toISOString(),
       due_at: dueDate.toISOString(),
+      duration_days: inputDays !== undefined ? Number(inputDays) : effectiveDurationDays,
+      duration_hours: inputHours !== undefined ? Number(inputHours) : 0,
+      duration_minutes: inputMinutes !== undefined ? Number(inputMinutes) : 0,
+      id_card_image_url: idCardImageUrl,
+      id_card_verified: false,
       status: 'pending',
       daily_rate_snapshot_paise: dailyRate,
       deposit_snapshot_paise: deposit,
@@ -1204,7 +1313,7 @@ class Store {
       action: 'created',
       metadata: {
         quantity,
-        durationDays,
+        durationDays: effectiveDurationDays,
         estimatedTotalPaise,
         resourceName: resource.name,
       },
@@ -1228,38 +1337,177 @@ class Store {
     return { success: true, booking: newBooking };
   }
 
-  approveBooking(bookingId: string, managerId: string): { success: boolean; error?: string } {
+  verifyIdAndApproveBooking(params: {
+    bookingId: string;
+    managerId: string;
+    approvedDuration?: {
+      days?: number;
+      hours?: number;
+      minutes?: number;
+    };
+  }): { success: boolean; error?: string; qrCode?: string } {
     const data = this.load();
-    const b = data.bookings.find((item) => item.id === bookingId);
+    const b = data.bookings.find((item) => item.id === params.bookingId);
     if (!b) return { success: false, error: 'Booking not found' };
-    if (b.status !== 'pending') return { success: false, error: `Cannot approve booking in status: ${b.status}` };
+    if (b.status !== 'pending') return { success: false, error: `Cannot verify and approve booking in status: ${b.status}` };
 
+    const nowIso = new Date().toISOString();
+    b.id_card_verified = true;
+    b.id_card_verified_by = params.managerId;
+    b.id_card_verified_at = nowIso;
     b.status = 'approved';
-    b.approved_by = managerId;
-    b.approved_at = new Date().toISOString();
-    b.updated_at = new Date().toISOString();
+    b.approved_by = params.managerId;
+    b.approved_at = nowIso;
+    b.updated_at = nowIso;
+
+    if (params.approvedDuration) {
+      if (params.approvedDuration.days !== undefined) b.duration_days = Number(params.approvedDuration.days);
+      if (params.approvedDuration.hours !== undefined) b.duration_hours = Number(params.approvedDuration.hours);
+      if (params.approvedDuration.minutes !== undefined) b.duration_minutes = Number(params.approvedDuration.minutes);
+
+      const totalMinutes = (b.duration_days || 0) * 1440 + (b.duration_hours || 0) * 60 + (b.duration_minutes || 0);
+      if (totalMinutes > 0) {
+        const start = new Date(b.start_at);
+        b.due_at = new Date(start.getTime() + totalMinutes * 60 * 1000).toISOString();
+      }
+    }
+
+    // Generate unique Handover QR Code for the Lab Head's screen
+    const qrToken = `IOT-HANDOVER:${b.id}:${Math.random().toString(36).substring(2, 10).toUpperCase()}`;
+    b.handover_qr_code = qrToken;
 
     const resource = data.resources.find((r) => r.id === b.resource_id);
 
     this.addAuditLog({
-      actor_id: managerId,
+      actor_id: params.managerId,
       institution_id: resource?.institution_id,
       entity_type: 'booking',
       entity_id: b.id,
-      action: 'approved',
-      metadata: { resourceId: b.resource_id },
+      action: 'id_verified_and_approved',
+      metadata: {
+        resourceId: b.resource_id,
+        qrGenerated: true,
+        approvedDuration: {
+          days: b.duration_days,
+          hours: b.duration_hours,
+          minutes: b.duration_minutes,
+        },
+      },
     });
 
     this.addNotification({
       user_id: b.borrower_id,
       event_type: 'booking_approved',
-      title: 'Booking Approved!',
-      message: `Your booking for ${resource?.name || 'equipment'} has been approved. Please visit the collection point at scheduled time.`,
+      title: 'ID Verified & Booking Accepted',
+      message: `Your ID has been manually verified by the Lab Head and booking for ${resource?.name || 'equipment'} is accepted! Note: Equipment will ONLY be handed over to the student or teacher whose verified ID card matches at pickup.`,
       related_booking_id: b.id,
     });
 
     this.persist();
-    return { success: true };
+    return { success: true, qrCode: qrToken };
+  }
+
+  claimHandoverWithQr(params: {
+    bookingId: string;
+    scannedQrToken: string;
+    receiverId: string;
+  }): { success: boolean; error?: string; deadlineAt?: string } {
+    const data = this.load();
+    const b = data.bookings.find((item) => item.id === params.bookingId);
+    if (!b) return { success: false, error: 'Booking not found' };
+    if (b.borrower_id !== params.receiverId) {
+      return { success: false, error: 'Unauthorised: You can only claim your own verified bookings' };
+    }
+    if (b.status !== 'approved') {
+      return { success: false, error: `Cannot claim handover for booking in status: ${b.status}` };
+    }
+
+    if (!b.handover_qr_code || b.handover_qr_code.trim() !== params.scannedQrToken.trim()) {
+      return { success: false, error: 'Invalid Handover QR code token. Please scan the QR code displayed on the Lab Head screen.' };
+    }
+
+    const now = new Date();
+    const nowIso = now.toISOString();
+
+    // Calculate countdown deadline period based on days, hours, and minutes
+    const days = b.duration_days ?? 0;
+    const hours = b.duration_hours ?? 0;
+    const minutes = b.duration_minutes ?? 0;
+    let totalMs = (days * 86400000) + (hours * 3600000) + (minutes * 60000);
+
+    // Fallback if 0: difference between start_at and due_at, or minimum 2 hours
+    if (totalMs <= 0) {
+      const start = new Date(b.start_at).getTime();
+      const due = new Date(b.due_at).getTime();
+      totalMs = due > start ? (due - start) : 7200000;
+    }
+
+    const deadlineDate = new Date(now.getTime() + totalMs);
+    const deadlineIso = deadlineDate.toISOString();
+
+    b.status = 'checked_out';
+    b.timer_activated = true;
+    b.issued_by = b.approved_by || b.id_card_verified_by;
+    b.issued_at = nowIso;
+    b.deadline_at = deadlineIso;
+    b.due_at = deadlineIso;
+    b.updated_at = nowIso;
+
+    // Condition report entry
+    const report: ConditionReport = {
+      id: crypto.randomUUID(),
+      booking_id: b.id,
+      report_type: 'checkout',
+      condition: 'good',
+      notes: 'Handover completed via Lab Head QR verification and receiver scan.',
+      evidence_paths: [],
+      submitted_by: params.receiverId,
+      created_at: nowIso,
+    };
+    data.condition_reports.push(report);
+
+    const resource = data.resources.find((r) => r.id === b.resource_id);
+
+    this.addAuditLog({
+      actor_id: params.receiverId,
+      institution_id: resource?.institution_id,
+      entity_type: 'booking',
+      entity_id: b.id,
+      action: 'handover_claimed_qr',
+      metadata: {
+        deadlineAt: deadlineIso,
+        durationDays: days,
+        durationHours: hours,
+        durationMinutes: minutes,
+      },
+    });
+
+    // Notify Receiver
+    this.addNotification({
+      user_id: b.borrower_id,
+      event_type: 'item_issued',
+      title: 'Equipment Handover Completed — Timer Active!',
+      message: `You have successfully received ${resource?.name || 'equipment'}. Your countdown timer is running until ${deadlineDate.toLocaleString()}.`,
+      related_booking_id: b.id,
+    });
+
+    // Notify Sender / Lab Head
+    if (b.approved_by) {
+      this.addNotification({
+        user_id: b.approved_by,
+        event_type: 'item_issued',
+        title: 'Handover Completed — Timer Active',
+        message: `${resource?.name || 'Equipment'} has been collected by receiver. Return countdown timer active until ${deadlineDate.toLocaleString()}.`,
+        related_booking_id: b.id,
+      });
+    }
+
+    this.persist();
+    return { success: true, deadlineAt: deadlineIso };
+  }
+
+  approveBooking(bookingId: string, managerId: string): { success: boolean; error?: string } {
+    return this.verifyIdAndApproveBooking({ bookingId, managerId });
   }
 
   rejectBooking(bookingId: string, managerId: string, reason: string): { success: boolean; error?: string } {

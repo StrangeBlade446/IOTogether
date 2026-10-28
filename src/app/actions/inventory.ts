@@ -53,7 +53,9 @@ export async function createResourceAction(data: {
   });
 
   revalidatePath('/explore');
+  revalidatePath('/receiver/explore');
   revalidatePath('/manage/inventory');
+  revalidatePath('/sender/inventory');
   return { success: true, resource: newResource };
 }
 

@@ -29,10 +29,29 @@ export async function Navbar() {
         <div className="flex items-center gap-6">
           <Logo size="md" showTagline />
 
+          {/* Platform Switcher Buttons */}
+          <div className="hidden lg:flex items-center gap-1.5 p-1 bg-neutral-950/80 border border-neutral-800 rounded-xl ml-2">
+            <Link
+              href="/sender"
+              className="px-2.5 py-1 rounded-lg text-xs font-bold text-amber-300 hover:bg-amber-950/50 transition flex items-center gap-1.5 border border-amber-500/20"
+            >
+              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
+              Sender Platform
+            </Link>
+
+            <Link
+              href="/receiver"
+              className="px-2.5 py-1 rounded-lg text-xs font-bold text-cyan-300 hover:bg-cyan-950/50 transition flex items-center gap-1.5 border border-cyan-500/20"
+            >
+              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
+              Receiver Platform
+            </Link>
+          </div>
+
           {/* Desktop Nav Links */}
           <nav className="hidden md:flex items-center gap-1">
             <Link
-              href="/explore"
+              href="/receiver/explore"
               className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
             >
               <Compass className="w-4 h-4 text-cyan-400" />
@@ -40,36 +59,28 @@ export async function Navbar() {
             </Link>
 
             <Link
-              href="/project-matcher"
+              href="/receiver/project-recipe"
               className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
             >
               <Cpu className="w-4 h-4 text-teal-400" />
-              Project Matcher
+              AI Project Recipe
             </Link>
 
             <Link
-              href="/my-bookings"
+              href="/receiver/bookings"
               className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
             >
               <Layers className="w-4 h-4 text-blue-400" />
               My Bookings
             </Link>
 
-            <Link
-              href="/institutions"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
-            >
-              <Building className="w-4 h-4 text-slate-400" />
-              Institutions
-            </Link>
-
             {isStaff && (
               <Link
-                href="/manage"
+                href="/sender/requests"
                 className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-amber-300 hover:text-amber-200 hover:bg-amber-950/40 border border-amber-800/40 transition-colors ml-1"
               >
                 <Settings className="w-4 h-4 text-amber-400" />
-                Manage Portal
+                Lab Head Portal
               </Link>
             )}
 

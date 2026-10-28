@@ -109,6 +109,151 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* TWO DEDICATED PLATFORMS SECTION (Sender Portal vs Receiver Portal) */}
+      <section className="py-16 md:py-20 border-b border-slate-800 bg-neutral-950">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 mb-3">
+              <Sparkles className="w-3.5 h-3.5" /> Two Dedicated Platforms
+            </div>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+              Purpose-Built Portals for Senders and Receivers
+            </h2>
+            <p className="text-slate-400 mt-3 text-sm leading-relaxed">
+              Whether you are an academic laboratory head sharing equipment or an engineering student building an IoT project, IOTogether provides dedicated workflows, ID verification, QR handovers, and live deadline countdown timers.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {/* PLATFORM 1: EQUIPMENT SENDER PORTAL */}
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900 via-amber-950/20 to-neutral-900 border border-amber-500/40 p-8 shadow-2xl flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-amber-500/20 text-amber-300 border border-amber-500/40">
+                    Platform 1: Equipment Senders
+                  </span>
+                  <span className="text-xs text-slate-400">Lab Heads & Assigners</span>
+                </div>
+
+                <h3 className="text-2xl font-bold text-white">Lab Head & Inventory Sender Portal</h3>
+                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                  List products with high-resolution photos, review borrower Student/Teacher ID cards, approve durations in days, hours, and minutes, click <strong>Manual Verified</strong>, and display the Handover QR code on your screen.
+                </p>
+
+                <ul className="mt-5 space-y-2 text-xs text-slate-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span><strong>List Products with Photos:</strong> High-res imagery, technical specs, and stock</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span><strong>Photo ID Verification:</strong> Inspect Student & Teacher ID cards before approval</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span><strong>&quot;Manual Verified&quot; Action:</strong> Triggers pickup notification & generates QR code</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span><strong>Screen Handover QR:</strong> Display on desk for receiver scan & timer start</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-amber-400 shrink-0" />
+                    <span><strong>Live Deadline Timers:</strong> Synchronized countdown for all equipment out on loan</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center gap-3">
+                <Link
+                  href="/sender"
+                  className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-yellow-500 hover:from-amber-400 hover:to-yellow-400 text-navy-950 font-bold text-xs shadow-lg shadow-amber-500/20 text-center transition flex items-center justify-center gap-1.5"
+                >
+                  Enter Sender Platform <ArrowRight className="w-4 h-4" />
+                </Link>
+                <div className="flex gap-2 w-full sm:w-auto">
+                  <Link
+                    href="/sender/login"
+                    className="flex-1 sm:flex-none py-3 px-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-slate-200 font-semibold text-xs transition text-center"
+                  >
+                    Sender Sign In
+                  </Link>
+                  <Link
+                    href="/sender/signup"
+                    className="flex-1 sm:flex-none py-3 px-3 rounded-xl bg-neutral-850 hover:bg-neutral-750 border border-neutral-700 text-amber-300 font-semibold text-xs transition text-center"
+                  >
+                    Register Lab
+                  </Link>
+                </div>
+              </div>
+            </div>
+
+            {/* PLATFORM 2: RECEIVER PORTAL */}
+            <div className="relative overflow-hidden rounded-3xl bg-gradient-to-br from-neutral-900 via-cyan-950/20 to-neutral-900 border border-cyan-500/40 p-8 shadow-2xl flex flex-col justify-between">
+              <div>
+                <div className="flex items-center justify-between mb-4">
+                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-cyan-500/20 text-cyan-300 border border-cyan-500/40">
+                    Platform 2: Equipment Receivers
+                  </span>
+                  <span className="text-xs text-slate-400">Students & Teachers</span>
+                </div>
+
+                <h3 className="text-2xl font-bold text-white">Student & Teacher Receiver Portal</h3>
+                <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                  Discover electronics with robust search & filters, utilize the <strong>AI-Powered Project Recipe Option</strong>, upload your photo ID, scan the Lab Head&apos;s Handover QR at collection, and track your active countdown timer.
+                </p>
+
+                <ul className="mt-5 space-y-2 text-xs text-slate-300">
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span><strong>Search & Filter Option:</strong> Multi-category discovery across colleges</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span><strong>AI-Powered Project Recipe:</strong> Automated Bill of Materials & stock lookup</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span><strong>Student/Teacher ID Upload:</strong> Required photo attachment for verification</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span><strong>QR Scan Handover Claim:</strong> Scan Lab Head screen to activate checkout</span>
+                  </li>
+                  <li className="flex items-center gap-2">
+                    <CheckCircle2 className="w-4 h-4 text-cyan-400 shrink-0" />
+                    <span><strong>Live Deadline Countdown:</strong> Days, hours, minutes, seconds countdown</span>
+                  </li>
+                </ul>
+              </div>
+
+              <div className="mt-8 pt-6 border-t border-neutral-800/80 flex flex-col sm:flex-row items-center gap-3">
+                <Link
+                  href="/receiver"
+                  className="w-full sm:flex-1 py-3 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-navy-950 font-bold text-xs shadow-lg shadow-cyan-500/20 text-center transition flex items-center justify-center gap-1.5"
+                >
+                  Enter Receiver Platform <ArrowRight className="w-4 h-4" />
+                </Link>
+                <div className="flex gap-2 w-full sm:w-auto">
+                  <Link
+                    href="/receiver/login"
+                    className="flex-1 sm:flex-none py-3 px-3 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-slate-200 font-semibold text-xs transition text-center"
+                  >
+                    Receiver Sign In
+                  </Link>
+                  <Link
+                    href="/receiver/signup"
+                    className="flex-1 sm:flex-none py-3 px-3 rounded-xl bg-neutral-850 hover:bg-neutral-750 border border-neutral-700 text-cyan-300 font-semibold text-xs transition text-center"
+                  >
+                    Register ID
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* The Real Problem & The IOTogether Model */}
       <section className="py-16 md:py-20 border-b border-slate-800/80 bg-navy-950">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
