@@ -9,6 +9,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        guild: {
+          bg: '#141821',
+          primary: '#C49A55',
+          secondary: '#263447',
+          accent: '#67C7D4',
+          text: '#F1E7D0',
+        },
         brand: {
           50: '#ecfeff',
           100: '#cffafe',
@@ -27,6 +34,14 @@ module.exports = {
           900: '#0a0f1d',
           950: '#060a14',
         },
+      },
+      fontFamily: {
+        serif: ['Cinzel', 'Playfair Display', 'Cormorant Garamond', 'Georgia', 'serif'],
+        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+      },
+      boxShadow: {
+        'forge': '0 0 25px -3px rgba(196, 154, 85, 0.35)',
+        'blueprint': '0 0 25px -3px rgba(103, 199, 212, 0.3)',
       },
     },
   },

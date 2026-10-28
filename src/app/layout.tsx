@@ -15,7 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className="dark">
-      <body className="bg-navy-900 text-slate-100 flex flex-col min-h-screen antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+      <body className="bg-[#141821] text-[#F1E7D0] flex flex-col min-h-screen antialiased selection:bg-[#C49A55]/30 selection:text-[#F1E7D0] font-sans">
         <Navbar />
         <main className="flex-1 flex flex-col">{children}</main>
         <Footer />

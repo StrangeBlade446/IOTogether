@@ -23,28 +23,30 @@ export async function Navbar() {
   const isAdmin = session.isPlatformAdmin;
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-800 bg-navy-900/95 backdrop-blur-md">
+    <header className="sticky top-0 z-40 w-full border-b border-[#263447] bg-[#141821]/95 backdrop-blur-md">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Left: Brand Logo */}
         <div className="flex items-center gap-6">
           <Logo size="md" showTagline />
 
-          {/* Platform Switcher Buttons */}
-          <div className="hidden lg:flex items-center gap-1.5 p-1 bg-neutral-950/80 border border-neutral-800 rounded-xl ml-2">
+          {/* Keeper / Seeker Platform Switcher Pills */}
+          <div className="hidden lg:flex items-center gap-1.5 p-1 bg-[#141821] border border-[#263447] rounded-xl ml-2">
             <Link
               href="/sender"
-              className="px-2.5 py-1 rounded-lg text-xs font-bold text-amber-300 hover:bg-amber-950/50 transition flex items-center gap-1.5 border border-amber-500/20"
+              className="px-2.5 py-1 rounded-lg text-xs font-bold text-[#C49A55] hover:bg-[#C49A55]/15 transition flex items-center gap-1.5 border border-[#C49A55]/30"
+              title="Equipments Keepers (Lab Heads & Assigners)"
             >
-              <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-              Sender Platform
+              <span className="w-2 h-2 rounded-full bg-[#C49A55] animate-pulse" />
+              Keeper Portal
             </Link>
 
             <Link
               href="/receiver"
-              className="px-2.5 py-1 rounded-lg text-xs font-bold text-cyan-300 hover:bg-cyan-950/50 transition flex items-center gap-1.5 border border-cyan-500/20"
+              className="px-2.5 py-1 rounded-lg text-xs font-bold text-[#67C7D4] hover:bg-[#67C7D4]/15 transition flex items-center gap-1.5 border border-[#67C7D4]/30"
+              title="Equipments Seekers (Students & Teachers)"
             >
-              <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse" />
-              Receiver Platform
+              <span className="w-2 h-2 rounded-full bg-[#67C7D4] animate-pulse" />
+              Seeker Portal
             </Link>
           </div>
 
@@ -52,34 +54,34 @@ export async function Navbar() {
           <nav className="hidden md:flex items-center gap-1">
             <Link
               href="/receiver/explore"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-[#F1E7D0]/80 hover:text-[#F1E7D0] hover:bg-[#263447]/60 transition-colors"
             >
-              <Compass className="w-4 h-4 text-cyan-400" />
+              <Compass className="w-4 h-4 text-[#67C7D4]" />
               Explore Equipment
             </Link>
 
             <Link
               href="/receiver/project-recipe"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-[#F1E7D0]/80 hover:text-[#F1E7D0] hover:bg-[#263447]/60 transition-colors"
             >
-              <Cpu className="w-4 h-4 text-teal-400" />
+              <Cpu className="w-4 h-4 text-[#67C7D4]" />
               AI Project Recipe
             </Link>
 
             <Link
               href="/receiver/bookings"
-              className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-slate-300 hover:text-white hover:bg-slate-800/60 transition-colors"
+              className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-[#F1E7D0]/80 hover:text-[#F1E7D0] hover:bg-[#263447]/60 transition-colors"
             >
-              <Layers className="w-4 h-4 text-blue-400" />
+              <Layers className="w-4 h-4 text-[#C49A55]" />
               My Bookings
             </Link>
 
             {isStaff && (
               <Link
                 href="/sender/requests"
-                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-amber-300 hover:text-amber-200 hover:bg-amber-950/40 border border-amber-800/40 transition-colors ml-1"
+                className="flex items-center gap-1.5 px-3 py-2 rounded-md text-sm font-medium text-[#C49A55] hover:text-[#F1E7D0] hover:bg-[#C49A55]/15 border border-[#C49A55]/30 transition-colors ml-1"
               >
-                <Settings className="w-4 h-4 text-amber-400" />
+                <Settings className="w-4 h-4 text-[#C49A55]" />
                 Lab Head Portal
               </Link>
             )}
@@ -100,12 +102,12 @@ export async function Navbar() {
         <div className="flex items-center gap-3">
           <Link
             href="/notifications"
-            className="relative p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors border border-transparent hover:border-slate-700"
+            className="relative p-2 rounded-lg text-[#F1E7D0]/80 hover:text-[#F1E7D0] hover:bg-[#263447] transition-colors border border-transparent hover:border-[#263447]"
             title="Notifications"
           >
-            <Bell className="w-5 h-5" />
+            <Bell className="w-5 h-5 text-[#C49A55]" />
             {unreadNotifs > 0 && (
-              <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold text-white bg-cyan-500 rounded-full border-2 border-navy-900 animate-pulse">
+              <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1 text-[10px] font-bold text-[#141821] bg-[#C49A55] rounded-full border-2 border-[#141821] animate-pulse">
                 {unreadNotifs}
               </span>
             )}
@@ -113,10 +115,10 @@ export async function Navbar() {
 
           <Link
             href="/profile"
-            className="p-2 rounded-lg text-slate-300 hover:text-white hover:bg-slate-800/80 transition-colors hidden sm:flex border border-transparent hover:border-slate-700"
+            className="p-2 rounded-lg text-[#F1E7D0]/80 hover:text-[#F1E7D0] hover:bg-[#263447] transition-colors hidden sm:flex border border-transparent hover:border-[#263447]"
             title="User Profile & Memberships"
           >
-            <User className="w-5 h-5 text-slate-400" />
+            <User className="w-5 h-5 text-[#67C7D4]" />
           </Link>
 
           {/* Quick Demo Persona Switcher */}
