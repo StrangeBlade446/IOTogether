@@ -9,8 +9,8 @@
       "post": "Consortium Network Auditor",
       "id_number": "ADMIN-CONSORTIUM-001",
       "institute_name": "National Electronics Academic Consortium",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "b0000000-0000-0000-0000-000000000002",
@@ -21,8 +21,8 @@
       "post": "Head of Embedded Systems & Robotics Lab",
       "id_number": "FAC-APEX-101",
       "institute_name": "Apex Institute of Technology",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "b0000000-0000-0000-0000-000000000003",
@@ -33,8 +33,8 @@
       "post": "Makerspace Director & Equipment Custodian",
       "id_number": "FAC-VEC-204",
       "institute_name": "Vanguard Engineering College",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "b0000000-0000-0000-0000-000000000004",
@@ -45,8 +45,8 @@
       "post": "Lead STEM Lab Instructor & Kit Custodian",
       "id_number": "STAFF-HSA-042",
       "institute_name": "Horizon STEM Academy",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "c0000000-0000-0000-0000-000000000001",
@@ -57,8 +57,8 @@
       "post": "B.Tech Electronics Student (Final Year)",
       "id_number": "STU-APEX-2024-512",
       "institute_name": "Apex Institute of Technology",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "c0000000-0000-0000-0000-000000000003",
@@ -69,8 +69,8 @@
       "post": "Assistant Professor & Research Mentor",
       "id_number": "FAC-VEC-789",
       "institute_name": "Vanguard Engineering College",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "c0000000-0000-0000-0000-000000000002",
@@ -81,8 +81,8 @@
       "post": "Senior STEM Student & Robotics Club Lead",
       "id_number": "STU-HSA-2024-088",
       "institute_name": "Horizon STEM Academy",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     }
   ],
   "institutions": [
@@ -96,10 +96,10 @@
       "address": "Academic Block 4, Embedded Systems Lab 201, Outer Ring Road, Bengaluru",
       "verification_status": "verified",
       "verified_by": "a0000000-0000-0000-0000-000000000001",
-      "verified_at": "2026-10-28T16:19:37.474Z",
+      "verified_at": "2026-10-28T16:58:24.260Z",
       "sharing_policy": "open_to_verified",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "22222222-2222-2222-2222-222222222222",
@@ -111,10 +111,10 @@
       "address": "Department of ECE, Makerspace Room 102, Hinjewadi Phase 1, Pune",
       "verification_status": "verified",
       "verified_by": "a0000000-0000-0000-0000-000000000001",
-      "verified_at": "2026-10-28T16:19:37.474Z",
+      "verified_at": "2026-10-28T16:58:24.260Z",
       "sharing_policy": "open_to_verified",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "33333333-3333-3333-3333-333333333333",
@@ -126,10 +126,10 @@
       "address": "STEM Innovation Campus, Sector 5, Gachibowli, Hyderabad",
       "verification_status": "verified",
       "verified_by": "a0000000-0000-0000-0000-000000000001",
-      "verified_at": "2026-10-28T16:19:37.474Z",
+      "verified_at": "2026-10-28T16:58:24.260Z",
       "sharing_policy": "open_to_all",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     }
   ],
   "memberships": [
@@ -140,8 +140,8 @@
       "role": "inventory_manager",
       "status": "verified",
       "verified_by": "a0000000-0000-0000-0000-000000000001",
-      "verified_at": "2026-10-28T16:19:37.474Z",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "verified_at": "2026-10-28T16:58:24.260Z",
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "m0000002-0000-0000-0000-000000000002",
@@ -150,8 +150,8 @@
       "role": "inventory_manager",
       "status": "verified",
       "verified_by": "a0000000-0000-0000-0000-000000000001",
-      "verified_at": "2026-10-28T16:19:37.474Z",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "verified_at": "2026-10-28T16:58:24.260Z",
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "m0000006-0000-0000-0000-000000000006",
@@ -160,8 +160,8 @@
       "role": "inventory_manager",
       "status": "verified",
       "verified_by": "a0000000-0000-0000-0000-000000000001",
-      "verified_at": "2026-10-28T16:19:37.474Z",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "verified_at": "2026-10-28T16:58:24.260Z",
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "m0000003-0000-0000-0000-000000000003",
@@ -170,8 +170,8 @@
       "role": "student",
       "status": "verified",
       "verified_by": "b0000000-0000-0000-0000-000000000002",
-      "verified_at": "2026-10-28T16:19:37.474Z",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "verified_at": "2026-10-28T16:58:24.260Z",
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "m0000004-0000-0000-0000-000000000004",
@@ -180,8 +180,8 @@
       "role": "student",
       "status": "verified",
       "verified_by": "b0000000-0000-0000-0000-000000000003",
-      "verified_at": "2026-10-28T16:19:37.474Z",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "verified_at": "2026-10-28T16:58:24.260Z",
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "m0000005-0000-0000-0000-000000000005",
@@ -190,8 +190,8 @@
       "role": "student",
       "status": "verified",
       "verified_by": "b0000000-0000-0000-0000-000000000004",
-      "verified_at": "2026-10-28T16:19:37.474Z",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "verified_at": "2026-10-28T16:58:24.260Z",
+      "created_at": "2026-10-28T16:58:24.260Z"
     }
   ],
   "eligibility_records": [
@@ -202,9 +202,9 @@
       "requirement_type": "lab_safety_course",
       "status": "approved",
       "verified_by": "b0000000-0000-0000-0000-000000000002",
-      "valid_from": "2026-10-28T16:19:37.474Z",
-      "expires_at": "2027-10-28T16:19:37.474Z",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "valid_from": "2026-10-28T16:58:24.260Z",
+      "expires_at": "2027-10-28T16:58:24.260Z",
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "e0000002-0000-0000-0000-000000000002",
@@ -213,9 +213,9 @@
       "requirement_type": "oscilloscope_training",
       "status": "approved",
       "verified_by": "b0000000-0000-0000-0000-000000000002",
-      "valid_from": "2026-10-28T16:19:37.474Z",
-      "expires_at": "2027-10-28T16:19:37.474Z",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "valid_from": "2026-10-28T16:58:24.260Z",
+      "expires_at": "2027-10-28T16:58:24.260Z",
+      "created_at": "2026-10-28T16:58:24.260Z"
     }
   ],
   "resources": [
@@ -248,8 +248,8 @@
       "eligibility_policy": "verified_members_only",
       "status": "active",
       "created_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "d0000002-0000-0000-0000-000000000002",
@@ -280,8 +280,8 @@
       "eligibility_policy": "verified_members_only",
       "status": "active",
       "created_by": "b0000000-0000-0000-0000-000000000003",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "d0000003-0000-0000-0000-000000000003",
@@ -310,8 +310,8 @@
       "eligibility_policy": "public",
       "status": "active",
       "created_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "d0000004-0000-0000-0000-000000000004",
@@ -340,8 +340,8 @@
       "eligibility_policy": "verified_members_only",
       "status": "active",
       "created_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "d0000005-0000-0000-0000-000000000005",
@@ -371,8 +371,8 @@
       "eligibility_policy": "training_certified",
       "status": "active",
       "created_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "d0000006-0000-0000-0000-000000000006",
@@ -401,8 +401,8 @@
       "eligibility_policy": "public",
       "status": "active",
       "created_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "d0000007-0000-0000-0000-000000000007",
@@ -432,8 +432,8 @@
       "eligibility_policy": "verified_members_only",
       "status": "active",
       "created_by": "b0000000-0000-0000-0000-000000000003",
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     }
   ],
   "resource_units": [
@@ -444,7 +444,7 @@
       "serial_number": "DS1ZA224500129",
       "condition": "brand_new",
       "unit_status": "available",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "u0000002-0000-0000-0000-000000000004",
@@ -453,7 +453,7 @@
       "serial_number": "RPI4B4-0982736",
       "condition": "excellent",
       "unit_status": "checked_out",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "u0000003-0000-0000-0000-000000000004",
@@ -462,7 +462,7 @@
       "serial_number": "RPI4B4-0982737",
       "condition": "excellent",
       "unit_status": "available",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "u0000004-0000-0000-0000-000000000007",
@@ -471,7 +471,7 @@
       "serial_number": "FLK101-839211",
       "condition": "excellent",
       "unit_status": "available",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "u0000005-0000-0000-0000-000000000007",
@@ -480,7 +480,7 @@
       "serial_number": "FLK101-839212",
       "condition": "good",
       "unit_status": "available",
-      "created_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z"
     }
   ],
   "bookings": [
@@ -489,8 +489,8 @@
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
-      "start_at": "2026-10-29T16:19:37.474Z",
-      "due_at": "2026-11-02T16:19:37.474Z",
+      "start_at": "2026-10-29T16:58:24.260Z",
+      "due_at": "2026-11-02T16:58:24.260Z",
       "duration_days": 3,
       "duration_hours": 4,
       "duration_minutes": 0,
@@ -503,23 +503,23 @@
       "payment_status": "not_required",
       "purpose": "Autonomous obstacle avoidance robot for Semester 5 Embedded Systems mini-project.",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.474Z",
-      "updated_at": "2026-10-28T16:19:37.474Z"
+      "created_at": "2026-10-28T16:58:24.260Z",
+      "updated_at": "2026-10-28T16:58:24.260Z"
     },
     {
       "id": "b2222222-0000-0000-0000-000000000002",
       "resource_id": "d0000002-0000-0000-0000-000000000002",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
-      "start_at": "2026-10-28T16:19:37.474Z",
-      "due_at": "2026-11-01T16:19:37.474Z",
+      "start_at": "2026-10-28T16:58:24.260Z",
+      "due_at": "2026-11-01T16:58:24.260Z",
       "duration_days": 2,
       "duration_hours": 0,
       "duration_minutes": 0,
       "id_card_image_url": "https://images.unsplash.com/photo-1544717305-2782549b5136?auto=format&fit=crop&w=400&q=80",
       "id_card_verified": true,
       "id_card_verified_by": "b0000000-0000-0000-0000-000000000003",
-      "id_card_verified_at": "2026-10-27T16:19:37.474Z",
+      "id_card_verified_at": "2026-10-27T16:58:24.260Z",
       "handover_qr_code": "IOT-HANDOVER:b2222222-0000-0000-0000-000000000002",
       "status": "approved",
       "daily_rate_snapshot_paise": 0,
@@ -529,9 +529,9 @@
       "purpose": "IoT smart weather station sending MQTT telemetry to AWS IoT Core.",
       "usage_rules_acknowledged": true,
       "approved_by": "b0000000-0000-0000-0000-000000000003",
-      "approved_at": "2026-10-27T16:19:37.474Z",
-      "created_at": "2026-10-27T16:19:37.474Z",
-      "updated_at": "2026-10-27T16:19:37.474Z"
+      "approved_at": "2026-10-27T16:58:24.260Z",
+      "created_at": "2026-10-27T16:58:24.260Z",
+      "updated_at": "2026-10-27T16:58:24.260Z"
     },
     {
       "id": "b3333333-0000-0000-0000-000000000003",
@@ -539,8 +539,8 @@
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "unit_id": "u0000002-0000-0000-0000-000000000004",
       "quantity": 1,
-      "start_at": "2026-10-26T16:19:37.474Z",
-      "due_at": "2026-10-31T16:19:37.474Z",
+      "start_at": "2026-10-26T16:58:24.260Z",
+      "due_at": "2026-10-31T16:58:24.260Z",
       "duration_days": 3,
       "duration_hours": 12,
       "duration_minutes": 0,
@@ -548,7 +548,7 @@
       "id_card_verified": true,
       "handover_qr_code": "IOT-HANDOVER:b3333333-0000-0000-0000-000000000003",
       "timer_activated": true,
-      "deadline_at": "2026-10-31T16:19:37.474Z",
+      "deadline_at": "2026-10-31T16:58:24.260Z",
       "status": "checked_out",
       "daily_rate_snapshot_paise": 5000,
       "deposit_snapshot_paise": 200000,
@@ -557,19 +557,19 @@
       "purpose": "Computer vision edge inference node with OpenCV and MobileNet v2.",
       "usage_rules_acknowledged": true,
       "approved_by": "b0000000-0000-0000-0000-000000000002",
-      "approved_at": "2026-10-26T16:19:37.474Z",
+      "approved_at": "2026-10-26T16:58:24.260Z",
       "issued_by": "b0000000-0000-0000-0000-000000000002",
-      "issued_at": "2026-10-26T16:19:37.474Z",
-      "created_at": "2026-10-26T16:19:37.474Z",
-      "updated_at": "2026-10-26T16:19:37.474Z"
+      "issued_at": "2026-10-26T16:58:24.260Z",
+      "created_at": "2026-10-26T16:58:24.260Z",
+      "updated_at": "2026-10-26T16:58:24.260Z"
     },
     {
       "id": "b4444444-0000-0000-0000-000000000004",
       "resource_id": "d0000003-0000-0000-0000-000000000003",
       "borrower_id": "c0000000-0000-0000-0000-000000000002",
       "quantity": 2,
-      "start_at": "2026-10-18T16:19:37.474Z",
-      "due_at": "2026-10-25T16:19:37.474Z",
+      "start_at": "2026-10-18T16:58:24.260Z",
+      "due_at": "2026-10-25T16:58:24.260Z",
       "status": "completed",
       "daily_rate_snapshot_paise": 0,
       "deposit_snapshot_paise": 0,
@@ -578,13 +578,13 @@
       "purpose": "Greenhouse climate monitoring proof of concept experiment.",
       "usage_rules_acknowledged": true,
       "approved_by": "b0000000-0000-0000-0000-000000000002",
-      "approved_at": "2026-10-18T16:19:37.474Z",
+      "approved_at": "2026-10-18T16:58:24.260Z",
       "issued_by": "b0000000-0000-0000-0000-000000000002",
-      "issued_at": "2026-10-18T16:19:37.474Z",
+      "issued_at": "2026-10-18T16:58:24.260Z",
       "returned_by": "b0000000-0000-0000-0000-000000000002",
-      "returned_at": "2026-10-25T16:19:37.474Z",
-      "created_at": "2026-10-18T16:19:37.474Z",
-      "updated_at": "2026-10-25T16:19:37.474Z"
+      "returned_at": "2026-10-25T16:58:24.260Z",
+      "created_at": "2026-10-18T16:58:24.260Z",
+      "updated_at": "2026-10-25T16:58:24.260Z"
     },
     {
       "id": "b5555555-0000-0000-0000-000000000005",
@@ -592,8 +592,8 @@
       "borrower_id": "c0000000-0000-0000-0000-000000000002",
       "unit_id": "u0000004-0000-0000-0000-000000000007",
       "quantity": 1,
-      "start_at": "2026-10-23T16:19:37.474Z",
-      "due_at": "2026-10-27T16:19:37.474Z",
+      "start_at": "2026-10-23T16:58:24.260Z",
+      "due_at": "2026-10-27T16:58:24.260Z",
       "status": "incident_review",
       "daily_rate_snapshot_paise": 0,
       "deposit_snapshot_paise": 50000,
@@ -602,21 +602,21 @@
       "purpose": "High voltage capacitor charging circuit testing.",
       "usage_rules_acknowledged": true,
       "approved_by": "b0000000-0000-0000-0000-000000000003",
-      "approved_at": "2026-10-23T16:19:37.474Z",
+      "approved_at": "2026-10-23T16:58:24.260Z",
       "issued_by": "b0000000-0000-0000-0000-000000000003",
-      "issued_at": "2026-10-23T16:19:37.474Z",
+      "issued_at": "2026-10-23T16:58:24.260Z",
       "returned_by": "b0000000-0000-0000-0000-000000000003",
-      "returned_at": "2026-10-27T16:19:37.474Z",
-      "created_at": "2026-10-23T16:19:37.474Z",
-      "updated_at": "2026-10-27T16:19:37.474Z"
+      "returned_at": "2026-10-27T16:58:24.260Z",
+      "created_at": "2026-10-23T16:58:24.260Z",
+      "updated_at": "2026-10-27T16:58:24.260Z"
     },
     {
-      "id": "99ce827e-6ecb-49bf-a601-67e1ae68621b",
+      "id": "f875eeb4-b36b-486a-b630-c947e7f6a432",
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
-      "start_at": "2026-11-17T16:19:37.496Z",
-      "due_at": "2026-11-20T16:19:37.496Z",
+      "start_at": "2026-11-17T16:58:24.280Z",
+      "due_at": "2026-11-20T16:58:24.280Z",
       "duration_days": 3,
       "duration_hours": 0,
       "duration_minutes": 0,
@@ -628,11 +628,11 @@
       "payment_status": "not_required",
       "purpose": "Robotics testbench verification",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.497Z",
-      "updated_at": "2026-10-28T16:19:37.497Z"
+      "created_at": "2026-10-28T16:58:24.281Z",
+      "updated_at": "2026-10-28T16:58:24.281Z"
     },
     {
-      "id": "b0911ff8-d093-40ac-bb50-82ae83707ac6",
+      "id": "2d2c45f0-596d-4985-8ecc-aca72dd29bfc",
       "resource_id": "d0000005-0000-0000-0000-000000000005",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
@@ -649,11 +649,11 @@
       "payment_status": "pending",
       "purpose": "Student 1 RF Analysis",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.546Z",
-      "updated_at": "2026-10-28T16:19:37.546Z"
+      "created_at": "2026-10-28T16:58:24.325Z",
+      "updated_at": "2026-10-28T16:58:24.325Z"
     },
     {
-      "id": "39f0afeb-6af5-41e9-b904-ef05b8fb4ae5",
+      "id": "d95aa18b-7d88-47a9-b287-67e50d745b58",
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
@@ -670,16 +670,16 @@
       "payment_status": "not_required",
       "purpose": "Approve lifecycle test",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.562Z",
-      "updated_at": "2026-10-28T16:19:37.576Z",
+      "created_at": "2026-10-28T16:58:24.339Z",
+      "updated_at": "2026-10-28T16:58:24.355Z",
       "id_card_verified_by": "b0000000-0000-0000-0000-000000000002",
-      "id_card_verified_at": "2026-10-28T16:19:37.576Z",
+      "id_card_verified_at": "2026-10-28T16:58:24.355Z",
       "approved_by": "b0000000-0000-0000-0000-000000000002",
-      "approved_at": "2026-10-28T16:19:37.576Z",
-      "handover_qr_code": "IOT-HANDOVER:39f0afeb-6af5-41e9-b904-ef05b8fb4ae5:1PFAYKW3"
+      "approved_at": "2026-10-28T16:58:24.355Z",
+      "handover_qr_code": "IOT-HANDOVER:d95aa18b-7d88-47a9-b287-67e50d745b58:BBLDMKHT"
     },
     {
-      "id": "9f4caf5f-0046-4448-b75c-968fadf55b81",
+      "id": "a06c685b-b7e6-40de-a1c5-82e69f9e9252",
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
@@ -696,18 +696,18 @@
       "payment_status": "not_required",
       "purpose": "Checkout test",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.592Z",
-      "updated_at": "2026-10-28T16:19:37.622Z",
+      "created_at": "2026-10-28T16:58:24.372Z",
+      "updated_at": "2026-10-28T16:58:24.397Z",
       "id_card_verified_by": "b0000000-0000-0000-0000-000000000002",
-      "id_card_verified_at": "2026-10-28T16:19:37.606Z",
+      "id_card_verified_at": "2026-10-28T16:58:24.384Z",
       "approved_by": "b0000000-0000-0000-0000-000000000002",
-      "approved_at": "2026-10-28T16:19:37.606Z",
-      "handover_qr_code": "IOT-HANDOVER:9f4caf5f-0046-4448-b75c-968fadf55b81:TTB5GKOT",
+      "approved_at": "2026-10-28T16:58:24.384Z",
+      "handover_qr_code": "IOT-HANDOVER:a06c685b-b7e6-40de-a1c5-82e69f9e9252:VSOHVG03",
       "issued_by": "b0000000-0000-0000-0000-000000000002",
-      "issued_at": "2026-10-28T16:19:37.622Z"
+      "issued_at": "2026-10-28T16:58:24.397Z"
     },
     {
-      "id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
+      "id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
@@ -724,20 +724,20 @@
       "payment_status": "not_required",
       "purpose": "Return test",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.637Z",
-      "updated_at": "2026-10-28T16:19:37.685Z",
+      "created_at": "2026-10-28T16:58:24.411Z",
+      "updated_at": "2026-10-28T16:58:24.449Z",
       "id_card_verified_by": "b0000000-0000-0000-0000-000000000002",
-      "id_card_verified_at": "2026-10-28T16:19:37.654Z",
+      "id_card_verified_at": "2026-10-28T16:58:24.423Z",
       "approved_by": "b0000000-0000-0000-0000-000000000002",
-      "approved_at": "2026-10-28T16:19:37.654Z",
-      "handover_qr_code": "IOT-HANDOVER:a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93:KPKVOZX2",
+      "approved_at": "2026-10-28T16:58:24.423Z",
+      "handover_qr_code": "IOT-HANDOVER:e06904e8-3809-40ee-910a-5eccd7ce394d:8SAI1J93",
       "issued_by": "b0000000-0000-0000-0000-000000000002",
-      "issued_at": "2026-10-28T16:19:37.670Z",
+      "issued_at": "2026-10-28T16:58:24.436Z",
       "returned_by": "b0000000-0000-0000-0000-000000000002",
-      "returned_at": "2026-10-28T16:19:37.685Z"
+      "returned_at": "2026-10-28T16:58:24.449Z"
     },
     {
-      "id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
+      "id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
@@ -754,25 +754,25 @@
       "payment_status": "not_required",
       "purpose": "Damage incident test",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.701Z",
-      "updated_at": "2026-10-28T16:19:37.750Z",
+      "created_at": "2026-10-28T16:58:24.462Z",
+      "updated_at": "2026-10-28T16:58:24.501Z",
       "id_card_verified_by": "b0000000-0000-0000-0000-000000000002",
-      "id_card_verified_at": "2026-10-28T16:19:37.718Z",
+      "id_card_verified_at": "2026-10-28T16:58:24.476Z",
       "approved_by": "b0000000-0000-0000-0000-000000000002",
-      "approved_at": "2026-10-28T16:19:37.718Z",
-      "handover_qr_code": "IOT-HANDOVER:ddf37ba6-77ce-4f5b-8376-37da0f0392b0:T80A98FK",
+      "approved_at": "2026-10-28T16:58:24.476Z",
+      "handover_qr_code": "IOT-HANDOVER:6bde2e1e-f1b0-46fd-9790-010ff9ea2884:A9E69P3L",
       "issued_by": "b0000000-0000-0000-0000-000000000002",
-      "issued_at": "2026-10-28T16:19:37.735Z",
+      "issued_at": "2026-10-28T16:58:24.489Z",
       "returned_by": "b0000000-0000-0000-0000-000000000002",
-      "returned_at": "2026-10-28T16:19:37.750Z"
+      "returned_at": "2026-10-28T16:58:24.501Z"
     },
     {
-      "id": "e573592e-4649-4b03-a64d-4fbc5a295bd2",
+      "id": "c9a9383b-6719-4035-bc95-ee49232df0d4",
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
-      "start_at": "2026-11-27T16:19:37.782Z",
-      "due_at": "2026-11-30T20:49:37.782Z",
+      "start_at": "2026-11-27T16:58:24.535Z",
+      "due_at": "2026-11-30T21:28:24.535Z",
       "duration_days": 3,
       "duration_hours": 4,
       "duration_minutes": 30,
@@ -785,16 +785,16 @@
       "payment_status": "not_required",
       "purpose": "IoT Edge Smart Farm prototype",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.782Z",
-      "updated_at": "2026-10-28T16:19:37.782Z"
+      "created_at": "2026-10-28T16:58:24.536Z",
+      "updated_at": "2026-10-28T16:58:24.536Z"
     },
     {
-      "id": "46689102-f2de-4363-ab6d-725da4290e4f",
+      "id": "f57659da-8060-4c72-b8f7-28b7ea21be21",
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
-      "start_at": "2026-12-02T16:19:37.798Z",
-      "due_at": "2026-12-04T22:19:37.798Z",
+      "start_at": "2026-12-02T16:58:24.549Z",
+      "due_at": "2026-12-04T22:58:24.549Z",
       "duration_days": 2,
       "duration_hours": 6,
       "duration_minutes": 0,
@@ -807,21 +807,21 @@
       "payment_status": "not_required",
       "purpose": "Senior design project demo",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.798Z",
-      "updated_at": "2026-10-28T16:19:37.818Z",
+      "created_at": "2026-10-28T16:58:24.549Z",
+      "updated_at": "2026-10-28T16:58:24.563Z",
       "id_card_verified_by": "b0000000-0000-0000-0000-000000000002",
-      "id_card_verified_at": "2026-10-28T16:19:37.818Z",
+      "id_card_verified_at": "2026-10-28T16:58:24.563Z",
       "approved_by": "b0000000-0000-0000-0000-000000000002",
-      "approved_at": "2026-10-28T16:19:37.818Z",
-      "handover_qr_code": "IOT-HANDOVER:46689102-f2de-4363-ab6d-725da4290e4f:B2XKJMO4"
+      "approved_at": "2026-10-28T16:58:24.563Z",
+      "handover_qr_code": "IOT-HANDOVER:f57659da-8060-4c72-b8f7-28b7ea21be21:5I053ATY"
     },
     {
-      "id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
+      "id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
       "resource_id": "d0000001-0000-0000-0000-000000000001",
       "borrower_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
-      "start_at": "2026-12-07T16:19:37.835Z",
-      "due_at": "2026-10-30T04:19:37.875Z",
+      "start_at": "2026-12-07T16:58:24.577Z",
+      "due_at": "2026-10-30T04:58:24.606Z",
       "duration_days": 1,
       "duration_hours": 12,
       "duration_minutes": 0,
@@ -834,17 +834,17 @@
       "payment_status": "not_required",
       "purpose": "Lab benchmark comparison",
       "usage_rules_acknowledged": true,
-      "created_at": "2026-10-28T16:19:37.835Z",
-      "updated_at": "2026-10-28T16:19:37.875Z",
+      "created_at": "2026-10-28T16:58:24.577Z",
+      "updated_at": "2026-10-28T16:58:24.606Z",
       "id_card_verified_by": "b0000000-0000-0000-0000-000000000002",
-      "id_card_verified_at": "2026-10-28T16:19:37.857Z",
+      "id_card_verified_at": "2026-10-28T16:58:24.591Z",
       "approved_by": "b0000000-0000-0000-0000-000000000002",
-      "approved_at": "2026-10-28T16:19:37.857Z",
-      "handover_qr_code": "IOT-HANDOVER:31ef1ac1-ff5b-438e-8b17-1fed08afea07:AAMDWKQ2",
+      "approved_at": "2026-10-28T16:58:24.591Z",
+      "handover_qr_code": "IOT-HANDOVER:d12205b7-72ca-4cec-9a2f-373f9d1b7978:G6N5HLA8",
       "timer_activated": true,
       "issued_by": "b0000000-0000-0000-0000-000000000002",
-      "issued_at": "2026-10-28T16:19:37.875Z",
-      "deadline_at": "2026-10-30T04:19:37.875Z"
+      "issued_at": "2026-10-28T16:58:24.606Z",
+      "deadline_at": "2026-10-30T04:58:24.606Z"
     }
   ],
   "condition_reports": [
@@ -858,7 +858,7 @@
         "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=300"
       ],
       "submitted_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-26T16:19:37.474Z"
+      "created_at": "2026-10-26T16:58:24.260Z"
     },
     {
       "id": "cr000002-0000-0000-0000-000000000002",
@@ -870,7 +870,7 @@
         "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=300"
       ],
       "submitted_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-25T16:19:37.474Z"
+      "created_at": "2026-10-25T16:58:24.260Z"
     },
     {
       "id": "cr000003-0000-0000-0000-000000000003",
@@ -882,67 +882,67 @@
         "https://images.unsplash.com/photo-1581092162384-8987c1d64718?w=300"
       ],
       "submitted_by": "b0000000-0000-0000-0000-000000000003",
-      "created_at": "2026-10-27T16:19:37.474Z"
+      "created_at": "2026-10-27T16:58:24.260Z"
     },
     {
-      "id": "9cb4b12b-ed4a-4699-8574-53c35f5e4650",
-      "booking_id": "9f4caf5f-0046-4448-b75c-968fadf55b81",
+      "id": "ee17bb65-2f86-4e49-bef6-4f88ef10b7a6",
+      "booking_id": "a06c685b-b7e6-40de-a1c5-82e69f9e9252",
       "report_type": "checkout",
       "condition": "excellent",
       "notes": "Initial checkout inspection passed",
       "evidence_paths": [],
       "submitted_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.622Z"
+      "created_at": "2026-10-28T16:58:24.397Z"
     },
     {
-      "id": "c033e290-76ee-4723-9af2-2aa1d5459fd8",
-      "booking_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
+      "id": "ed01330c-d803-40ef-ad6b-28143e95f409",
+      "booking_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
       "report_type": "checkout",
       "condition": "good",
       "notes": "Issued in good condition",
       "evidence_paths": [],
       "submitted_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.670Z"
+      "created_at": "2026-10-28T16:58:24.436Z"
     },
     {
-      "id": "566f962a-6dfb-4fee-a86f-bee17c3bd6d0",
-      "booking_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
+      "id": "7fbbca65-07b8-4915-8b95-8de2dab8727a",
+      "booking_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
       "report_type": "return",
       "condition": "good",
       "notes": "Returned in good order",
       "evidence_paths": [],
       "submitted_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.685Z"
+      "created_at": "2026-10-28T16:58:24.449Z"
     },
     {
-      "id": "b061b90b-4a0c-432f-be4e-fdf0968daa33",
-      "booking_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
+      "id": "d4a176af-52be-48d9-a47b-bfc8a64f91e0",
+      "booking_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
       "report_type": "checkout",
       "condition": "good",
       "notes": "Pre-checkout ok",
       "evidence_paths": [],
       "submitted_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.735Z"
+      "created_at": "2026-10-28T16:58:24.489Z"
     },
     {
-      "id": "7bdb3dd5-bbcd-40a1-a16a-02588b17d3d0",
-      "booking_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
+      "id": "d7e09483-589a-429b-b7a3-3d5ffbf25abc",
+      "booking_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
       "report_type": "return",
       "condition": "damaged",
       "notes": "Power connector port cracked",
       "evidence_paths": [],
       "submitted_by": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.750Z"
+      "created_at": "2026-10-28T16:58:24.501Z"
     },
     {
-      "id": "fff9df01-e3af-461c-9b90-4edc25829075",
-      "booking_id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
+      "id": "1b85956a-202d-4e12-b25f-d117031d553e",
+      "booking_id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
       "report_type": "checkout",
       "condition": "good",
       "notes": "Handover completed via Lab Head QR verification and receiver scan.",
       "evidence_paths": [],
       "submitted_by": "c0000000-0000-0000-0000-000000000001",
-      "created_at": "2026-10-28T16:19:37.875Z"
+      "created_at": "2026-10-28T16:58:24.606Z"
     }
   ],
   "incidents": [
@@ -958,18 +958,18 @@
       "status": "investigating",
       "assigned_to": "b0000000-0000-0000-0000-000000000003",
       "resolution_notes": "Lead probe replacement estimated at INR 350. Discussed with borrower; partial deposit deduction under review.",
-      "created_at": "2026-10-27T16:19:37.474Z"
+      "created_at": "2026-10-27T16:58:24.260Z"
     },
     {
-      "id": "f02f7948-00a5-4254-81cf-2687a7980fdc",
-      "booking_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
+      "id": "8c406381-90eb-46d5-85c5-953e0671e5ff",
+      "booking_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
       "reported_by": "b0000000-0000-0000-0000-000000000002",
       "incident_type": "damage",
       "description": "Cracked barrel jack connector",
       "evidence_paths": [],
       "status": "open",
       "assigned_to": "b0000000-0000-0000-0000-000000000002",
-      "created_at": "2026-10-28T16:19:37.750Z"
+      "created_at": "2026-10-28T16:58:24.501Z"
     }
   ],
   "waitlist_entries": [
@@ -981,17 +981,17 @@
       "status": "active",
       "queue_position": 1,
       "priority_reason": "Final Year Capstone Project — RF Signal Analysis",
-      "created_at": "2026-10-27T16:19:37.474Z"
+      "created_at": "2026-10-27T16:58:24.260Z"
     },
     {
-      "id": "e0a44d1a-4d25-4cf7-a20c-724d4e4c84af",
+      "id": "2a329fe1-6449-4742-93cd-c1513160ac42",
       "resource_id": "d0000005-0000-0000-0000-000000000005",
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "quantity": 1,
       "status": "active",
       "queue_position": 2,
       "priority_reason": "Final year capstone 1",
-      "created_at": "2026-10-28T16:19:37.767Z"
+      "created_at": "2026-10-28T16:58:24.519Z"
     }
   ],
   "audit_logs": [
@@ -1005,7 +1005,7 @@
       "metadata": {
         "verified_by": "Dr. Vikram Seth"
       },
-      "created_at": "2026-09-28T16:19:37.474Z"
+      "created_at": "2026-09-28T16:58:24.260Z"
     },
     {
       "id": "a2222222-0000-0000-0000-000000000002",
@@ -1018,7 +1018,7 @@
         "name": "Arduino Uno Rev3",
         "quantity": 5
       },
-      "created_at": "2026-10-08T16:19:37.474Z"
+      "created_at": "2026-10-08T16:58:24.260Z"
     },
     {
       "id": "a3333333-0000-0000-0000-000000000003",
@@ -1031,13 +1031,13 @@
         "unit": "NIT-RPI-01",
         "issued_to": "Aarav Sharma"
       },
-      "created_at": "2026-10-26T16:19:37.474Z"
+      "created_at": "2026-10-26T16:58:24.260Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "99ce827e-6ecb-49bf-a601-67e1ae68621b",
+      "entity_id": "f875eeb4-b36b-486a-b630-c947e7f6a432",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1045,14 +1045,14 @@
         "estimatedTotalPaise": 0,
         "resourceName": "Arduino Uno Rev3 Microcontroller Board"
       },
-      "id": "8af1126e-b8e6-427b-bb8a-b5bdea4fa9d7",
-      "created_at": "2026-10-28T16:19:37.497Z"
+      "id": "de621ba7-f3a4-4477-8239-76dfdd72d279",
+      "created_at": "2026-10-28T16:58:24.281Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "b0911ff8-d093-40ac-bb50-82ae83707ac6",
+      "entity_id": "2d2c45f0-596d-4985-8ecc-aca72dd29bfc",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1060,14 +1060,14 @@
         "estimatedTotalPaise": 520000,
         "resourceName": "Rigol DS1054Z 50MHz 4-Channel Digital Oscilloscope"
       },
-      "id": "a974a3d6-9dd6-4950-a52e-a85fc8f24eea",
-      "created_at": "2026-10-28T16:19:37.546Z"
+      "id": "59c1115e-a496-4b80-b9f9-9fac8e8e5295",
+      "created_at": "2026-10-28T16:58:24.325Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "39f0afeb-6af5-41e9-b904-ef05b8fb4ae5",
+      "entity_id": "d95aa18b-7d88-47a9-b287-67e50d745b58",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1075,14 +1075,14 @@
         "estimatedTotalPaise": 0,
         "resourceName": "Arduino Uno Rev3 Microcontroller Board"
       },
-      "id": "f2ae9824-8cd4-468a-8bed-ee318371f394",
-      "created_at": "2026-10-28T16:19:37.562Z"
+      "id": "495e4b6f-a212-473b-ac5e-87e9f90611a0",
+      "created_at": "2026-10-28T16:58:24.339Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "39f0afeb-6af5-41e9-b904-ef05b8fb4ae5",
+      "entity_id": "d95aa18b-7d88-47a9-b287-67e50d745b58",
       "action": "id_verified_and_approved",
       "metadata": {
         "resourceId": "d0000001-0000-0000-0000-000000000001",
@@ -1093,14 +1093,14 @@
           "minutes": 0
         }
       },
-      "id": "93a0e2c1-ee33-49b7-b7d2-5d12b13aa90e",
-      "created_at": "2026-10-28T16:19:37.576Z"
+      "id": "337392c7-4ea4-4055-b5c0-3dc113832bd1",
+      "created_at": "2026-10-28T16:58:24.356Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "9f4caf5f-0046-4448-b75c-968fadf55b81",
+      "entity_id": "a06c685b-b7e6-40de-a1c5-82e69f9e9252",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1108,14 +1108,14 @@
         "estimatedTotalPaise": 0,
         "resourceName": "Arduino Uno Rev3 Microcontroller Board"
       },
-      "id": "ae6abf74-45aa-4792-b46f-e0bc7ad3a152",
-      "created_at": "2026-10-28T16:19:37.592Z"
+      "id": "91dc1e4d-a9ff-4a9a-9571-563d2bbc0384",
+      "created_at": "2026-10-28T16:58:24.372Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "9f4caf5f-0046-4448-b75c-968fadf55b81",
+      "entity_id": "a06c685b-b7e6-40de-a1c5-82e69f9e9252",
       "action": "id_verified_and_approved",
       "metadata": {
         "resourceId": "d0000001-0000-0000-0000-000000000001",
@@ -1126,27 +1126,27 @@
           "minutes": 0
         }
       },
-      "id": "756eaab2-8d22-4dc3-8e7b-f8153f10fc34",
-      "created_at": "2026-10-28T16:19:37.607Z"
+      "id": "f6746e88-5b65-4927-b7e8-ab3f2181b5db",
+      "created_at": "2026-10-28T16:58:24.384Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "9f4caf5f-0046-4448-b75c-968fadf55b81",
+      "entity_id": "a06c685b-b7e6-40de-a1c5-82e69f9e9252",
       "action": "checked_out",
       "metadata": {
         "condition": "excellent",
         "notes": "Initial checkout inspection passed"
       },
-      "id": "60677631-d854-4dfb-9e1c-04abaf439dd6",
-      "created_at": "2026-10-28T16:19:37.622Z"
+      "id": "437d2719-43bf-46c4-a441-3096fd314df1",
+      "created_at": "2026-10-28T16:58:24.397Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
+      "entity_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1154,14 +1154,14 @@
         "estimatedTotalPaise": 0,
         "resourceName": "Arduino Uno Rev3 Microcontroller Board"
       },
-      "id": "7ee3296f-c334-444e-b72d-ee031f2f7514",
-      "created_at": "2026-10-28T16:19:37.637Z"
+      "id": "12401ac8-6ebe-4fd6-ace2-5073ae9036fd",
+      "created_at": "2026-10-28T16:58:24.411Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
+      "entity_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
       "action": "id_verified_and_approved",
       "metadata": {
         "resourceId": "d0000001-0000-0000-0000-000000000001",
@@ -1172,41 +1172,41 @@
           "minutes": 0
         }
       },
-      "id": "5405a10b-4038-4abe-a0e5-ddd4d347c398",
-      "created_at": "2026-10-28T16:19:37.654Z"
+      "id": "2154dec5-62f0-498e-9956-a465a3ebbdca",
+      "created_at": "2026-10-28T16:58:24.423Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
+      "entity_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
       "action": "checked_out",
       "metadata": {
         "condition": "good",
         "notes": "Issued in good condition"
       },
-      "id": "597159f3-fefd-4440-8263-1f23ff2f22fe",
-      "created_at": "2026-10-28T16:19:37.670Z"
+      "id": "0352acfb-7071-4c90-87e0-b6836d02fd3c",
+      "created_at": "2026-10-28T16:58:24.436Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
+      "entity_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
       "action": "return_completed",
       "metadata": {
         "condition": "good",
         "notes": "Returned in good order",
         "isIncident": false
       },
-      "id": "ef9d16bd-8079-446e-8d61-1ef4e430a9b8",
-      "created_at": "2026-10-28T16:19:37.685Z"
+      "id": "0451d555-c179-4c14-88ba-6d51eae94e4e",
+      "created_at": "2026-10-28T16:58:24.449Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
+      "entity_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1214,14 +1214,14 @@
         "estimatedTotalPaise": 0,
         "resourceName": "Arduino Uno Rev3 Microcontroller Board"
       },
-      "id": "159345be-29fc-451b-a141-c1930c8e63fc",
-      "created_at": "2026-10-28T16:19:37.701Z"
+      "id": "bbfe6e29-6cdf-4972-8506-bb1407ee5232",
+      "created_at": "2026-10-28T16:58:24.462Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
+      "entity_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
       "action": "id_verified_and_approved",
       "metadata": {
         "resourceId": "d0000001-0000-0000-0000-000000000001",
@@ -1232,54 +1232,54 @@
           "minutes": 0
         }
       },
-      "id": "c6308460-6953-455b-bdee-4830cab3853c",
-      "created_at": "2026-10-28T16:19:37.718Z"
+      "id": "79bfe9fb-0638-4611-9538-25fec29e7afc",
+      "created_at": "2026-10-28T16:58:24.476Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
+      "entity_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
       "action": "checked_out",
       "metadata": {
         "condition": "good",
         "notes": "Pre-checkout ok"
       },
-      "id": "bf6f91fe-85a6-45c1-8534-f920a44d222a",
-      "created_at": "2026-10-28T16:19:37.735Z"
+      "id": "a4336805-7bbd-4bc5-8352-26ba69c0e33a",
+      "created_at": "2026-10-28T16:58:24.489Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
+      "entity_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
       "action": "return_incident_review",
       "metadata": {
         "condition": "damaged",
         "notes": "Power connector port cracked",
         "isIncident": true
       },
-      "id": "f44c3181-7fcf-4528-bab2-1e8a9ba2a6ca",
-      "created_at": "2026-10-28T16:19:37.750Z"
+      "id": "0b309fa9-0cec-451a-bbe9-0aec0ff16512",
+      "created_at": "2026-10-28T16:58:24.502Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "entity_type": "waitlist",
-      "entity_id": "e0a44d1a-4d25-4cf7-a20c-724d4e4c84af",
+      "entity_id": "2a329fe1-6449-4742-93cd-c1513160ac42",
       "action": "joined",
       "metadata": {
         "queuePosition": 2,
         "quantity": 1,
         "priorityReason": "Final year capstone 1"
       },
-      "id": "a6408932-97f1-4b3c-9f24-4414991ccac5",
-      "created_at": "2026-10-28T16:19:37.767Z"
+      "id": "e364e814-f31b-45f2-a0a7-ae108b23eb51",
+      "created_at": "2026-10-28T16:58:24.519Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "e573592e-4649-4b03-a64d-4fbc5a295bd2",
+      "entity_id": "c9a9383b-6719-4035-bc95-ee49232df0d4",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1287,14 +1287,14 @@
         "estimatedTotalPaise": 0,
         "resourceName": "Arduino Uno Rev3 Microcontroller Board"
       },
-      "id": "4ce46ddc-22d6-418e-95ca-d150788794b8",
-      "created_at": "2026-10-28T16:19:37.782Z"
+      "id": "6f23cbc0-a854-4436-99db-0c771abc2385",
+      "created_at": "2026-10-28T16:58:24.536Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "46689102-f2de-4363-ab6d-725da4290e4f",
+      "entity_id": "f57659da-8060-4c72-b8f7-28b7ea21be21",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1302,14 +1302,14 @@
         "estimatedTotalPaise": 0,
         "resourceName": "Arduino Uno Rev3 Microcontroller Board"
       },
-      "id": "497433d9-c416-46fe-aee3-cf9844e9f9d9",
-      "created_at": "2026-10-28T16:19:37.799Z"
+      "id": "2db87425-bd4d-42eb-b836-191484fa2f42",
+      "created_at": "2026-10-28T16:58:24.549Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "46689102-f2de-4363-ab6d-725da4290e4f",
+      "entity_id": "f57659da-8060-4c72-b8f7-28b7ea21be21",
       "action": "id_verified_and_approved",
       "metadata": {
         "resourceId": "d0000001-0000-0000-0000-000000000001",
@@ -1320,14 +1320,14 @@
           "minutes": 0
         }
       },
-      "id": "58c8b5c3-f0b6-4c7e-8e6c-e857023d731c",
-      "created_at": "2026-10-28T16:19:37.818Z"
+      "id": "1c9ba183-d5d5-4e8a-b8c4-26f9fae845b1",
+      "created_at": "2026-10-28T16:58:24.563Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
+      "entity_id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
       "action": "created",
       "metadata": {
         "quantity": 1,
@@ -1335,14 +1335,14 @@
         "estimatedTotalPaise": 0,
         "resourceName": "Arduino Uno Rev3 Microcontroller Board"
       },
-      "id": "ba4f75b6-0367-4e21-a14c-ae90108da208",
-      "created_at": "2026-10-28T16:19:37.835Z"
+      "id": "b6bf9b78-dfe0-4f3e-8385-0fed6f675a7c",
+      "created_at": "2026-10-28T16:58:24.577Z"
     },
     {
       "actor_id": "b0000000-0000-0000-0000-000000000002",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
+      "entity_id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
       "action": "id_verified_and_approved",
       "metadata": {
         "resourceId": "d0000001-0000-0000-0000-000000000001",
@@ -1353,23 +1353,23 @@
           "minutes": 0
         }
       },
-      "id": "7154cdfa-b898-4e60-8271-da8680b01811",
-      "created_at": "2026-10-28T16:19:37.857Z"
+      "id": "6d7e1c23-8e57-4290-be53-693f00a9290c",
+      "created_at": "2026-10-28T16:58:24.592Z"
     },
     {
       "actor_id": "c0000000-0000-0000-0000-000000000001",
       "institution_id": "11111111-1111-1111-1111-111111111111",
       "entity_type": "booking",
-      "entity_id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
+      "entity_id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
       "action": "handover_claimed_qr",
       "metadata": {
-        "deadlineAt": "2026-10-30T04:19:37.875Z",
+        "deadlineAt": "2026-10-30T04:58:24.606Z",
         "durationDays": 1,
         "durationHours": 12,
         "durationMinutes": 0
       },
-      "id": "fcdcf63a-51d3-4a9e-8992-1b61d6d97b68",
-      "created_at": "2026-10-28T16:19:37.875Z"
+      "id": "571de3ba-6ace-4142-9967-3e81f5b3bacb",
+      "created_at": "2026-10-28T16:58:24.606Z"
     }
   ],
   "notifications": [
@@ -1380,7 +1380,7 @@
       "title": "Booking Request Approved!",
       "message": "Your request for ESP-32 NodeMCU Wi-Fi Board has been approved by Greenfield Engineering College. You may pick it up at Makerspace Room 102.",
       "related_booking_id": "b2222222-0000-0000-0000-000000000002",
-      "created_at": "2026-10-27T16:19:37.474Z"
+      "created_at": "2026-10-27T16:58:24.260Z"
     },
     {
       "id": "n0000002-0000-0000-0000-000000000001",
@@ -1389,205 +1389,205 @@
       "title": "Equipment Issued",
       "message": "Raspberry Pi 4 Model B (Asset Tag: NIT-RPI-01) has been checked out to you. Due date: in 3 days.",
       "related_booking_id": "b3333333-0000-0000-0000-000000000003",
-      "created_at": "2026-10-26T16:19:37.474Z"
+      "created_at": "2026-10-26T16:58:24.260Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Arduino Uno Rev3 Microcontroller Board from 11/17/2026 to 11/20/2026.",
-      "related_booking_id": "99ce827e-6ecb-49bf-a601-67e1ae68621b",
-      "id": "4e82a110-72b0-428a-b6bb-6741e5677798",
-      "created_at": "2026-10-28T16:19:37.530Z"
+      "related_booking_id": "f875eeb4-b36b-486a-b630-c947e7f6a432",
+      "id": "9b0aeb2c-5a86-4603-afcf-e590546feb1c",
+      "created_at": "2026-10-28T16:58:24.311Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Rigol DS1054Z 50MHz 4-Channel Digital Oscilloscope from 1/10/2027 to 1/12/2027.",
-      "related_booking_id": "b0911ff8-d093-40ac-bb50-82ae83707ac6",
-      "id": "7494f465-7b3c-4c59-aee7-8b09c86efefd",
-      "created_at": "2026-10-28T16:19:37.546Z"
+      "related_booking_id": "2d2c45f0-596d-4985-8ecc-aca72dd29bfc",
+      "id": "53f15bb3-b5bf-4f51-b4b8-fc88a16c7db6",
+      "created_at": "2026-10-28T16:58:24.325Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Arduino Uno Rev3 Microcontroller Board from 2/1/2027 to 2/4/2027.",
-      "related_booking_id": "39f0afeb-6af5-41e9-b904-ef05b8fb4ae5",
-      "id": "b94aaa1c-ae6e-4e75-a4e6-d9a791fe3801",
-      "created_at": "2026-10-28T16:19:37.562Z"
+      "related_booking_id": "d95aa18b-7d88-47a9-b287-67e50d745b58",
+      "id": "d45efa1c-fa55-4649-bd5a-3008cd522e24",
+      "created_at": "2026-10-28T16:58:24.339Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "booking_approved",
       "title": "ID Verified & Booking Accepted",
       "message": "Your ID has been manually verified by the Lab Head and booking for Arduino Uno Rev3 Microcontroller Board is accepted! Note: Equipment will ONLY be handed over to the student or teacher whose verified ID card matches at pickup.",
-      "related_booking_id": "39f0afeb-6af5-41e9-b904-ef05b8fb4ae5",
-      "id": "0456d950-3d38-49b3-a080-1d53865afa7b",
-      "created_at": "2026-10-28T16:19:37.576Z"
+      "related_booking_id": "d95aa18b-7d88-47a9-b287-67e50d745b58",
+      "id": "374655a7-8f65-42da-b49f-59b85d5e1dbe",
+      "created_at": "2026-10-28T16:58:24.356Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Arduino Uno Rev3 Microcontroller Board from 3/1/2027 to 3/5/2027.",
-      "related_booking_id": "9f4caf5f-0046-4448-b75c-968fadf55b81",
-      "id": "0f3588ca-e1a1-4fc3-9cea-533b8aed4491",
-      "created_at": "2026-10-28T16:19:37.592Z"
+      "related_booking_id": "a06c685b-b7e6-40de-a1c5-82e69f9e9252",
+      "id": "018e9c62-b310-4c9c-a258-1b0b10898a6e",
+      "created_at": "2026-10-28T16:58:24.372Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "booking_approved",
       "title": "ID Verified & Booking Accepted",
       "message": "Your ID has been manually verified by the Lab Head and booking for Arduino Uno Rev3 Microcontroller Board is accepted! Note: Equipment will ONLY be handed over to the student or teacher whose verified ID card matches at pickup.",
-      "related_booking_id": "9f4caf5f-0046-4448-b75c-968fadf55b81",
-      "id": "deeb1f9e-be05-46de-a57e-dce1288eec7b",
-      "created_at": "2026-10-28T16:19:37.607Z"
+      "related_booking_id": "a06c685b-b7e6-40de-a1c5-82e69f9e9252",
+      "id": "0a6901eb-2e65-46fe-b1b5-4593a688495f",
+      "created_at": "2026-10-28T16:58:24.384Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "item_issued",
       "title": "Equipment Handover Completed",
       "message": "Arduino Uno Rev3 Microcontroller Board has been checked out. Return due date: 3/5/2027.",
-      "related_booking_id": "9f4caf5f-0046-4448-b75c-968fadf55b81",
-      "id": "485aad6d-b6b8-4265-8ac0-d595bb42c2d8",
-      "created_at": "2026-10-28T16:19:37.622Z"
+      "related_booking_id": "a06c685b-b7e6-40de-a1c5-82e69f9e9252",
+      "id": "88aaa421-da6b-4b6f-b616-edf7324936ce",
+      "created_at": "2026-10-28T16:58:24.397Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Arduino Uno Rev3 Microcontroller Board from 4/1/2027 to 4/5/2027.",
-      "related_booking_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
-      "id": "16ee7436-6d0d-425b-9b34-7712633f6e03",
-      "created_at": "2026-10-28T16:19:37.637Z"
+      "related_booking_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
+      "id": "c7244de1-239a-4106-92b3-2d8bbcb4579f",
+      "created_at": "2026-10-28T16:58:24.411Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "booking_approved",
       "title": "ID Verified & Booking Accepted",
       "message": "Your ID has been manually verified by the Lab Head and booking for Arduino Uno Rev3 Microcontroller Board is accepted! Note: Equipment will ONLY be handed over to the student or teacher whose verified ID card matches at pickup.",
-      "related_booking_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
-      "id": "c339111a-6ee8-4940-95bb-726e8c027c20",
-      "created_at": "2026-10-28T16:19:37.654Z"
+      "related_booking_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
+      "id": "b04bb276-80b5-4e8f-9b98-c3212af54365",
+      "created_at": "2026-10-28T16:58:24.423Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "item_issued",
       "title": "Equipment Handover Completed",
       "message": "Arduino Uno Rev3 Microcontroller Board has been checked out. Return due date: 4/5/2027.",
-      "related_booking_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
-      "id": "cfe9444e-4f70-497b-8413-700767020d0e",
-      "created_at": "2026-10-28T16:19:37.670Z"
+      "related_booking_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
+      "id": "19db655e-4d8c-4178-a7ed-b7e355f0c8f5",
+      "created_at": "2026-10-28T16:58:24.436Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "return_confirmed",
       "title": "Return Confirmed",
       "message": "Your return of Arduino Uno Rev3 Microcontroller Board has been inspected and confirmed in good order.",
-      "related_booking_id": "a05b6b52-a68d-4f0d-9e4e-9a5b017c4e93",
-      "id": "04b9032b-f341-454e-ba78-e75ad7d58f0c",
-      "created_at": "2026-10-28T16:19:37.685Z"
+      "related_booking_id": "e06904e8-3809-40ee-910a-5eccd7ce394d",
+      "id": "5dec28d3-f47c-4d83-8eb6-851ce5a628a6",
+      "created_at": "2026-10-28T16:58:24.449Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Arduino Uno Rev3 Microcontroller Board from 5/1/2027 to 5/5/2027.",
-      "related_booking_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
-      "id": "65d33769-e37e-4de3-bd57-36fe72c4d555",
-      "created_at": "2026-10-28T16:19:37.702Z"
+      "related_booking_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
+      "id": "321b850a-76d3-4d13-b2c6-46d67e6a3e85",
+      "created_at": "2026-10-28T16:58:24.462Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "booking_approved",
       "title": "ID Verified & Booking Accepted",
       "message": "Your ID has been manually verified by the Lab Head and booking for Arduino Uno Rev3 Microcontroller Board is accepted! Note: Equipment will ONLY be handed over to the student or teacher whose verified ID card matches at pickup.",
-      "related_booking_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
-      "id": "f43c1bdc-acfe-42b7-85cf-2a62a5543c51",
-      "created_at": "2026-10-28T16:19:37.718Z"
+      "related_booking_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
+      "id": "b5e12701-65f8-4ace-bcf9-59a9610566c2",
+      "created_at": "2026-10-28T16:58:24.476Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "item_issued",
       "title": "Equipment Handover Completed",
       "message": "Arduino Uno Rev3 Microcontroller Board has been checked out. Return due date: 5/5/2027.",
-      "related_booking_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
-      "id": "0a5520bd-6920-4b94-8a1b-077bbf4c7e9d",
-      "created_at": "2026-10-28T16:19:37.735Z"
+      "related_booking_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
+      "id": "f8388cdb-13b9-4dae-9643-79a72b151a40",
+      "created_at": "2026-10-28T16:58:24.489Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "incident_opened",
       "title": "Incident Review Opened",
       "message": "Equipment returned with condition notes. An incident review has been initiated.",
-      "related_booking_id": "ddf37ba6-77ce-4f5b-8376-37da0f0392b0",
-      "id": "e10d70b5-d09a-4bae-bea7-2199bc1e5046",
-      "created_at": "2026-10-28T16:19:37.750Z"
+      "related_booking_id": "6bde2e1e-f1b0-46fd-9790-010ff9ea2884",
+      "id": "963f49d0-1587-477b-913a-acd71c46bfbc",
+      "created_at": "2026-10-28T16:58:24.502Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Arduino Uno Rev3 Microcontroller Board from 11/27/2026 to 12/1/2026.",
-      "related_booking_id": "e573592e-4649-4b03-a64d-4fbc5a295bd2",
-      "id": "c0735486-5f06-4b62-b1c7-a081f0a78182",
-      "created_at": "2026-10-28T16:19:37.782Z"
+      "related_booking_id": "c9a9383b-6719-4035-bc95-ee49232df0d4",
+      "id": "e74b0f85-59f8-4934-b0ae-835e784160f5",
+      "created_at": "2026-10-28T16:58:24.536Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Arduino Uno Rev3 Microcontroller Board from 12/2/2026 to 12/5/2026.",
-      "related_booking_id": "46689102-f2de-4363-ab6d-725da4290e4f",
-      "id": "5537b378-2394-4295-a04b-b662ebf3af4a",
-      "created_at": "2026-10-28T16:19:37.799Z"
+      "related_booking_id": "f57659da-8060-4c72-b8f7-28b7ea21be21",
+      "id": "4eeff4b7-7a58-476c-a44f-f3fc03c26edc",
+      "created_at": "2026-10-28T16:58:24.549Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "booking_approved",
       "title": "ID Verified & Booking Accepted",
       "message": "Your ID has been manually verified by the Lab Head and booking for Arduino Uno Rev3 Microcontroller Board is accepted! Note: Equipment will ONLY be handed over to the student or teacher whose verified ID card matches at pickup.",
-      "related_booking_id": "46689102-f2de-4363-ab6d-725da4290e4f",
-      "id": "636d5e76-7156-4746-b09f-0a8905a3f82e",
-      "created_at": "2026-10-28T16:19:37.818Z"
+      "related_booking_id": "f57659da-8060-4c72-b8f7-28b7ea21be21",
+      "id": "f0a8e742-fe49-4dae-821b-87e49888edb3",
+      "created_at": "2026-10-28T16:58:24.563Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "new_booking_request",
       "title": "New Booking Request",
       "message": "New booking request for 1x Arduino Uno Rev3 Microcontroller Board from 12/7/2026 to 12/9/2026.",
-      "related_booking_id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
-      "id": "2ed97f48-847f-4775-bbd3-cb2673400821",
-      "created_at": "2026-10-28T16:19:37.835Z"
+      "related_booking_id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
+      "id": "5be70f8a-f122-40f3-9fba-61c65d951394",
+      "created_at": "2026-10-28T16:58:24.577Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "booking_approved",
       "title": "ID Verified & Booking Accepted",
       "message": "Your ID has been manually verified by the Lab Head and booking for Arduino Uno Rev3 Microcontroller Board is accepted! Note: Equipment will ONLY be handed over to the student or teacher whose verified ID card matches at pickup.",
-      "related_booking_id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
-      "id": "c4db4e78-6898-4bc6-971c-a7e3add0972b",
-      "created_at": "2026-10-28T16:19:37.857Z"
+      "related_booking_id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
+      "id": "35d01059-ed03-463c-82eb-2d1be88cb90c",
+      "created_at": "2026-10-28T16:58:24.592Z"
     },
     {
       "user_id": "c0000000-0000-0000-0000-000000000001",
       "event_type": "item_issued",
       "title": "Equipment Handover Completed — Timer Active!",
-      "message": "You have successfully received Arduino Uno Rev3 Microcontroller Board. Your countdown timer is running until 10/30/2026, 9:49:37 AM.",
-      "related_booking_id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
-      "id": "bc616e43-b1c5-47cb-8940-d8eb959c231a",
-      "created_at": "2026-10-28T16:19:37.875Z"
+      "message": "You have successfully received Arduino Uno Rev3 Microcontroller Board. Your countdown timer is running until 10/30/2026, 10:28:24 AM.",
+      "related_booking_id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
+      "id": "00e5d0d7-ba5a-4774-8c2b-4ce091e8e5ad",
+      "created_at": "2026-10-28T16:58:24.606Z"
     },
     {
       "user_id": "b0000000-0000-0000-0000-000000000002",
       "event_type": "item_issued",
       "title": "Handover Completed — Timer Active",
-      "message": "Arduino Uno Rev3 Microcontroller Board has been collected by receiver. Return countdown timer active until 10/30/2026, 9:49:37 AM.",
-      "related_booking_id": "31ef1ac1-ff5b-438e-8b17-1fed08afea07",
-      "id": "0e850d69-3b67-4ad4-8aca-fd588f63e8c7",
-      "created_at": "2026-10-28T16:19:37.875Z"
+      "message": "Arduino Uno Rev3 Microcontroller Board has been collected by receiver. Return countdown timer active until 10/30/2026, 10:28:24 AM.",
+      "related_booking_id": "d12205b7-72ca-4cec-9a2f-373f9d1b7978",
+      "id": "e8d2073a-df9e-40c5-8aa7-abe8f40e5f1c",
+      "created_at": "2026-10-28T16:58:24.606Z"
     }
   ]
 }
