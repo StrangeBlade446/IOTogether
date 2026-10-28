@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { receiverSignupAction } from '@/app/actions/auth';
-import { Sparkles, UserPlus, AlertCircle, ShieldCheck } from 'lucide-react';
+import { Compass, UserPlus, AlertCircle, ShieldCheck } from 'lucide-react';
 
-export default function ReceiverSignupPage() {
+export default function SeekerSignupPage() {
   const router = useRouter();
   const [formData, setFormData] = useState({
     name: '',
@@ -40,12 +40,12 @@ export default function ReceiverSignupPage() {
   return (
     <div className="max-w-md mx-auto px-4 py-12 animate-in fade-in duration-300">
       <div className="text-center mb-6">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/10 text-cyan-400 border border-cyan-500/30 mb-2">
-          <Sparkles className="w-3.5 h-3.5" /> Receiver Portal
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#263447] text-[#67C7D4] border border-[#67C7D4]/30 mb-2">
+          <Compass className="w-3.5 h-3.5" /> Seeker Platform
         </div>
-        <h1 className="text-2xl font-bold text-white tracking-tight">Student / Teacher Registration</h1>
-        <p className="text-xs text-slate-400 mt-1">
-          Join the academic electronics sharing network to borrow verified laboratory resources.
+        <h1 className="font-serif text-3xl font-bold text-[#F1E7D0] tracking-tight">Register as a Seeker</h1>
+        <p className="text-xs text-[#F1E7D0]/70 mt-1 font-sans">
+          Join the electronics sharing network to borrow verified laboratory equipment, sensors, and microcontrollers.
         </p>
       </div>
 
@@ -56,92 +56,88 @@ export default function ReceiverSignupPage() {
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-neutral-900 border border-neutral-800 rounded-2xl p-6 space-y-4 shadow-xl">
+      <form onSubmit={handleSubmit} className="bg-[#263447] border border-[#263447] rounded-2xl p-6 space-y-4 shadow-xl">
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Full Name</label>
+          <label className="block text-xs font-semibold text-[#F1E7D0] mb-1 font-sans">Full Name</label>
           <input
             type="text"
-            required
             value={formData.name}
             onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-            placeholder="e.g. Aarav Sharma"
-            className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+            placeholder="e.g. Ada Lovelace"
+            required
+            className="w-full bg-[#141821] border border-[#263447] rounded-xl px-3.5 py-2 text-xs text-[#F1E7D0] placeholder-[#F1E7D0]/40 focus:outline-none focus:border-[#67C7D4]"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Post / Academic Role</label>
+          <label className="block text-xs font-semibold text-[#F1E7D0] mb-1 font-sans">Role / Post</label>
           <select
             value={formData.post}
             onChange={(e) => setFormData({ ...formData, post: e.target.value })}
-            className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2 text-xs text-white focus:outline-none focus:border-cyan-500"
+            className="w-full bg-[#141821] border border-[#263447] rounded-xl px-3.5 py-2 text-xs text-[#F1E7D0] focus:outline-none focus:border-[#67C7D4]"
           >
-            <option value="Student">Student (Undergraduate / Diploma)</option>
-            <option value="Postgraduate Scholar">Postgraduate Scholar / M.Tech</option>
-            <option value="Teacher / Faculty Guide">Teacher / Faculty Guide</option>
-            <option value="Assistant Professor">Assistant Professor</option>
-            <option value="Research Scholar">Research Scholar</option>
+            <option value="Student">Student (Undergraduate / Postgraduate)</option>
+            <option value="School Student">School / STEM Student</option>
+            <option value="Teacher / Faculty Mentor">Teacher / Faculty Mentor</option>
+            <option value="Project Team Lead">Project Team Lead</option>
           </select>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Student ID / Teacher ID Number</label>
+          <label className="block text-xs font-semibold text-[#F1E7D0] mb-1 font-sans">Student / Teacher ID Number</label>
           <input
             type="text"
-            required
             value={formData.idNumber}
             onChange={(e) => setFormData({ ...formData, idNumber: e.target.value })}
-            placeholder="e.g. STU-NIT-2024-819"
-            className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+            placeholder="e.g. STU-2024-901"
+            required
+            className="w-full bg-[#141821] border border-[#263447] rounded-xl px-3.5 py-2 text-xs text-[#F1E7D0] placeholder-[#F1E7D0]/40 focus:outline-none focus:border-[#67C7D4]"
           />
-          <p className="text-[10px] text-slate-400 mt-0.5">
-            Must match the institutional photo ID card you submit during bookings.
-          </p>
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Institute / College Name</label>
+          <label className="block text-xs font-semibold text-[#F1E7D0] mb-1 font-sans">Institution Name</label>
           <input
             type="text"
-            required
             value={formData.instituteName}
             onChange={(e) => setFormData({ ...formData, instituteName: e.target.value })}
-            placeholder="e.g. Northstar Institute of Technology"
-            className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+            placeholder="e.g. Vanguard Engineering College"
+            required
+            className="w-full bg-[#141821] border border-[#263447] rounded-xl px-3.5 py-2 text-xs text-[#F1E7D0] placeholder-[#F1E7D0]/40 focus:outline-none focus:border-[#67C7D4]"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-semibold text-slate-300 mb-1">Email Address</label>
+          <label className="block text-xs font-semibold text-[#F1E7D0] mb-1 font-sans">Institutional Email Address</label>
           <input
             type="email"
-            required
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            placeholder="name@college.edu"
-            className="w-full bg-neutral-950 border border-neutral-700 rounded-xl px-3.5 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-cyan-500"
+            placeholder="e.g. student@institution.edu"
+            required
+            className="w-full bg-[#141821] border border-[#263447] rounded-xl px-3.5 py-2 text-xs text-[#F1E7D0] placeholder-[#F1E7D0]/40 focus:outline-none focus:border-[#67C7D4]"
           />
         </div>
 
-        <div className="p-3 bg-neutral-950 border border-neutral-800 rounded-xl text-[11px] text-slate-400 flex items-start gap-2">
-          <ShieldCheck className="w-4 h-4 text-cyan-400 shrink-0 mt-0.5" />
+        <div className="p-3 bg-[#141821] border border-[#263447] rounded-xl text-[11px] text-[#F1E7D0]/70 flex items-start gap-2">
+          <ShieldCheck className="w-4 h-4 text-[#67C7D4] shrink-0 mt-0.5" />
           <span>
-            Equipment can only be physically collected by the verified ID holder after the Lab Head confirms your booking with a Handover QR code.
+            Equipment can only be physically collected by the verified ID holder after the Lab Head confirms your booking and you scan their Handover QR code.
           </span>
         </div>
 
         <button
           type="submit"
           disabled={loading}
-          className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-600 hover:from-cyan-400 hover:to-teal-500 disabled:opacity-50 text-navy-950 font-bold text-xs shadow-md transition flex items-center justify-center gap-2"
+          className="w-full py-2.5 px-4 rounded-xl bg-[#67C7D4] hover:bg-[#7ed2dd] disabled:opacity-50 text-[#141821] font-bold text-xs shadow-md transition flex items-center justify-center gap-2"
         >
-          <UserPlus className="w-4 h-4" /> {loading ? 'Registering...' : 'Register as Receiver'}
+          <UserPlus className="w-4 h-4" /> {loading ? 'Registering...' : 'Register as Seeker'}
         </button>
 
-        <div className="text-center pt-2 border-t border-neutral-800 text-xs text-slate-400">
+        <div className="text-center pt-2 border-t border-[#141821] text-xs text-[#F1E7D0]/60">
           Already registered?{' '}
-          <Link href="/receiver/login" className="text-cyan-400 hover:underline font-semibold">
-            Sign In here
+          <Link href="/receiver/login" className="text-[#67C7D4] hover:underline font-semibold">
+            Seeker Sign In
           </Link>
         </div>
       </form>

@@ -258,15 +258,15 @@ export default async function SenderPortalPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/sender/login"
-            className="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-slate-200 font-medium transition"
+            className="px-3 py-1.5 rounded-lg bg-[#263447] hover:bg-[#32455e] text-[#F1E7D0] font-medium transition"
           >
-            Sender Login
+            Keeper Sign In
           </Link>
           <Link
             href="/sender/signup"
-            className="px-3 py-1.5 rounded-lg bg-amber-600/80 hover:bg-amber-600 text-white font-semibold transition"
+            className="px-3 py-1.5 rounded-lg bg-[#C49A55] hover:bg-[#d4aa65] text-[#141821] font-semibold transition"
           >
-            Sender Signup
+            Keeper Signup
           </Link>
         </div>
       </div>

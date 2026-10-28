@@ -193,15 +193,15 @@ export default async function ReceiverPortalPage() {
         <div className="flex items-center gap-3">
           <Link
             href="/receiver/login"
-            className="px-3 py-1.5 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-slate-200 font-medium transition"
+            className="px-3 py-1.5 rounded-lg bg-[#263447] hover:bg-[#32455e] text-[#F1E7D0] font-medium transition"
           >
-            Receiver Login
+            Seeker Sign In
           </Link>
           <Link
             href="/receiver/signup"
-            className="px-3 py-1.5 rounded-lg bg-cyan-600/80 hover:bg-cyan-600 text-white font-semibold transition"
+            className="px-3 py-1.5 rounded-lg bg-[#67C7D4] hover:bg-[#7ed2dd] text-[#141821] font-semibold transition"
           >
-            Receiver Signup
+            Seeker Signup
           </Link>
         </div>
       </div>

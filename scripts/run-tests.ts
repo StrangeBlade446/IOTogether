@@ -44,9 +44,9 @@ async function runAllTests() {
   test('Institutions exist with valid verified status', () => {
     const insts = db.getInstitutions();
     assert(insts.length >= 3, 'Should have at least 3 institutions');
-    const nit = insts.find((i) => i.name.includes('Northstar'));
-    assert(nit, 'Northstar Institute of Technology must exist');
-    assert.strictEqual(nit.verification_status, 'verified');
+    const apex = insts.find((i) => i.name.includes('Apex'));
+    assert(apex, 'Apex Institute of Technology must exist');
+    assert.strictEqual(apex.verification_status, 'verified');
   });
 
   test('Initial inventory includes free, paid, and training-restricted items', () => {
