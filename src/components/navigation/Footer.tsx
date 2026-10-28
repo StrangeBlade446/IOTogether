@@ -10,6 +10,11 @@ export function Footer() {
   const pathname = usePathname();
   const isLanding = pathname === '/';
 
+  // Do not display footer on the minimalist landing page
+  if (isLanding) {
+    return null;
+  }
+
   return (
     <footer
       className={`w-full border-t border-[#263447] bg-[#141821]/90 backdrop-blur-md py-10 mt-auto relative z-20 ${
