@@ -36,8 +36,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        serif: ['Cinzel', 'Playfair Display', 'Cormorant Garamond', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        serif: ['Instrument Serif', 'Cinzel', 'Playfair Display', 'Georgia', 'serif'],
+        sans: ['DM Sans', 'Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        mono: ['DM Mono', 'monospace'],
       },
       boxShadow: {
         'forge': '0 0 25px -3px rgba(196, 154, 85, 0.35)',

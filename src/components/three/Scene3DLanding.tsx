@@ -1,638 +1,88 @@
 'use client';
 
-import React, { useRef, useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import * as THREE from 'three';
-import { TextRoll } from '@/components/core/text-roll';
+import Link from 'next/link';
+import { Experiment } from '@/components/experiment/Experiment';
+import type { ExperimentHandle, ExperimentState } from '@/components/experiment/types';
 import { DEMO_USERS } from '@/lib/auth/demo-users';
 import { switchDemoUser } from '@/app/actions/auth';
 import {
+  MousePointer2,
+  ArrowUpRight,
+  MoveUpRight,
+  RotateCcw,
+  Volume2,
+  VolumeX,
+  Check,
+  X,
   Shield,
   Compass,
-  Plug,
-  ArrowRight,
   UserCheck,
-  Building2,
-  GraduationCap,
+  HelpCircle,
   Sparkles,
+  Plug,
 } from 'lucide-react';
 
-// Web Audio sound synthesizer for physical cable interactions
-function playSound(type: 'pickup' | 'plug' | 'spark') {
-  try {
-    const AudioContext = window.AudioContext || (window as any).webkitAudioContext;
-    if (!AudioContext) return;
-    const ctx = new AudioContext();
-
-    if (type === 'pickup') {
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'sine';
-      osc.frequency.setValueAtTime(260, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(420, ctx.currentTime + 0.08);
-      gain.gain.setValueAtTime(0.06, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.08);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.08);
-    } else if (type === 'plug') {
-      // Heavy metallic contact + relay click
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(160, ctx.currentTime);
-      osc.frequency.exponentialRampToValueAtTime(50, ctx.currentTime + 0.22);
-      gain.gain.setValueAtTime(0.3, ctx.currentTime);
-      gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.22);
-      osc.connect(gain);
-      gain.connect(ctx.destination);
-      osc.start();
-      osc.stop(ctx.currentTime + 0.22);
-
-      // Electric buzz burst
-      const buzz = ctx.createOscillator();
-      const buzzGain = ctx.createGain();
-      buzz.type = 'sawtooth';
-      buzz.frequency.setValueAtTime(60, ctx.currentTime);
-      buzzGain.gain.setValueAtTime(0.15, ctx.currentTime);
-      buzzGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.3);
-      buzz.connect(buzzGain);
-      buzzGain.connect(ctx.destination);
-      buzz.start();
-      buzz.stop(ctx.currentTime + 0.3);
-    }
-  } catch {
-    // Audio context unavailable or restricted
-  }
-}
-
-// Socket 3D coordinates on the wall
-const KEEPER_SOCKET_POS = new THREE.Vector3(-2.6, 0.4, -0.4);
-const SEEKER_SOCKET_POS = new THREE.Vector3(2.6, 0.4, -0.4);
-const KEEPER_BULB_POS = new THREE.Vector3(-2.6, 2.2, -0.3);
-const SEEKER_BULB_POS = new THREE.Vector3(2.6, 2.2, -0.3);
-const CABLE_ANCHOR = new THREE.Vector3(0, -2.48, 2.8);
-
-// 3D Bulb Component on the Wall
-function Bulb3D({
-  position,
-  color,
-  active,
-  onClick,
-  label,
-}: {
-  position: THREE.Vector3;
-  color: string;
-  active: boolean;
-  onClick: () => void;
-  label: string;
-}) {
-  const bulbRef = useRef<THREE.Group>(null);
-  const filamentRef = useRef<THREE.Mesh>(null);
-
-  useFrame((state, delta) => {
-    if (active && filamentRef.current) {
-      // Warm glowing filament pulse
-      const t = state.clock.elapsedTime * 6;
-      const mat = filamentRef.current.material as THREE.MeshStandardMaterial;
-      if (mat) {
-        mat.emissiveIntensity = 4 + Math.sin(t) * 0.8;
-      }
-    }
-  });
-
-  return (
-    <group
-      ref={bulbRef}
-      position={position}
-      onClick={onClick}
-      onPointerOver={() => (document.body.style.cursor = 'pointer')}
-      onPointerOut={() => (document.body.style.cursor = 'auto')}
-    >
-      {/* Real 3D PointLight casting dynamic shadows and room illumination */}
-      {active && (
-        <>
-          <pointLight
-            color={color}
-            intensity={4.8}
-            distance={14}
-            decay={2}
-            castShadow
-            shadow-mapSize-width={1024}
-            shadow-mapSize-height={1024}
-          />
-          {/* Ambient downward beam projection */}
-          <pointLight
-            position={[0, -1, 0.5]}
-            color={color}
-            intensity={2.5}
-            distance={6}
-          />
-        </>
-      )}
-
-      {/* Wall Bracket / Base Fitting */}
-      <mesh position={[0, 0.85, -0.3]}>
-        <boxGeometry args={[0.7, 0.7, 0.2]} />
-        <meshStandardMaterial color="#334155" roughness={0.4} metalness={0.8} />
-      </mesh>
-
-      {/* Gooseneck Pipe to Bulb Base */}
-      <mesh position={[0, 0.65, -0.1]} rotation={[Math.PI / 4, 0, 0]}>
-        <cylinderGeometry args={[0.07, 0.07, 0.5, 16]} />
-        <meshStandardMaterial color={color} roughness={0.3} metalness={0.85} />
-      </mesh>
-
-      {/* Brass / Metal Screw Socket Base */}
-      <mesh position={[0, 0.45, 0]}>
-        <cylinderGeometry args={[0.3, 0.34, 0.35, 32]} />
-        <meshStandardMaterial color={color} roughness={0.25} metalness={0.9} />
-      </mesh>
-
-      {/* Internal Filament Wire (Glows when active) */}
-      <mesh ref={filamentRef} position={[0, 0, 0]}>
-        <torusGeometry args={[0.18, 0.025, 16, 32]} />
-        <meshStandardMaterial
-          color={active ? '#ffffff' : color}
-          emissive={active ? color : '#000000'}
-          emissiveIntensity={active ? 5 : 0}
-          roughness={0.1}
-          metalness={0.9}
-        />
-      </mesh>
-
-      {/* Outer Glass Envelope */}
-      <mesh position={[0, 0, 0]} castShadow receiveShadow>
-        <sphereGeometry args={[0.62, 36, 36]} />
-        <meshPhysicalMaterial
-          color={active ? color : '#E2E8F0'}
-          emissive={active ? color : '#000000'}
-          emissiveIntensity={active ? 2.2 : 0}
-          roughness={0.06}
-          transmission={0.88}
-          thickness={0.5}
-          transparent
-          opacity={active ? 0.95 : 0.6}
-        />
-      </mesh>
-    </group>
-  );
-}
-
-// 3D Wall Socket Receptacle Component
-function Socket3D({
-  position,
-  color,
-  active,
-  isTarget,
-  onClick,
-  title,
-  subtitle,
-}: {
-  position: THREE.Vector3;
-  color: string;
-  active: boolean;
-  isTarget: boolean;
-  onClick: () => void;
-  title: string;
-  subtitle: string;
-}) {
-  return (
-    <group position={position} onClick={onClick}>
-      {/* Faceplate on the Wall */}
-      <mesh position={[0, 0, -0.05]} castShadow receiveShadow>
-        <boxGeometry args={[1.5, 1.5, 0.16]} />
-        <meshStandardMaterial
-          color={active ? '#334155' : '#1E293B'}
-          roughness={0.35}
-          metalness={0.8}
-        />
-      </mesh>
-
-      {/* Beveled Metallic Outer Bezel */}
-      <mesh position={[0, 0, 0.06]}>
-        <cylinderGeometry args={[0.62, 0.65, 0.08, 36]} />
-        <meshStandardMaterial
-          color={color}
-          roughness={0.2}
-          metalness={0.95}
-          emissive={active ? color : '#000000'}
-          emissiveIntensity={active ? 1.2 : 0.1}
-        />
-      </mesh>
-
-      {/* Socket Inner Cavity Hole (Where the plug enters) */}
-      <mesh position={[0, 0, 0.1]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.26, 0.26, 0.2, 32]} />
-        <meshStandardMaterial
-          color="#080b0f"
-          roughness={0.8}
-          metalness={0.2}
-        />
-      </mesh>
-
-      {/* Internal Metallic Contact Ring */}
-      <mesh position={[0, 0, 0.08]} rotation={[Math.PI / 2, 0, 0]}>
-        <torusGeometry args={[0.24, 0.03, 16, 32]} />
-        <meshStandardMaterial
-          color={color}
-          emissive={active ? color : '#000000'}
-          emissiveIntensity={active ? 2.5 : 0.2}
-          metalness={0.95}
-          roughness={0.1}
-        />
-      </mesh>
-
-      {/* Pulsing Target Indicator when dragging cable near */}
-      {isTarget && (
-        <mesh position={[0, 0, 0.15]} rotation={[0, 0, 0]}>
-          <ringGeometry args={[0.7, 0.85, 32]} />
-          <meshBasicMaterial color={color} wireframe transparent opacity={0.8} />
-        </mesh>
-      )}
-    </group>
-  );
-}
-
-// 3D Movable Cable and Jack Plug Component
-function CableAndPlug3D({
-  plugPos,
-  isDragging,
-  connectedSocket,
-  onPointerDown,
-  onPointerUp,
-  onPointerMove,
-}: {
-  plugPos: THREE.Vector3;
-  isDragging: boolean;
-  connectedSocket: 'keeper' | 'seeker' | null;
-  onPointerDown: (e: any) => void;
-  onPointerUp: () => void;
-  onPointerMove: (point: THREE.Vector3) => void;
-}) {
-  const tubeMeshRef = useRef<THREE.Mesh>(null);
-  const plugGroupRef = useRef<THREE.Group>(null);
-
-  // Compute 3D Catmull-Rom spline curve from floor anchor to plug
-  const curve = useMemo(() => {
-    const p0 = CABLE_ANCHOR.clone();
-    const pEnd = plugPos.clone();
-
-    // Natural floor bend point
-    const p1 = new THREE.Vector3(
-      p0.x * 0.7 + pEnd.x * 0.3,
-      -2.46, // Slumped on the floor
-      p0.z * 0.7 + pEnd.z * 0.3
-    );
-
-    // Mid air sag point based on drag height
-    const midY = isDragging
-      ? Math.max(-2.4, pEnd.y * 0.4 - 1.2)
-      : connectedSocket
-      ? -1.2
-      : -2.42;
-
-    const p2 = new THREE.Vector3(
-      p0.x * 0.3 + pEnd.x * 0.7,
-      midY,
-      p0.z * 0.3 + pEnd.z * 0.7
-    );
-
-    // Lead-in to the plug neck
-    const p3 = new THREE.Vector3(
-      pEnd.x,
-      pEnd.y - (connectedSocket ? 0.3 : 0.15),
-      pEnd.z + 0.15
-    );
-
-    return new THREE.CatmullRomCurve3([p0, p1, p2, p3, pEnd], false, 'centripetal', 0.5);
-  }, [plugPos, isDragging, connectedSocket]);
-
-  // Update dynamic tube geometry every frame
-  useFrame(() => {
-    if (!tubeMeshRef.current) return;
-    const geom = new THREE.TubeGeometry(curve, 44, 0.075, 12, false);
-    tubeMeshRef.current.geometry.dispose();
-    tubeMeshRef.current.geometry = geom;
-
-    // Align plug group rotation
-    if (plugGroupRef.current) {
-      if (connectedSocket) {
-        // Plug inserted into wall: points straight into socket
-        plugGroupRef.current.rotation.set(Math.PI / 2, 0, 0);
-      } else if (isDragging) {
-        // Tilted upward in hand
-        plugGroupRef.current.rotation.set(Math.PI / 3, 0, 0);
-      } else {
-        // Lying on the floor
-        plugGroupRef.current.rotation.set(0, 0, Math.PI / 6);
-      }
-    }
-  });
-
-  const cableColor =
-    connectedSocket === 'keeper'
-      ? '#C49A55'
-      : connectedSocket === 'seeker'
-      ? '#67C7D4'
-      : '#263447';
-
-  return (
-    <group>
-      {/* 3D Tube Cable Mesh */}
-      <mesh ref={tubeMeshRef} castShadow receiveShadow>
-        <tubeGeometry args={[curve, 44, 0.075, 12, false]} />
-        <meshStandardMaterial
-          color="#334155"
-          roughness={0.5}
-          metalness={0.3}
-        />
-      </mesh>
-
-      {/* 3D Plug Assembly (The Grabbable Object) */}
-      <group
-        ref={plugGroupRef}
-        position={plugPos}
-        onPointerDown={onPointerDown}
-      >
-        {/* Metal Contact Tip Pin */}
-        <mesh position={[0, 0.28, 0]} castShadow>
-          <cylinderGeometry args={[0.07, 0.07, 0.35, 24]} />
-          <meshStandardMaterial
-            color={cableColor}
-            metalness={0.98}
-            roughness={0.1}
-            emissive={connectedSocket ? cableColor : '#000000'}
-            emissiveIntensity={connectedSocket ? 2.5 : 0}
-          />
-        </mesh>
-
-        {/* Insulating Separator Ring */}
-        <mesh position={[0, 0.1, 0]}>
-          <cylinderGeometry args={[0.075, 0.075, 0.05, 24]} />
-          <meshStandardMaterial color="#0b0e14" roughness={0.9} />
-        </mesh>
-
-        {/* Jack Sleeve Ring */}
-        <mesh position={[0, 0.02, 0]}>
-          <cylinderGeometry args={[0.11, 0.11, 0.1, 24]} />
-          <meshStandardMaterial color="#94A3B8" metalness={0.95} roughness={0.2} />
-        </mesh>
-
-        {/* Ergonomic Rubber Handle Barrel (Grip) */}
-        <mesh position={[0, -0.32, 0]} castShadow>
-          <cylinderGeometry args={[0.18, 0.16, 0.58, 24]} />
-          <meshStandardMaterial
-            color="#1E293B"
-            roughness={0.4}
-            metalness={0.7}
-          />
-        </mesh>
-
-        {/* Colored Accent Grip Band */}
-        <mesh position={[0, -0.32, 0]}>
-          <cylinderGeometry args={[0.185, 0.185, 0.15, 24]} />
-          <meshStandardMaterial
-            color={cableColor}
-            roughness={0.3}
-            metalness={0.8}
-            emissive={cableColor}
-            emissiveIntensity={connectedSocket ? 1.2 : 0.2}
-          />
-        </mesh>
-
-        {/* Flexible Strain Relief Boot */}
-        <mesh position={[0, -0.7, 0]}>
-          <coneGeometry args={[0.14, 0.25, 24]} />
-          <meshStandardMaterial color="#334155" roughness={0.6} />
-        </mesh>
-      </group>
-    </group>
-  );
-}
-
-// Main 3D Scene Container
-function Scene({
-  onConnect,
-  statusText,
-  setStatusText,
-}: {
-  onConnect: (portal: 'keeper' | 'seeker') => void;
-  statusText: string;
-  setStatusText: (t: string) => void;
-}) {
-  const { viewport } = useThree();
-
-  const [plugPos, setPlugPos] = useState<THREE.Vector3>(
-    new THREE.Vector3(0.4, -2.36, 1.3) // Initially resting on the floor
-  );
-  const [isDragging, setIsDragging] = useState(false);
-  const [connectedSocket, setConnectedSocket] = useState<'keeper' | 'seeker' | null>(null);
-
-  // Invisible drag plane parallel to camera to capture cursor motion in 3D
-  const dragPlaneRef = useRef<THREE.Mesh>(null);
-
-  const handlePointerDown = (e: any) => {
-    e.stopPropagation();
-    setIsDragging(true);
-    setConnectedSocket(null);
-    playSound('pickup');
-    setStatusText('Drag the cable and insert it into a wall socket');
-  };
-
-  const handlePointerUp = () => {
-    if (!isDragging) return;
-    setIsDragging(false);
-
-    // Check distance to Keeper socket
-    const distKeeper = plugPos.distanceTo(KEEPER_SOCKET_POS);
-    // Check distance to Seeker socket
-    const distSeeker = plugPos.distanceTo(SEEKER_SOCKET_POS);
-
-    if (distKeeper < 1.35) {
-      setPlugPos(KEEPER_SOCKET_POS.clone().add(new THREE.Vector3(0, 0, 0.1)));
-      setConnectedSocket('keeper');
-      playSound('plug');
-      setStatusText('⚡ Circuit Complete! Connecting to Keeper Portal...');
-      onConnect('keeper');
-    } else if (distSeeker < 1.35) {
-      setPlugPos(SEEKER_SOCKET_POS.clone().add(new THREE.Vector3(0, 0, 0.1)));
-      setConnectedSocket('seeker');
-      playSound('plug');
-      setStatusText('⚡ Circuit Complete! Connecting to Seeker Portal...');
-      onConnect('seeker');
-    } else {
-      // Return plug gently to floor
-      setPlugPos(new THREE.Vector3(plugPos.x * 0.7, -2.36, 1.3));
-      setStatusText('Cable dropped on the floor — pick up to connect');
-    }
-  };
-
-  const handlePointerMove = (e: any) => {
-    if (!isDragging) return;
-    e.stopPropagation();
-    const point = e.point as THREE.Vector3;
-    if (!point) return;
-
-    // Constrain within 3D room coordinates
-    const clampedX = Math.max(-4.2, Math.min(4.2, point.x));
-    const clampedY = Math.max(-2.35, Math.min(2.8, point.y));
-    const clampedZ = Math.max(-0.2, Math.min(2.5, point.z));
-
-    const newPos = new THREE.Vector3(clampedX, clampedY, clampedZ);
-    setPlugPos(newPos);
-
-    const distKeeper = newPos.distanceTo(KEEPER_SOCKET_POS);
-    const distSeeker = newPos.distanceTo(SEEKER_SOCKET_POS);
-
-    if (distKeeper < 1.35) {
-      setStatusText('Release to snap into Keeper Socket');
-    } else if (distSeeker < 1.35) {
-      setStatusText('Release to snap into Seeker Socket');
-    } else {
-      setStatusText('Dragging cable in 3D...');
-    }
-  };
-
-  // Direct click connection trigger
-  const handleDirectClick = (target: 'keeper' | 'seeker') => {
-    playSound('pickup');
-    const dest =
-      target === 'keeper'
-        ? KEEPER_SOCKET_POS.clone().add(new THREE.Vector3(0, 0, 0.1))
-        : SEEKER_SOCKET_POS.clone().add(new THREE.Vector3(0, 0, 0.1));
-
-    setPlugPos(dest);
-    setConnectedSocket(target);
-    playSound('plug');
-    setStatusText(
-      target === 'keeper'
-        ? '⚡ Circuit Complete! Connecting to Keeper Portal...'
-        : '⚡ Circuit Complete! Connecting to Seeker Portal...'
-    );
-    onConnect(target);
-  };
-
-  return (
-    <>
-      {/* Invisible Full-Screen Raycast Dragging Plane */}
-      <mesh
-        ref={dragPlaneRef}
-        position={[0, 0, 0.6]}
-        visible={false}
-        onPointerMove={handlePointerMove}
-        onPointerUp={handlePointerUp}
-      >
-        <planeGeometry args={[26, 26]} />
-        <meshBasicMaterial transparent opacity={0} />
-      </mesh>
-
-      {/* 3D Atmospheric Lighting */}
-      <ambientLight intensity={0.85} />
-      <directionalLight
-        position={[2, 9, 6]}
-        intensity={1.5}
-        castShadow
-        shadow-mapSize-width={1024}
-        shadow-mapSize-height={1024}
-      />
-      <directionalLight
-        position={[-4, 5, 4]}
-        intensity={0.5}
-      />
-
-      {/* 3D Laboratory Back Wall (Receives shadows and light) */}
-      <mesh position={[0, 1.2, -0.6]} receiveShadow>
-        <planeGeometry args={[20, 10]} />
-        <meshStandardMaterial
-          color="#EDF2F7"
-          roughness={0.85}
-          metalness={0.1}
-        />
-      </mesh>
-
-      {/* 3D Laboratory Floor / Ground (Where cable lies) */}
-      <mesh position={[0, -2.5, 2]} rotation={[-Math.PI / 2, 0, 0]} receiveShadow>
-        <planeGeometry args={[20, 10]} />
-        <meshStandardMaterial
-          color="#CBD5E1"
-          roughness={0.4}
-          metalness={0.3}
-        />
-      </mesh>
-
-      {/* Cable Ground Terminal Junction Box */}
-      <mesh position={[CABLE_ANCHOR.x, -2.4, CABLE_ANCHOR.z]} castShadow receiveShadow>
-        <boxGeometry args={[0.8, 0.2, 0.6]} />
-        <meshStandardMaterial color="#94A3B8" roughness={0.25} metalness={0.8} />
-      </mesh>
-
-      {/* 3D Bulbs */}
-      <Bulb3D
-        position={KEEPER_BULB_POS}
-        color="#C49A55"
-        active={connectedSocket === 'keeper'}
-        onClick={() => handleDirectClick('keeper')}
-        label="Keeper"
-      />
-      <Bulb3D
-        position={SEEKER_BULB_POS}
-        color="#67C7D4"
-        active={connectedSocket === 'seeker'}
-        onClick={() => handleDirectClick('seeker')}
-        label="Seeker"
-      />
-
-      {/* 3D Wall Sockets */}
-      <Socket3D
-        position={KEEPER_SOCKET_POS}
-        color="#C49A55"
-        active={connectedSocket === 'keeper'}
-        isTarget={isDragging && plugPos.distanceTo(KEEPER_SOCKET_POS) < 1.35}
-        onClick={() => handleDirectClick('keeper')}
-        title="KEEPER PORTAL"
-        subtitle="For Lab Heads & Custodians"
-      />
-      <Socket3D
-        position={SEEKER_SOCKET_POS}
-        color="#67C7D4"
-        active={connectedSocket === 'seeker'}
-        isTarget={isDragging && plugPos.distanceTo(SEEKER_SOCKET_POS) < 1.35}
-        onClick={() => handleDirectClick('seeker')}
-        title="SEEKER PORTAL"
-        subtitle="For Students & Makers"
-      />
-
-      {/* 3D Movable Cable and Jack Plug */}
-      <CableAndPlug3D
-        plugPos={plugPos}
-        isDragging={isDragging}
-        connectedSocket={connectedSocket}
-        onPointerDown={handlePointerDown}
-        onPointerUp={handlePointerUp}
-        onPointerMove={handlePointerMove}
-      />
-    </>
-  );
-}
-
-// Full-Page Three.js 3D Landing Page
 export function Scene3DLanding() {
   const router = useRouter();
-  const [statusText, setStatusText] = useState('Pick up the 3D cable from the ground and plug it into a wall socket');
+  const experiment = useRef<ExperimentHandle>(null);
+
+  const [state, setState] = useState<ExperimentState>({
+    connected: [false, false],
+    connectedSocket: null,
+    dragging: false,
+    nearSocket: null,
+    ready: false,
+  });
+
+  const [sound, setSound] = useState(true);
+  const [guide, setGuide] = useState(false);
   const [showDemoTray, setShowDemoTray] = useState(false);
+  const [showHelpDialog, setShowHelpDialog] = useState(false);
   const [loadingDemoId, setLoadingDemoId] = useState<string | null>(null);
 
-  const handleConnect = useCallback(
-    (portal: 'keeper' | 'seeker') => {
-      setTimeout(() => {
-        router.push(portal === 'keeper' ? '/sender' : '/receiver');
-      }, 1200);
-    },
-    [router]
-  );
+  const keepers = DEMO_USERS.filter((u) => u.platformType === 'sender');
+  const seekers = DEMO_USERS.filter((u) => u.platformType === 'receiver');
+
+  // Navigate when a socket connects
+  useEffect(() => {
+    if (state.connectedSocket === 'keeper') {
+      const timer = setTimeout(() => {
+        router.push('/sender');
+      }, 1400);
+      return () => clearTimeout(timer);
+    } else if (state.connectedSocket === 'seeker') {
+      const timer = setTimeout(() => {
+        router.push('/receiver');
+      }, 1400);
+      return () => clearTimeout(timer);
+    }
+  }, [state.connectedSocket, router]);
+
+  function start() {
+    setGuide(true);
+    document
+      .querySelector<HTMLElement>('.experiment-canvas')
+      ?.focus({ preventScroll: true });
+  }
+
+  function reset() {
+    experiment.current?.reset();
+    setGuide(false);
+  }
+
+  const message = state.dragging
+    ? state.nearSocket !== null
+      ? state.nearSocket === 0
+        ? 'A perfect fit. Release to connect to Keeper Portal.'
+        : 'A perfect fit. Release to connect to Seeker Portal.'
+      : 'A little closer. Bring the plug to Socket 01 or 02.'
+    : state.connectedSocket === 'keeper'
+    ? '⚡ Circuit Complete! Keeper Portal Activated. Navigating...'
+    : state.connectedSocket === 'seeker'
+    ? '⚡ Circuit Complete! Seeker Portal Activated. Navigating...'
+    : 'Pick up the single plug from the floor to connect.';
 
   const handleDemoLogin = async (userId: string, targetPath: string) => {
     setLoadingDemoId(userId);
@@ -643,153 +93,426 @@ export function Scene3DLanding() {
     }
   };
 
-  const keepers = DEMO_USERS.filter((u) => u.platformType === 'sender');
-  const seekers = DEMO_USERS.filter((u) => u.platformType === 'receiver');
-
   return (
-    <div className="relative w-full h-[calc(100vh-4rem)] min-h-[640px] overflow-hidden flex flex-col items-center justify-between select-none">
-      {/* ===================================================================== */}
-      {/* OVERLAY HEADER: TITLE & INTERACTIVE STATUS */}
-      {/* ===================================================================== */}
-      <div className="relative z-20 pt-6 px-4 text-center max-w-2xl mx-auto space-y-2 pointer-events-none">
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border border-slate-200 text-slate-800 text-xs font-semibold shadow-sm backdrop-blur-md">
-          <span className="w-2 h-2 rounded-full bg-[#C49A55] animate-pulse" />
-          <span className="tracking-wider uppercase text-[11px] font-mono text-[#A17A38]">
-            3D Electronics Exchange Chamber
-          </span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#0891B2]" />
-        </div>
-
-        <div className="flex items-center justify-center font-serif text-5xl sm:text-7xl font-bold tracking-tight">
-          <TextRoll className="text-[#C49A55]">IO</TextRoll>
-          <TextRoll className="text-[#0F172A]">Together</TextRoll>
-        </div>
-
-        <p className="font-serif text-base text-slate-700 font-medium">
-          Share Resources. Build Possibilities.
-        </p>
-
-        {/* Live Interactive Status Pill */}
-        <div className="pt-1 flex items-center justify-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/95 border border-slate-300 text-xs text-slate-800 font-mono shadow-md backdrop-blur-md pointer-events-auto">
-            <Plug className="w-3.5 h-3.5 text-[#C49A55] animate-bounce" />
-            <span>{statusText}</span>
-          </span>
-        </div>
-      </div>
-
-      {/* ===================================================================== */}
-      {/* FULL-PAGE THREE.JS CANVAS */}
-      {/* ===================================================================== */}
-      <div className="absolute inset-0 w-full h-full z-10 cursor-grab active:cursor-grabbing">
-        <Canvas
-          shadows
-          camera={{ position: [0, 0.4, 6.2], fov: 48 }}
-          dpr={[1, 2]}
-        >
-          <Scene
-            onConnect={handleConnect}
-            statusText={statusText}
-            setStatusText={setStatusText}
-          />
-        </Canvas>
-      </div>
-
-      {/* ===================================================================== */}
-      {/* OVERLAY FOOTER: 3D LABELS, QUICK BUTTONS & DEMO PROFILES */}
-      {/* ===================================================================== */}
-      <div className="relative z-20 pb-4 px-4 w-full max-w-3xl flex flex-col items-center gap-3">
-        {/* Terminal Quick Access Cards */}
-        <div className="grid grid-cols-2 gap-4 w-full">
-          {/* Left Keeper Station Label */}
-          <div className="p-3 rounded-2xl bg-white/95 backdrop-blur-md border border-amber-300 text-center shadow-md">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-amber-800 font-bold block">
-              WALL SOCKET 01
-            </span>
-            <span className="font-serif text-sm font-bold text-slate-900 block">
-              Keeper Portal
-            </span>
-            <span className="text-[10px] text-slate-500 block">
-              Lab Heads &amp; Equipment Custodians
-            </span>
+    <div className="w-full flex-1 flex flex-col bg-[#f3efe6] text-[#2b3029] select-none relative overflow-x-hidden min-h-screen">
+      {/* ========================================================================= */}
+      {/* 1. TOP SITE HEADER INSPIRED BY LIVEWIRE */}
+      {/* ========================================================================= */}
+      <header className="h-20 sm:h-24 px-4 sm:px-8 lg:px-12 flex items-center justify-between border-b border-[#dcd7cb] relative z-20 bg-[#f3efe6]/80 backdrop-blur-md">
+        <Link href="/" className="flex items-center gap-2 group">
+          <div className="w-8 h-8 rounded-full bg-[#ba4d2b] flex items-center justify-center text-white shadow-sm">
+            <Plug className="w-4 h-4" />
           </div>
+          <span className="font-serif text-2xl font-bold tracking-tight text-[#2b3029]">
+            IO<span className="text-[#ba4d2b]">Together</span>
+            <span className="text-[#ba4d2b] font-mono text-xl">.</span>
+          </span>
+        </Link>
 
-          {/* Right Seeker Station Label */}
-          <div className="p-3 rounded-2xl bg-white/95 backdrop-blur-md border border-cyan-300 text-center shadow-md">
-            <span className="text-[10px] uppercase font-mono tracking-wider text-cyan-800 font-bold block">
-              WALL SOCKET 02
-            </span>
-            <span className="font-serif text-sm font-bold text-slate-900 block">
-              Seeker Portal
-            </span>
-            <span className="text-[10px] text-slate-500 block">
-              Students, Teachers &amp; Innovators
-            </span>
-          </div>
+        <div className="hidden md:flex items-center gap-2.5 font-mono text-[10px] tracking-widest text-[#7f7b6d] uppercase">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#ba4d2b]" />
+          A PLAYGROUND FOR POSSIBILITY — MULTI-INSTITUTION ELECTRONICS SHARING
         </div>
 
-        {/* Instant Demo Profiles Toggle */}
-        <div className="text-center">
+        <nav className="flex items-center gap-4 sm:gap-6">
           <button
             type="button"
-            onClick={() => setShowDemoTray(!showDemoTray)}
-            className="inline-flex items-center gap-1.5 text-xs text-slate-700 hover:text-amber-800 transition font-mono bg-white/90 hover:bg-white px-3 py-1 rounded-full border border-slate-300 backdrop-blur-md shadow-xs"
+            onClick={() => setShowHelpDialog(true)}
+            className="flex items-center gap-1.5 text-xs text-[#77786c] hover:text-[#ba4d2b] transition font-sans font-medium"
           >
-            <UserCheck className="w-3.5 h-3.5 text-[#C49A55]" />
-            <span>{showDemoTray ? 'Hide Demo Profiles' : 'One-Click Demo Profiles (2 Colleges • 1 School)'}</span>
+            How it works <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
+          <span className="h-4 w-px bg-[#dcd7cb] hidden sm:block" />
+          <button
+            type="button"
+            onClick={start}
+            className="flex items-center gap-1.5 text-xs font-semibold text-[#ba4d2b] hover:text-[#9d442b] transition font-sans"
+          >
+            Try the Cable <ArrowUpRight className="w-3.5 h-3.5" />
+          </button>
+        </nav>
+      </header>
+
+      {/* ========================================================================= */}
+      {/* 2. HERO SECTION: EDITORIAL COPY (LEFT) & 3D EXPERIMENT (RIGHT/FILL) */}
+      {/* ========================================================================= */}
+      <section className="relative flex-1 min-h-[620px] lg:h-[calc(100vh-180px)] max-h-[860px] flex flex-col lg:flex-row">
+        {/* Left Hero Copy */}
+        <div className="w-full lg:w-[38%] xl:w-[35%] pt-8 sm:pt-12 pb-6 px-6 sm:px-10 lg:pl-12 lg:pr-4 flex flex-col justify-center z-10 pointer-events-none">
+          <div className="eyebrow flex items-center gap-3 font-mono text-[9px] tracking-wider text-[#7f7b6d] uppercase mb-4">
+            <span className="text-[#ba4d2b] font-bold">N° 001</span>
+            <span className="w-6 h-px bg-[#c7bcaa]" />
+            <span>SINGLE-SIDED PHYSICAL CABLE</span>
+          </div>
+
+          <h1 className="font-serif text-5xl sm:text-6xl xl:text-7xl leading-[0.98] tracking-tight font-normal text-[#2b3029] mb-6">
+            Make a<br />
+            <em className="text-[#ba4d2b] not-italic font-normal">connection.</em>
+          </h1>
+
+          <p className="text-sm sm:text-base text-[#77786c] leading-relaxed max-w-sm mb-8 font-light">
+            Sometimes, all it takes is a physical connection to spark new innovation. Grab the 3D plug and insert it into either wall socket.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pointer-events-auto">
+            <button
+              type="button"
+              onClick={start}
+              className="inline-flex items-center gap-2.5 px-5 py-3 rounded-md bg-[#ba4d2b] hover:bg-[#9d442b] text-[#fff6e9] text-xs font-semibold shadow-sm transition-transform hover:-translate-y-0.5"
+            >
+              <MousePointer2 className="w-4 h-4" />
+              <span>Pick up the plug</span>
+              <ArrowUpRight className="w-4 h-4 ml-2" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => experiment.current?.connectTo(0)}
+              className="inline-flex items-center gap-1.5 text-xs text-[#77786c] hover:text-[#ba4d2b] transition font-mono underline underline-offset-4"
+            >
+              Test Keeper (01)
+            </button>
+            <span className="text-[#c7bcaa] font-mono text-xs">•</span>
+            <button
+              type="button"
+              onClick={() => experiment.current?.connectTo(1)}
+              className="inline-flex items-center gap-1.5 text-xs text-[#77786c] hover:text-[#0891B2] transition font-mono underline underline-offset-4"
+            >
+              Test Seeker (02)
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 mt-5 text-[10px] text-[#8c8b7e] font-sans">
+            <span className="w-3.5 h-px bg-[#bbb5a5]" />
+            <span>Drag in 3D. Connect. Let there be light.</span>
+          </div>
+
+          <div className="flex items-center gap-3.5 mt-8 sm:mt-12 text-[10px] text-[#8d8b7d] font-mono leading-tight">
+            <span className="text-2xl text-[#b9ae9b] font-light leading-none">+</span>
+            <div>
+              Multi-institution verified inventory.
+              <br />
+              Lab Custodians &amp; Student Innovators.
+            </div>
+          </div>
+        </div>
+
+        {/* Right 3D Scene Wrap */}
+        <div className="relative flex-1 w-full lg:w-[62%] xl:w-[65%] h-[480px] sm:h-[540px] lg:h-full">
+          {/* Three.js Canvas Container */}
+          <Experiment ref={experiment} onState={setState} sound={sound} />
+
+          {/* Architectural Light Gradient Overlays */}
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#f3efe6] via-transparent to-transparent opacity-80 lg:opacity-100 w-24"
+          />
+
+          {/* Floating 3D Scene Label */}
+          <div className="absolute top-5 right-6 sm:right-10 flex items-center gap-2 text-[9px] font-mono tracking-wider text-[#8d897b] pointer-events-none">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ba4d2b]" />
+            <span>LIVE IN 3D</span>
+            <span className="text-[#c2bbaa]">/</span>
+            <span>SINGLE-SIDED GRAVITY</span>
+          </div>
+
+          {/* Floating Depth Controls while Dragging */}
+          {state.dragging && (
+            <div className="absolute top-14 right-6 sm:right-10 flex items-center gap-1.5 bg-[#f5f1e5]/90 border border-[#d5cebd] px-2.5 py-1.5 rounded-lg shadow-sm backdrop-blur-md text-[10px] font-mono text-[#77786c]">
+              <span className="mr-1 text-[9px] font-bold text-[#ba4d2b]">DEPTH</span>
+              <button
+                type="button"
+                aria-label="Move cable closer"
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  experiment.current?.adjustDepth(0.28);
+                }}
+                className="px-2 py-0.5 rounded bg-white/90 border border-[#d5cebd] hover:border-[#ba4d2b] hover:text-[#ba4d2b] transition"
+              >
+                + NEAR
+              </button>
+              <button
+                type="button"
+                aria-label="Move cable further"
+                onPointerDown={(e) => {
+                  e.preventDefault();
+                  e.stopPropagation();
+                  experiment.current?.adjustDepth(-0.28);
+                }}
+                className="px-2 py-0.5 rounded bg-white/90 border border-[#d5cebd] hover:border-[#ba4d2b] hover:text-[#ba4d2b] transition"
+              >
+                − FAR
+              </button>
+            </div>
+          )}
+
+          {/* Guidance Callout */}
+          {guide && !state.dragging && !state.connectedSocket && (
+            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 sm:left-24 sm:translate-x-0 flex items-center gap-3 bg-[#faf7ee] border border-[#d9ceba] shadow-lg rounded-lg px-4 py-2.5 text-xs text-[#88816e] max-w-xs animate-in fade-in slide-in-from-bottom-2">
+              <MousePointer2 className="w-4 h-4 text-[#ba4d2b] shrink-0" />
+              <div className="text-[11px] leading-snug">
+                Grab the dark physical plug.
+                <br />
+                <strong className="text-[#414b38] font-semibold">Drag it up to Socket 01 or 02.</strong>
+              </div>
+              <button
+                type="button"
+                aria-label="Dismiss guide"
+                onClick={() => setGuide(false)}
+                className="p-1 text-[#999581] hover:text-[#ba4d2b]"
+              >
+                <X className="w-3.5 h-3.5" />
+              </button>
+            </div>
+          )}
+
+          {/* Live Dynamic Status Message Pill */}
+          <div
+            className={`absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono backdrop-blur-md shadow-sm transition-all pointer-events-none ${
+              state.dragging || state.connectedSocket
+                ? 'bg-white/95 border-[#ba4d2b]/60 text-[#ba4d2b]'
+                : 'bg-[#f5f1e5]/90 border-[#d5cebd]/80 text-[#77796b]'
+            }`}
+          >
+            <span
+              className={`w-2 h-2 rounded-full ${
+                state.connectedSocket
+                  ? 'bg-[#ba4d2b] shadow-[0_0_8px_#ba4d2b] animate-pulse'
+                  : state.dragging
+                  ? 'bg-[#ba4d2b]'
+                  : 'bg-[#939a82]'
+              }`}
+            />
+            <span>{message}</span>
+          </div>
+
+          {/* Subtle Chamber Coordinates */}
+          <span className="absolute bottom-6 right-8 font-mono text-[9px] tracking-widest text-[#b0a995] pointer-events-none hidden sm:block">
+            01 — 02
+          </span>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 3. INTERACTION STATUS BAR INSPIRED BY LIVEWIRE */}
+      {/* ========================================================================= */}
+      <section className="mx-4 sm:mx-8 lg:mx-12 py-4 border-t border-b border-[#dcd7cb] flex flex-col md:flex-row items-start md:items-center justify-between gap-4 relative z-20 bg-[#f3efe6]">
+        {/* Left Instruction */}
+        <div className="flex items-center gap-3.5">
+          <div className="w-8 h-8 rounded-full border border-[#dcd7cb] flex items-center justify-center text-[#77786c] shrink-0">
+            <MoveUpRight className="w-4 h-4 text-[#ba4d2b]" />
+          </div>
+          <div>
+            <div className="text-xs font-semibold text-[#2b3029]">
+              A little nudge is all it takes.
+            </div>
+            <div className="text-[11px] text-[#77786c]">
+              Drag the plug into Socket 01 (Keeper) or Socket 02 (Seeker).
+            </div>
+          </div>
+        </div>
+
+        {/* Center Circuit Status LEDs */}
+        <div className="flex items-center gap-3 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
+          {/* Socket 01 (Keeper) */}
+          <button
+            type="button"
+            onClick={() => experiment.current?.connectTo(0)}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md border text-xs font-mono transition ${
+              state.connected[0]
+                ? 'bg-amber-50 border-[#C49A55] text-amber-900 shadow-sm'
+                : 'bg-white/60 border-[#dcd7cb] text-[#77786c] hover:border-[#C49A55]'
+            }`}
+          >
+            <span
+              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
+                state.connected[0] ? 'bg-[#C49A55] text-white' : 'bg-[#dcd7cb]'
+              }`}
+            >
+              {state.connected[0] && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+            </span>
+            <span className="font-bold">01 KEEPER PORTAL</span>
+            <span className="text-[10px] text-[#8c8b7e]">
+              {state.connected[0] ? 'CONNECTED' : 'AWAITING'}
+            </span>
+          </button>
+
+          {/* Socket 02 (Seeker) */}
+          <button
+            type="button"
+            onClick={() => experiment.current?.connectTo(1)}
+            className={`flex items-center gap-2 px-3 py-1.5 rounded-md border text-xs font-mono transition ${
+              state.connected[1]
+                ? 'bg-cyan-50 border-[#0891B2] text-cyan-900 shadow-sm'
+                : 'bg-white/60 border-[#dcd7cb] text-[#77786c] hover:border-[#0891B2]'
+            }`}
+          >
+            <span
+              className={`w-3.5 h-3.5 rounded-full flex items-center justify-center text-[9px] ${
+                state.connected[1] ? 'bg-[#0891B2] text-white' : 'bg-[#dcd7cb]'
+              }`}
+            >
+              {state.connected[1] && <Check className="w-2.5 h-2.5 stroke-[3]" />}
+            </span>
+            <span className="font-bold">02 SEEKER PORTAL</span>
+            <span className="text-[10px] text-[#8c8b7e]">
+              {state.connected[1] ? 'CONNECTED' : 'AWAITING'}
+            </span>
           </button>
         </div>
 
-        {showDemoTray && (
-          <div className="p-4 rounded-2xl bg-white/98 border border-slate-200 shadow-2xl text-left space-y-3 w-full backdrop-blur-xl">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <span className="text-[10px] font-mono text-amber-800 font-bold uppercase block mb-1">
-                  Keepers (Lab Heads)
-                </span>
-                <div className="space-y-1">
-                  {keepers.map((u, i) => (
-                    <button
-                      key={u.id}
-                      onClick={() => handleDemoLogin(u.id, '/sender')}
-                      disabled={loadingDemoId !== null}
-                      className="w-full text-left p-2 rounded-xl bg-slate-50 hover:bg-amber-50/80 border border-slate-200 hover:border-amber-400 text-xs flex items-center justify-between group transition"
-                    >
-                      <div className="truncate">
-                        <span className="font-bold text-slate-900 group-hover:text-amber-800">{u.name}</span>
-                        <span className="text-[9px] text-slate-500 block truncate">{u.instituteName}</span>
-                      </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-amber-800 shrink-0" />
-                    </button>
-                  ))}
-                </div>
-              </div>
+        {/* Right Tools: Reset, Sound, Demo Profiles */}
+        <div className="flex items-center gap-2 shrink-0 self-end md:self-center">
+          <button
+            type="button"
+            onClick={reset}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[#dcd7cb] bg-white/70 hover:bg-white text-xs font-sans text-[#77786c] hover:text-[#2b3029] transition shadow-xs"
+            title="Reset Cable to Floor"
+          >
+            <RotateCcw className="w-3.5 h-3.5" />
+            <span>Reset</span>
+          </button>
 
-              <div>
-                <span className="text-[10px] font-mono text-cyan-800 font-bold uppercase block mb-1">
-                  Seekers (Students &amp; Mentors)
-                </span>
-                <div className="space-y-1">
-                  {seekers.map((u, i) => (
-                    <button
-                      key={u.id}
-                      onClick={() => handleDemoLogin(u.id, '/receiver')}
-                      disabled={loadingDemoId !== null}
-                      className="w-full text-left p-2 rounded-xl bg-slate-50 hover:bg-cyan-50/80 border border-slate-200 hover:border-cyan-400 text-xs flex items-center justify-between group transition"
-                    >
-                      <div className="truncate">
-                        <span className="font-bold text-slate-900 group-hover:text-cyan-800">{u.name}</span>
-                        <span className="text-[9px] text-slate-500 block truncate">{u.instituteName}</span>
-                      </div>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:text-cyan-800 shrink-0" />
-                    </button>
-                  ))}
-                </div>
+          <button
+            type="button"
+            onClick={() => setSound(!sound)}
+            className={`p-2 rounded-md border text-xs transition ${
+              sound
+                ? 'border-[#ba4d2b]/40 text-[#ba4d2b] bg-white'
+                : 'border-[#dcd7cb] text-[#999581] bg-white/60'
+            }`}
+            title={sound ? 'Mute Sound' : 'Enable Sound'}
+          >
+            {sound ? <Volume2 className="w-4 h-4" /> : <VolumeX className="w-4 h-4" />}
+          </button>
+
+          <button
+            type="button"
+            onClick={() => setShowDemoTray(!showDemoTray)}
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-md border border-[#dcd7cb] bg-white/70 hover:bg-white text-xs font-sans text-[#77786c] hover:text-[#ba4d2b] transition shadow-xs"
+            title="Switch Demo Profiles"
+          >
+            <UserCheck className="w-3.5 h-3.5 text-[#ba4d2b]" />
+            <span className="hidden sm:inline">Demo Personas</span>
+          </button>
+        </div>
+      </section>
+
+      {/* ========================================================================= */}
+      {/* 4. EXPANDABLE DEMO TRAY (2 COLLEGES • 1 SCHOOL) */}
+      {/* ========================================================================= */}
+      {showDemoTray && (
+        <div className="mx-4 sm:mx-8 lg:mx-12 my-3 p-4 rounded-xl bg-white border border-[#dcd7cb] shadow-xl animate-in fade-in slide-in-from-top-2 duration-150 relative z-30">
+          <div className="flex items-center justify-between pb-3 border-b border-[#ece7dd] mb-3">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#ba4d2b] flex items-center gap-2">
+              <Sparkles className="w-3.5 h-3.5" /> One-Click Academic Demo Personas (2 Colleges • 1 School)
+            </span>
+            <button
+              onClick={() => setShowDemoTray(false)}
+              className="text-xs text-[#999581] hover:text-[#2b3029]"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* Keepers Column */}
+            <div>
+              <span className="text-[11px] font-mono font-bold text-amber-800 uppercase block mb-1.5">
+                Keepers (Lab Heads &amp; Equipment Custodians)
+              </span>
+              <div className="space-y-1.5">
+                {keepers.map((u) => (
+                  <button
+                    key={u.id}
+                    onClick={() => handleDemoLogin(u.id, '/sender')}
+                    disabled={loadingDemoId !== null}
+                    className="w-full text-left p-2.5 rounded-lg bg-amber-50/50 hover:bg-amber-50 border border-amber-200/80 text-xs flex items-center justify-between group transition"
+                  >
+                    <div>
+                      <span className="font-bold text-slate-900 group-hover:text-amber-800">{u.name}</span>
+                      <span className="text-[10px] text-slate-500 block">{u.instituteName}</span>
+                    </div>
+                    <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-amber-800" />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Seekers Column */}
+            <div>
+              <span className="text-[11px] font-mono font-bold text-cyan-800 uppercase block mb-1.5">
+                Seekers (Student Borrowers &amp; Makers)
+              </span>
+              <div className="space-y-1.5">
+                {seekers.map((u) => (
+                  <button
+                    key={u.id}
+                    onClick={() => handleDemoLogin(u.id, '/receiver')}
+                    disabled={loadingDemoId !== null}
+                    className="w-full text-left p-2.5 rounded-lg bg-cyan-50/50 hover:bg-cyan-50 border border-cyan-200/80 text-xs flex items-center justify-between group transition"
+                  >
+                    <div>
+                      <span className="font-bold text-slate-900 group-hover:text-cyan-800">{u.name}</span>
+                      <span className="text-[10px] text-slate-500 block">{u.instituteName}</span>
+                    </div>
+                    <ArrowUpRight className="w-4 h-4 text-slate-400 group-hover:text-cyan-800" />
+                  </button>
+                ))}
               </div>
             </div>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+
+      {/* ========================================================================= */}
+      {/* 5. HOW IT WORKS DIALOG */}
+      {/* ========================================================================= */}
+      {showHelpDialog && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40 backdrop-blur-xs">
+          <div className="w-full max-w-lg bg-[#faf7ee] border border-[#d9ceba] rounded-2xl p-6 shadow-2xl relative">
+            <button
+              onClick={() => setShowHelpDialog(false)}
+              className="absolute top-4 right-4 p-1 text-[#999581] hover:text-[#2b3029]"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="text-[10px] font-mono uppercase tracking-widest text-[#ba4d2b] font-bold mb-1">
+              FIELD GUIDE — IOTOGETHER 3D CHAMBER
+            </div>
+            <h3 className="font-serif text-2xl font-normal text-[#2b3029] mb-3">
+              Single-Sided Cable Interaction
+            </h3>
+            <div className="space-y-3 text-xs text-[#77786c] leading-relaxed font-sans">
+              <p>
+                <strong>1. Anchored Base:</strong> The cable emerges from the floor terminal. It obeys real position-based Verlet dynamics with gravity and friction.
+              </p>
+              <p>
+                <strong>2. Free Grabbable Plug:</strong> Click and drag the single dark plug on the floor. Scroll your mouse wheel or use the floating depth buttons to push the plug closer to or further from the wall.
+              </p>
+              <p>
+                <strong>3. Sockets &amp; Edison Bulbs:</strong>
+                <br />
+                • Drag to <strong>Socket 01</strong>: Keeper Portal activates &amp; the left bulb glows warm amber.
+                <br />
+                • Drag to <strong>Socket 02</strong>: Seeker Portal activates &amp; the right bulb glows electric cyan.
+              </p>
+              <p>
+                <strong>4. Keyboard Controls:</strong> Press <kbd className="font-mono bg-white px-1.5 py-0.5 rounded border border-[#d9ceba]">Enter</kbd> to connect next socket, <kbd className="font-mono bg-white px-1.5 py-0.5 rounded border border-[#d9ceba]">R</kbd> to reset, and <kbd className="font-mono bg-white px-1.5 py-0.5 rounded border border-[#d9ceba]">Esc</kbd> to release.
+              </p>
+            </div>
+            <div className="mt-6 flex justify-end">
+              <button
+                onClick={() => setShowHelpDialog(false)}
+                className="px-4 py-2 rounded-md bg-[#ba4d2b] text-white text-xs font-semibold"
+              >
+                Got it
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
