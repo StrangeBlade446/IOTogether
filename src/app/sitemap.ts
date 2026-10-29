@@ -2,7 +2,9 @@ import { MetadataRoute } from 'next';
 import { db } from '@/lib/db/store';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://iotogether.edu';
+  const baseUrl =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://iotogether.edu');
   const now = new Date();
 
   // Static routes

@@ -8,7 +8,9 @@ import { MainLayoutWrapper } from '@/components/navigation/MainLayoutWrapper';
 import { OrganizationSchema } from '@/components/seo/OrganizationSchema';
 import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
 
-const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://iotogether.edu';
+const siteUrl =
+  process.env.NEXT_PUBLIC_APP_URL ||
+  (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://iotogether.edu');
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

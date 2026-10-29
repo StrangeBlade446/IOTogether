@@ -13,7 +13,9 @@ interface BreadcrumbsProps {
 }
 
 export function Breadcrumbs({ items, className = '' }: BreadcrumbsProps) {
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://iotogether.edu';
+  const baseUrl =
+    process.env.NEXT_PUBLIC_APP_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : 'https://iotogether.edu');
 
   const fullItems: BreadcrumbItem[] = [
     { label: 'Home', href: '/' },
