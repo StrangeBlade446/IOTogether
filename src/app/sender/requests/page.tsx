@@ -1,4 +1,5 @@
 import React from 'react';
+import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { SenderRequestsClient } from './SenderRequestsClient';
@@ -8,6 +9,10 @@ export const revalidate = 0;
 
 export default async function SenderRequestsPage() {
   const session = await getSession();
+  if (session.user.platform_role === 'student' && !session.isPlatformAdmin) {
+    redirect('/receiver');
+  }
+
   const isPlatformAdmin = session.isPlatformAdmin;
   const managedInstIds = session.managedInstitutions;
 

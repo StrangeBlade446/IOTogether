@@ -1,4 +1,5 @@
 import React from 'react';
+import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { ReceiverBookingsClient } from './ReceiverBookingsClient';
@@ -8,6 +9,10 @@ export const revalidate = 0;
 
 export default async function ReceiverBookingsPage() {
   const session = await getSession();
+  if (session.user.platform_role === 'staff' && !session.isPlatformAdmin) {
+    redirect('/sender');
+  }
+
   const bookings = db.getBookings({ borrowerId: session.user.id });
 
   return (

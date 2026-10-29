@@ -41,8 +41,8 @@ export default async function RootLayout({
           <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-gradient-to-b from-[#C49A55]/10 via-[#0891B2]/8 to-transparent blur-3xl rounded-full" />
         </div>
 
-        {/* Side Dock Navigation (hidden on landing page, shown after login / on inner pages) */}
-        <SideDock unreadNotifs={unreadNotifs} />
+        {/* Side Dock Navigation (hidden on landing page, role-filtered for Seeker vs Keeper) */}
+        <SideDock unreadNotifs={unreadNotifs} userRole={session.user.platform_role} />
 
         {/* Dynamic Main Content Wrapper with route-aware padding */}
         <MainLayoutWrapper>{children}</MainLayoutWrapper>

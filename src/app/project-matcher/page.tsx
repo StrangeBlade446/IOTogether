@@ -11,9 +11,9 @@ export default function ProjectMatcherPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
       <div className="mb-8">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-950 text-cyan-400 text-xs font-semibold mb-3 border border-cyan-800/60">
-          <Sparkles className="w-3.5 h-3.5" />
-          Deterministic Component Compatibility Engine
+        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-100 text-slate-700 text-xs font-semibold mb-3 border border-slate-200">
+          <Sparkles className="w-3.5 h-3.5 text-teal-600" />
+          Component Compatibility Checker
         </div>
         <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
           <Cpu className="w-8 h-8 text-teal-600" />

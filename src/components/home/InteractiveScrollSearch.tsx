@@ -605,7 +605,7 @@ export function InteractiveScrollSearch({
       </section>
 
       {/* ======================================================================= */}
-      {/* 4. AI-POWERED PROJECT RECIPES SPOTLIGHT (ANCHOR: #recipe) */}
+      {/* 4. SCIENTIFIC CHEF PROJECT RECIPES (ANCHOR: #recipe) */}
       {/* ======================================================================= */}
       <section id="recipe" className="px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full scroll-mt-20">
         <div className="rounded-3xl bg-gradient-to-br from-[#263447] via-[#1a2330] to-[#141821] border border-[#67C7D4]/40 p-8 sm:p-12 relative overflow-hidden shadow-2xl">
@@ -614,14 +614,14 @@ export function InteractiveScrollSearch({
           <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
             <div className="space-y-4">
               <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#67C7D4]/15 text-[#67C7D4] border border-[#67C7D4]/30">
-                <Sparkles className="w-3.5 h-3.5" /> AI Recipe Engine
+                <Sparkles className="w-3.5 h-3.5" /> Scientific Chef Recipes
               </div>
               <h3 className="font-serif text-3xl sm:text-4xl font-bold text-[#F1E7D0] leading-tight">
-                Don&apos;t Know Exactly What Components You Need?
+                Plan Your Circuit with Project Recipes
               </h3>
               <p className="text-sm text-[#F1E7D0]/80 leading-relaxed font-sans font-light">
-                Simply type what you want to construct—whether an automated greenhouse, a drone telemetry relay, or an ECG monitor.
-                Our AI Recipe Engine maps your concept to verified hardware across partner institutions, generates bills of materials, and checks stock.
+                Specify what you want to build—such as an automated greenhouse, an obstacle-avoiding rover, or a pulse oximeter.
+                Scientific Chef generates the verified bill of materials, pin-to-pin wiring tips, and checks real-time availability across all three partner labs.
               </p>
 
               <div className="pt-2 flex flex-wrap gap-3">
@@ -629,7 +629,7 @@ export function InteractiveScrollSearch({
                   href="/receiver/project-recipe"
                   className="px-6 py-3 rounded-xl bg-[#67C7D4] hover:bg-[#7ed2dd] text-[#141821] font-bold text-xs shadow-md transition flex items-center gap-2"
                 >
-                  <Cpu className="w-4 h-4" /> Try AI Project Recipes &rarr;
+                  <Cpu className="w-4 h-4" /> Open Project Recipes &rarr;
                 </Link>
 
                 {/* Example TextMorph button directly in action */}
@@ -641,7 +641,7 @@ export function InteractiveScrollSearch({
               </div>
             </div>
 
-            {/* AI Schematic preview */}
+            {/* Circuit Recipe preview */}
             <div className="p-5 rounded-2xl bg-[#141821]/90 border border-[#67C7D4]/30 space-y-3 font-mono text-xs shadow-xl">
               <div className="flex items-center justify-between pb-2 border-b border-[#263447]">
                 <span className="text-[#67C7D4] font-bold text-[11px] flex items-center gap-1.5">
@@ -660,14 +660,14 @@ export function InteractiveScrollSearch({
                   <span className="text-[#C49A55]">10k Pullup @ 3.3V</span>
                 </div>
                 <div className="p-2 rounded bg-[#263447]/60 border border-[#263447] flex items-center justify-between">
-                  <span className="text-[#F1E7D0]">1x Soil Moisture Probe (A0)</span>
+                  <span className="text-[#F1E7D0]">1x Capacitive Soil Moisture Probe</span>
                   <span className="text-[#67C7D4]">ADC1 Channel 6</span>
                 </div>
               </div>
 
               <div className="pt-2 text-[10px] text-[#F1E7D0]/60 flex items-center gap-1">
                 <CheckCircle2 className="w-3.5 h-3.5 text-[#67C7D4]" />
-                Ready to book across Apex Institute &amp; Vanguard College
+                In stock across Apex Institute &amp; Vanguard College
               </div>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { CountdownTimer } from '@/components/timer/CountdownTimer';
@@ -17,6 +18,10 @@ export const revalidate = 0;
 
 export default async function SenderLoansPage() {
   const session = await getSession();
+  if (session.user.platform_role === 'student' && !session.isPlatformAdmin) {
+    redirect('/receiver');
+  }
+
   const isPlatformAdmin = session.isPlatformAdmin;
   const managedInstIds = session.managedInstitutions;
 

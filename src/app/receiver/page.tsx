@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { CountdownTimer } from '@/components/timer/CountdownTimer';
@@ -20,6 +21,12 @@ import {
 
 export default async function ReceiverPortalPage() {
   const session = await getSession();
+
+  // Route protection: Keepers cannot access Seeker portal
+  if (session.user.platform_role === 'staff' && !session.isPlatformAdmin) {
+    redirect('/sender');
+  }
+
   const profile = db.getProfile(session.user.id);
   const myBookings = db.getBookings({ borrowerId: session.user.id });
   const activeLoansWithTimers = myBookings.filter((b) => b.status === 'checked_out' && (b.deadline_at || b.due_at));

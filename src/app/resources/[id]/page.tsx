@@ -44,7 +44,7 @@ export default async function ResourceDetailPage({ params }: PageProps) {
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
       {/* Back Link */}
       <Link
-        href="/explore"
+        href={session.user.platform_role === 'staff' ? '/sender/inventory' : '/receiver/explore'}
         className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-cyan-400 transition-colors mb-6"
       >
         <ArrowLeft className="w-4 h-4" />

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { CountdownTimer } from '@/components/timer/CountdownTimer';
@@ -20,6 +21,12 @@ import {
 
 export default async function SenderPortalPage() {
   const session = await getSession();
+
+  // Route protection: Seekers cannot access Keeper portal
+  if (session.user.platform_role === 'student' && !session.isPlatformAdmin) {
+    redirect('/receiver');
+  }
+
   const profile = db.getProfile(session.user.id);
   const managedInstIds = session.managedInstitutions;
   const isPlatformAdmin = session.isPlatformAdmin;

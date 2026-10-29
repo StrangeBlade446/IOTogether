@@ -1,4 +1,6 @@
 import React from 'react';
+import { redirect } from 'next/navigation';
+import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { ExploreClient } from '@/app/explore/ExploreClient';
 import Link from 'next/link';
@@ -6,7 +8,12 @@ import { Sparkles, Cpu, Clock, ShieldCheck } from 'lucide-react';
 
 export const revalidate = 0;
 
-export default function ReceiverExplorePage() {
+export default async function ReceiverExplorePage() {
+  const session = await getSession();
+  if (session.user.platform_role === 'staff' && !session.isPlatformAdmin) {
+    redirect('/sender');
+  }
+
   const resources = db.getResources();
   const institutions = db.getInstitutions();
 

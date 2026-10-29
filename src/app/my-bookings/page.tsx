@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { MyBookingsClient } from './MyBookingsClient';
@@ -9,6 +10,10 @@ export const revalidate = 0;
 
 export default async function MyBookingsPage() {
   const session = await getSession();
+
+  if (session.user.platform_role === 'staff' && !session.isPlatformAdmin) {
+    redirect('/sender');
+  }
   const bookings = db.getBookings({ borrowerId: session.user.id });
   const waitlist = db.getWaitlist().filter((w) => w.user_id === session.user.id);
 
