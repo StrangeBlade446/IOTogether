@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import os from 'os';
 import {
   Profile,
   Institution,
@@ -31,8 +32,12 @@ interface DatabaseData {
   notifications: Notification[];
 }
 
-const DATA_DIR = path.join(process.cwd(), '.data');
+const isVercel = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+const DATA_DIR = isVercel
+  ? path.join(os.tmpdir(), '.data')
+  : path.join(process.cwd(), '.data');
 const DB_FILE = path.join(DATA_DIR, 'iotogether.db.json');
+const BUNDLED_DB_FILE = path.join(process.cwd(), '.data', 'iotogether.db.json');
 
 export function getDefaultNotifications(): Notification[] {
   const now = new Date();
@@ -1544,6 +1549,13 @@ class Store {
         this.data = JSON.parse(raw);
         return this.data!;
       }
+
+      if (isVercel && fs.existsSync(BUNDLED_DB_FILE)) {
+        const raw = fs.readFileSync(BUNDLED_DB_FILE, 'utf-8');
+        this.data = JSON.parse(raw);
+        this.persist();
+        return this.data!;
+      }
     } catch (err) {
       console.error('Error loading DB file, initializing with fresh seed data:', err);
     }
@@ -1561,7 +1573,7 @@ class Store {
       }
       fs.writeFileSync(DB_FILE, JSON.stringify(this.data, null, 2), 'utf-8');
     } catch (err) {
-      console.error('Error persisting DB file:', err);
+      console.error('Error persisting DB file (in-memory remains active):', err);
     }
   }
 
