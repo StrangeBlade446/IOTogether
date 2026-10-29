@@ -17,21 +17,7 @@ export default function KeeperLoginPage() {
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!email) return;
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await loginUser(email);
-      if (res.success) {
-        router.push('/sender');
-      } else {
-        setError(res.error || 'Failed to sign in');
-      }
-    } catch (err: any) {
-      setError(err?.message || 'Login error');
-    } finally {
-      setLoading(false);
-    }
+    router.push('/auth/unavailable');
   };
 
   const handleQuickSwitch = async (userId: string) => {

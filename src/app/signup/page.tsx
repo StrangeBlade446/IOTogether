@@ -11,7 +11,7 @@ export default function SignupPage() {
       <div className="w-full max-w-md rounded-2xl bg-slate-900 border border-slate-800 p-8 shadow-2xl">
         <div className="text-center mb-6">
           <Logo size="lg" showTagline />
-          <h2 className="text-xl font-bold text-white mt-4">Create Your Borrower Account</h2>
+          <h1 className="text-xl font-bold text-white mt-4">Create Your Borrower Account</h1>
           <p className="text-xs text-slate-400 mt-1">
             Join the verified network to borrow hardware from academic labs & makerspaces.
           </p>

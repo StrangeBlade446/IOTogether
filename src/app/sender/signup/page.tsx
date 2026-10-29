@@ -18,23 +18,9 @@ export default function KeeperSignupPage() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
-    setError(null);
-
-    try {
-      const res = await senderSignupAction(formData);
-      if (res.success) {
-        router.push('/sender');
-      } else {
-        setError(res.error || 'Failed to complete keeper registration');
-      }
-    } catch (err: any) {
-      setError(err?.message || 'Registration error');
-    } finally {
-      setLoading(false);
-    }
+    router.push('/auth/unavailable');
   };
 
   return (

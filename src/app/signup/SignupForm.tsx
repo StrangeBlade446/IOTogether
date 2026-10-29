@@ -15,17 +15,7 @@ export function SignupForm() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setErrorMessage(null);
-
-    startTransition(async () => {
-      const res = await registerUser({ name, email, role });
-      if (!res.success) {
-        setErrorMessage(res.error || 'Failed to register account');
-      } else {
-        router.push('/explore');
-        router.refresh();
-      }
-    });
+    router.push('/auth/unavailable');
   };
 
   return (
