@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
@@ -18,6 +19,23 @@ import {
   UserCheck,
   BookOpen,
 } from 'lucide-react';
+
+export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: 'Seeker 3D Walkable Lab & Equipment Discovery',
+  description:
+    'Walk through the 3D electronics laboratory, interact with the Scientific Chef mini droid, and borrow microcontrollers and sensors.',
+  alternates: {
+    canonical: '/receiver',
+  },
+  openGraph: {
+    title: 'Seeker 3D Walkable Lab | IOTogether',
+    description:
+      'First-person walkable 3D lab featuring microcontrollers, sensors, test benches, and the Scientific Chef.',
+    url: '/receiver',
+  },
+};
 
 interface PageProps {
   searchParams?: { role?: string };

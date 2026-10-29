@@ -1,10 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { db } from '@/lib/db/store';
 import { getSession } from '@/lib/auth/session';
 import { formatCurrency, getStatusBadge } from '@/lib/utils';
 import { BookingForm } from './BookingForm';
+import { Breadcrumbs } from '@/components/navigation/Breadcrumbs';
 import {
   ArrowLeft,
   Building2,
@@ -25,6 +27,31 @@ interface PageProps {
   params: { id: string };
 }
 
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const resource = db.getResource(params.id);
+  if (!resource) {
+    return { title: 'Laboratory Equipment Not Found' };
+  }
+  const dailyRate = resource.daily_rate_paise === 0 ? 'Free' : `₹${resource.daily_rate_paise / 100}/day`;
+  const instName = resource.institution?.name || 'Consortium Laboratory';
+
+  return {
+    title: `${resource.name} (${dailyRate})`,
+    description: `Borrow ${resource.name} from ${instName}. Category: ${resource.category.replace('_', ' ')}. ${resource.description.slice(0, 110)}...`,
+    alternates: {
+      canonical: `/resources/${resource.id}`,
+    },
+    openGraph: {
+      title: `${resource.name} — ${instName}`,
+      description: resource.description,
+      url: `/resources/${resource.id}`,
+      images: resource.image_url
+        ? [{ url: resource.image_url, alt: `${resource.name} equipment` }]
+        : undefined,
+    },
+  };
+}
+
 export default async function ResourceDetailPage({ params }: PageProps) {
   const resource = db.getResource(params.id);
   if (!resource) {
@@ -41,15 +68,13 @@ export default async function ResourceDetailPage({ params }: PageProps) {
   const isFree = resource.daily_rate_paise === 0;
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
-      {/* Back Link */}
-      <Link
-        href={session.user.platform_role === 'staff' ? '/sender/inventory' : '/receiver/explore'}
-        className="inline-flex items-center gap-1.5 text-xs font-semibold text-slate-400 hover:text-cyan-400 transition-colors mb-6"
-      >
-        <ArrowLeft className="w-4 h-4" />
-        Back to Equipment Catalog
-      </Link>
+    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full space-y-6">
+      <Breadcrumbs
+        items={[
+          { label: 'Equipment Catalog', href: '/receiver/explore' },
+          { label: resource.name },
+        ]}
+      />
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* Left Column: Image, Specs, Institution Info */}
@@ -60,7 +85,9 @@ export default async function ResourceDetailPage({ params }: PageProps) {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={resource.image_url || 'https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=800'}
-                alt={resource.name}
+                alt={`${resource.name} - ${resource.category.replace('_', ' ')} laboratory hardware`}
+                loading="eager"
+                decoding="async"
                 className="w-full h-full object-cover"
               />
               <div className="absolute top-4 left-4 flex gap-2">

@@ -355,7 +355,9 @@ export function InteractiveScrollSearch({
                     {item.image_url ? (
                       <img
                         src={item.image_url}
-                        alt={item.name}
+                        alt={`${item.name} - ${item.category.replace('_', ' ')} electronics equipment`}
+                        loading="lazy"
+                        decoding="async"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                       />
                     ) : (

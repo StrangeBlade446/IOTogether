@@ -5,11 +5,70 @@ import { db } from '@/lib/db/store';
 import { SideDock } from '@/components/navigation/SideDock';
 import { Footer } from '@/components/navigation/Footer';
 import { MainLayoutWrapper } from '@/components/navigation/MainLayoutWrapper';
+import { OrganizationSchema } from '@/components/seo/OrganizationSchema';
+import { GoogleAnalytics } from '@/components/analytics/GoogleAnalytics';
+
+const siteUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://iotogether.edu';
 
 export const metadata: Metadata = {
-  title: 'IOTogether — Multi-Institution Electronics Resource-Sharing Platform',
+  metadataBase: new URL(siteUrl),
+  title: {
+    default: 'IOTogether — Multi-Institution Electronics Resource-Sharing Platform',
+    template: '%s | IOTogether',
+  },
   description:
-    'Connect schools, colleges, laboratories, and makerspaces to share underused electronics equipment with verified students and makers.',
+    'Inter-collegiate platform connecting engineering universities, schools, and makerspaces to share underutilized microcontrollers, sensors, robotics kits, and laboratory instruments with verified students.',
+  keywords: [
+    'electronics equipment sharing',
+    'academic laboratory consortium',
+    'borrow arduino uno',
+    'borrow oscilloscope',
+    'microcontroller loan college',
+    'sensor library university',
+    'IOTogether',
+    'maker hardware borrowing',
+  ],
+  authors: [{ name: 'IOTogether Academic Consortium' }],
+  creator: 'IOTogether',
+  publisher: 'National Electronics Academic Consortium',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: '/',
+  },
+  openGraph: {
+    title: 'IOTogether — Academic Electronics Resource Sharing Platform',
+    description:
+      'Connecting colleges and schools possessing underused electronics equipment with verified students and makers seeking hardware.',
+    url: siteUrl,
+    siteName: 'IOTogether',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'IOTogether — Electronics Resource-Sharing Platform',
+    description:
+      'Connect schools, colleges, laboratories, and makerspaces to share underused electronics equipment.',
+    creator: '@IOTogether',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION || 'google-site-verification-iotogether-token',
+  },
 };
 
 export default async function RootLayout({
@@ -22,7 +81,12 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className="light">
+      <head>
+        <OrganizationSchema />
+      </head>
       <body className="bg-[#F8FAFC] text-[#0F172A] flex flex-col min-h-screen antialiased selection:bg-[#C49A55]/25 selection:text-[#0F172A] font-sans relative">
+        <GoogleAnalytics />
+
         {/* ========================================================================= */}
         {/* ROTATED BACKGROUND ARTWORK (LANDSCAPE 16:9) WITH LIGHT AMBIENT GRADIENT */}
         {/* ========================================================================= */}

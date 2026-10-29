@@ -1,11 +1,28 @@
 import React from 'react';
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { ProjectRecipeClient } from './ProjectRecipeClient';
+import { Breadcrumbs } from '@/components/navigation/Breadcrumbs';
 import { Sparkles, Cpu } from 'lucide-react';
 
 export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: 'Scientific Chef Project Recipes & Bill of Materials',
+  description:
+    'Explore 24 pre-verified academic electronics and IoT project recipes with pinout wiring instructions, starter firmware hints, and cross-college stock availability.',
+  alternates: {
+    canonical: '/receiver/project-recipe',
+  },
+  openGraph: {
+    title: 'Scientific Chef Project Recipes | IOTogether',
+    description:
+      'Curated laboratory builds with matched bills of materials, pin-to-pin schematics, and live partner lab inventory.',
+    url: '/receiver/project-recipe',
+  },
+};
 
 export default async function ReceiverProjectRecipePage() {
   const session = await getSession();
@@ -17,6 +34,8 @@ export default async function ReceiverProjectRecipePage() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 animate-in fade-in duration-300">
+      <Breadcrumbs items={[{ label: 'Seeker Lab', href: '/receiver' }, { label: 'Scientific Chef Recipes' }]} />
+
       <div>
         <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-teal-500/20 text-teal-700 border border-teal-500/30 mb-2">
           <Sparkles className="w-3.5 h-3.5 text-teal-600" /> Scientific Chef Assistant

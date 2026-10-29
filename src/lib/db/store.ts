@@ -2593,13 +2593,14 @@ class Store {
     }
   }
 
-  private addNotification(entry: Omit<Notification, 'id' | 'created_at'>): void {
+  addNotification(entry: Omit<Notification, 'id' | 'created_at'>): void {
     const data = this.load();
     data.notifications.push({
       ...entry,
       id: crypto.randomUUID(),
       created_at: new Date().toISOString(),
     });
+    this.persist();
   }
 }
 

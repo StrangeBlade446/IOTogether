@@ -14,7 +14,7 @@ export default async function AdminAuditLogPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <ShieldAlert className="w-12 h-12 text-rose-400 mx-auto mb-4" />
-        <h1 className="text-2xl font-bold text-white">Privileged Access Required</h1>
+        <h2 className="text-2xl font-bold text-white">Privileged Access Required</h2>
         <p className="text-sm text-slate-400 mt-2">
           Only authorized staff and platform administrators can inspect the append-only audit ledger.
         </p>

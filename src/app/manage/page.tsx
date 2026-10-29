@@ -28,7 +28,7 @@ export default async function ManagePortalPage() {
     return (
       <div className="max-w-4xl mx-auto px-4 py-20 text-center">
         <ShieldAlert className="w-12 h-12 text-amber-400 mx-auto mb-4" />
-        <h1 className="text-2xl font-bold text-white">Institution Manager Privileges Required</h1>
+        <h2 className="text-2xl font-bold text-white">Institution Manager Privileges Required</h2>
         <p className="text-sm text-slate-400 mt-2 max-w-md mx-auto">
           You are currently viewing as <strong className="text-white">{session.user.display_name}</strong> (Student).
           To access the Lab Management Portal, use the <strong>Role Switcher</strong> at the top right to switch to{' '}

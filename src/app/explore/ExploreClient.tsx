@@ -246,7 +246,9 @@ export function ExploreClient({ initialResources, institutions }: ExploreClientP
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={r.image_url || 'https://images.unsplash.com/photo-1517420704952-d9f39e95b43e?w=500'}
-                    alt={r.name}
+                    alt={`${r.name} - ${r.category.replace('_', ' ')} available at ${r.institution?.name || 'partner lab'}`}
+                    loading="lazy"
+                    decoding="async"
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute top-2 left-2 flex gap-1.5 flex-wrap">

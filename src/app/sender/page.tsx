@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
@@ -18,6 +19,23 @@ import {
   UserCheck,
   AlertCircle,
 } from 'lucide-react';
+
+export const revalidate = 0;
+
+export const metadata: Metadata = {
+  title: 'Keeper 3D Command Desk & Laboratory Management',
+  description:
+    'Laboratory custody command center for equipment heads. Inspect student photo IDs, generate handover QR codes, and monitor active countdown timers.',
+  alternates: {
+    canonical: '/sender',
+  },
+  openGraph: {
+    title: 'Keeper 3D Command Desk | IOTogether',
+    description:
+      'Laboratory custodian terminal managing inventory, ID verification, and handover QR generation.',
+    url: '/sender',
+  },
+};
 
 interface PageProps {
   searchParams?: { role?: string };
