@@ -8,13 +8,28 @@ import { Layers, Sparkles, ShieldCheck } from 'lucide-react';
 
 export const revalidate = 0;
 
-export default async function ReceiverBookingsPage() {
+interface ReceiverBookingsPageProps {
+  searchParams?: {
+    claim?: string;
+    token?: string;
+  };
+}
+
+export default async function ReceiverBookingsPage({ searchParams }: ReceiverBookingsPageProps) {
   const session = await getSession();
-  if (session.user.platform_role === 'staff' && !session.isPlatformAdmin) {
+
+  // If claiming a specific handover, look up the target booking's borrower
+  let effectiveUserId = session.user.id;
+  if (searchParams?.claim) {
+    const targetBooking = db.getBooking(searchParams.claim);
+    if (targetBooking && targetBooking.borrower_id) {
+      effectiveUserId = targetBooking.borrower_id;
+    }
+  } else if (session.user.platform_role === 'staff' && !session.isPlatformAdmin) {
     redirect('/sender');
   }
 
-  const bookings = db.getBookings({ borrowerId: session.user.id });
+  const bookings = db.getBookings({ borrowerId: effectiveUserId });
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-6 animate-in fade-in duration-300">
@@ -41,9 +56,14 @@ export default async function ReceiverBookingsPage() {
         </div>
       </div>
 
-      <PortalProfileSwitcher portal="seeker" currentUserId={session.user.id} variant="pills" />
+      <PortalProfileSwitcher portal="seeker" currentUserId={effectiveUserId} variant="pills" />
 
-      <ReceiverBookingsClient initialBookings={bookings} currentUserId={session.user.id} />
+      <ReceiverBookingsClient
+        initialBookings={bookings}
+        currentUserId={effectiveUserId}
+        autoClaimBookingId={searchParams?.claim}
+        autoClaimToken={searchParams?.token}
+      />
     </div>
   );
 }

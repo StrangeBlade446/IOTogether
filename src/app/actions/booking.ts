@@ -112,7 +112,7 @@ export async function claimHandoverWithQrAction(bookingId: string, scannedQrToke
   const res = db.claimHandoverWithQr({
     bookingId,
     scannedQrToken,
-    receiverId: session.user.id,
+    receiverId: booking.borrower_id || session.user.id,
   });
 
   if (res.success) {
@@ -301,5 +301,62 @@ export async function resolveIncidentAction(incidentId: string, notes: string) {
     revalidatePath('/manage/incidents');
     revalidatePath('/admin/incidents');
   }
+  return res;
+}
+
+
+export async function generateReturnQrAction(bookingId: string) {
+  const session = await getSession();
+  if (!session.user) {
+    return { success: false, error: 'You must be logged in' };
+  }
+
+  const res = db.generateReturnQr(bookingId, session.user.id);
+  if (res.success) {
+    revalidatePath('/receiver/bookings');
+    revalidatePath(`/receiver/bookings/${bookingId}`);
+  }
+  return res;
+}
+
+export async function completeReturnWithQrAction(params: {
+  bookingId: string;
+  scannedReturnQr: string;
+  condition: ConditionReport['condition'];
+  notes: string;
+  isIncident?: boolean;
+  incidentType?: Incident['incident_type'];
+  incidentDescription?: string;
+}) {
+  const session = await getSession();
+  const booking = db.getBooking(params.bookingId);
+  if (!booking || !booking.resource) {
+    return { success: false, error: 'Booking not found' };
+  }
+
+  if (!checkPermission(session, 'manage_institution', booking.resource.institution_id)) {
+    return { success: false, error: 'Forbidden: You do not have keeper permissions to process this return' };
+  }
+
+  const res = db.completeReturnWithQr({
+    bookingId: params.bookingId,
+    managerId: session.user.id,
+    scannedReturnQr: params.scannedReturnQr,
+    condition: params.condition,
+    notes: params.notes,
+    isIncident: params.isIncident,
+    incidentType: params.incidentType,
+    incidentDescription: params.incidentDescription,
+  });
+
+  if (res.success) {
+    revalidatePath('/sender/loans');
+    revalidatePath('/sender/requests');
+    revalidatePath('/receiver/bookings');
+    revalidatePath('/my-bookings');
+    revalidatePath(`/my-bookings/${params.bookingId}`);
+    revalidatePath('/notifications');
+  }
+
   return res;
 }

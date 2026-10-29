@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { Booking, ConditionReport, Incident } from '@/types/database';
 import { returnEquipmentAction } from '@/app/actions/booking';
 import { formatCurrency, formatDate, getStatusBadge } from '@/lib/utils';
+import { KeeperReturnScanModal } from '@/components/qr/KeeperReturnScanModal';
 import {
   RotateCcw,
   CheckCircle2,
@@ -24,6 +25,7 @@ interface ReturnsClientProps {
 export function ReturnsClient({ bookings, managerId }: ReturnsClientProps) {
   const router = useRouter();
   const [returnBooking, setReturnBooking] = useState<Booking | null>(null);
+  const [qrReturnBooking, setQrReturnBooking] = useState<Booking | null>(null);
 
   // Return Form State
   const [condition, setCondition] = useState<ConditionReport['condition']>('good');
@@ -136,13 +138,23 @@ export function ReturnsClient({ bookings, managerId }: ReturnsClientProps) {
                     </div>
                   </div>
 
-                  <button
-                    onClick={() => openReturnModal(b)}
-                    className="px-4 py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-navy-950 font-bold text-xs shadow-md shadow-cyan-500/20 transition-all flex items-center gap-1.5 shrink-0"
-                  >
-                    <FileCheck2 className="w-4 h-4" />
-                    Inspect & Record Return
-                  </button>
+                  <div className="flex items-center gap-2 shrink-0">
+                    <button
+                      onClick={() => setQrReturnBooking(b)}
+                      className="px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 text-slate-950 font-bold text-xs shadow-md shadow-emerald-500/20 transition-all flex items-center gap-1.5 shrink-0"
+                    >
+                      <Camera className="w-4 h-4" />
+                      Scan Return QR &amp; Verify
+                    </button>
+
+                    <button
+                      onClick={() => openReturnModal(b)}
+                      className="px-3.5 py-2.5 rounded-xl bg-neutral-800 hover:bg-neutral-700 text-slate-200 font-semibold text-xs transition-all flex items-center gap-1.5 shrink-0"
+                    >
+                      <FileCheck2 className="w-4 h-4 text-cyan-400" />
+                      Bench Manual Form
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -303,6 +315,20 @@ export function ReturnsClient({ bookings, managerId }: ReturnsClientProps) {
             </form>
           </div>
         </div>
+      )}
+
+      {qrReturnBooking && (
+        <KeeperReturnScanModal
+          bookingId={qrReturnBooking.id}
+          resourceName={qrReturnBooking.resource?.name || 'Equipment'}
+          borrowerName={qrReturnBooking.borrower?.display_name || 'Borrower'}
+          expectedReturnToken={qrReturnBooking.return_qr_code}
+          onSuccess={() => {
+            setQrReturnBooking(null);
+            router.refresh();
+          }}
+          onClose={() => setQrReturnBooking(null)}
+        />
       )}
     </div>
   );

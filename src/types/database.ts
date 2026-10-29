@@ -161,6 +161,11 @@ export interface Booking {
   id_card_verified_at?: string;
   handover_qr_code?: string; // QR token generated on Sender screen upon verification
   timer_activated?: boolean;
+  return_qr_code?: string; // QR token generated for equipment return
+  return_qr_scanned?: boolean;
+  return_qr_scanned_at?: string;
+  return_verified_by?: string;
+  return_verified_at?: string;
   status: BookingStatus;
   daily_rate_snapshot_paise: number;
   deposit_snapshot_paise: number;

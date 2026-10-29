@@ -1,8 +1,9 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+import Link from 'next/link';
 import QRCode from 'qrcode';
-import { QrCode, CheckCircle2, ShieldCheck, X, Copy, Check } from 'lucide-react';
+import { QrCode, CheckCircle2, ShieldCheck, X, Copy, Check, ExternalLink, Sparkles } from 'lucide-react';
 
 interface SenderHandoverQrModalProps {
   bookingId: string;
@@ -26,11 +27,16 @@ export function SenderHandoverQrModal({
   onClose,
 }: SenderHandoverQrModalProps) {
   const [dataUrl, setDataUrl] = useState<string>('');
+  const [redirectUrl, setRedirectUrl] = useState<string>('');
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     if (qrToken) {
-      QRCode.toDataURL(qrToken, {
+      const origin = typeof window !== 'undefined' ? window.location.origin : 'http://localhost:3000';
+      const target = `${origin}/receiver/bookings?claim=${bookingId}&token=${encodeURIComponent(qrToken)}`;
+      setRedirectUrl(target);
+
+      QRCode.toDataURL(target, {
         width: 320,
         margin: 3,
         errorCorrectionLevel: 'M',
@@ -42,7 +48,7 @@ export function SenderHandoverQrModal({
         .then((url) => setDataUrl(url))
         .catch((err) => console.error('Error generating QR:', err));
     }
-  }, [qrToken]);
+  }, [qrToken, bookingId]);
 
   const copyToken = () => {
     navigator.clipboard.writeText(qrToken);
@@ -115,6 +121,20 @@ export function SenderHandoverQrModal({
             SCAN WITH RECEIVER CAMERA OR APP
           </span>
         </div>
+
+        {/* Direct Action Link & Simulator */}
+        {redirectUrl && (
+          <div className="mb-4">
+            <a
+              href={redirectUrl}
+              className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-cyan-500 to-teal-500 hover:from-cyan-400 hover:to-teal-400 text-slate-950 font-bold text-xs shadow-lg shadow-cyan-500/20 transition flex items-center justify-center gap-2 group"
+            >
+              <Sparkles className="w-4 h-4 text-cyan-950" />
+              <span>Open Seeker Page &amp; Claim Handover (Starts Live Timer)</span>
+              <ExternalLink className="w-3.5 h-3.5 group-hover:translate-x-0.5 transition-transform" />
+            </a>
+          </div>
+        )}
 
         {/* Token Manual Fallback */}
         <div className="flex items-center justify-between gap-2 p-2 bg-neutral-950 border border-neutral-800 rounded-lg text-xs">

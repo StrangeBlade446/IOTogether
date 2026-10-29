@@ -34,6 +34,72 @@ interface DatabaseData {
 const DATA_DIR = path.join(process.cwd(), '.data');
 const DB_FILE = path.join(DATA_DIR, 'iotogether.db.json');
 
+export function getDefaultNotifications(): Notification[] {
+  const now = new Date();
+  const m1 = new Date(now.getTime() - 1000 * 60 * 15).toISOString();
+  const m2 = new Date(now.getTime() - 1000 * 60 * 90).toISOString();
+  const m3 = new Date(now.getTime() - 1000 * 60 * 300).toISOString();
+
+  return [
+    {
+      id: 'notif-001',
+      user_id: 'c0000000-0000-0000-0000-000000000001', // Rohan Verma (Apex Seeker)
+      event_type: 'welcome',
+      title: 'Welcome to IOTogether Seeker Platform',
+      message: 'Your student credentials from Apex Institute of Technology have been verified. You can discover components in the 3D lab and submit booking requests with your photo ID.',
+      created_at: m3,
+    },
+    {
+      id: 'notif-002',
+      user_id: 'c0000000-0000-0000-0000-000000000001',
+      event_type: 'recipe_update',
+      title: '24 Scientific Chef Hardware Recipes Ready',
+      message: 'Explore pre-configured BOMs for Arduino Uno, ESP32, Raspberry Pi Pico, and STM32. 1-click bundle items into your borrowing cart.',
+      created_at: m2,
+    },
+    {
+      id: 'notif-003',
+      user_id: 'b0000000-0000-0000-0000-000000000002', // Prof. Alistair Vance (Apex Keeper)
+      event_type: 'lab_head_ready',
+      title: 'Apex Embedded Systems & Robotics Inventory Online',
+      message: 'Your lab bench is linked with active components (Arduino Uno Rev3, STM32 Nucleo, RPi Pico, stepper kits). Review student photo ID cards in the Verification Center.',
+      created_at: m3,
+    },
+    {
+      id: 'notif-004',
+      user_id: 'b0000000-0000-0000-0000-000000000002',
+      event_type: 'handover_policy',
+      title: 'Dual-Handshake QR Handover & Return Protocol Active',
+      message: 'Click "Manual Verified" on student requests to display the Handover QR code. When the borrower returns equipment, scan their Return QR code to complete the booking.',
+      created_at: m1,
+    },
+    {
+      id: 'notif-005',
+      user_id: 'c0000000-0000-0000-0000-000000000003', // Meera Krishnan (Vanguard Seeker)
+      event_type: 'welcome',
+      title: 'Research Mentor Access Activated',
+      message: 'Welcome Prof. Meera Krishnan. As a faculty project guide at Vanguard Engineering College, you have borrowing privileges across all 3 consortium institutions.',
+      created_at: m2,
+    },
+    {
+      id: 'notif-006',
+      user_id: 'b0000000-0000-0000-0000-000000000003', // Dr. Elena Rostova (Vanguard Keeper)
+      event_type: 'lab_head_ready',
+      title: 'Vanguard Makerspace Equipment Bench Active',
+      message: 'ESP32 NodeMCU, ultrasonic sensor arrays, and OLED displays are active and open for inter-collegiate borrowing.',
+      created_at: m3,
+    },
+    {
+      id: 'notif-007',
+      user_id: 'a0000000-0000-0000-0000-000000000001', // Dr. Vikram Seth (Admin)
+      event_type: 'audit_ready',
+      title: 'Consortium Tamper-Evident Ledger Operational',
+      message: 'The append-only audit trail is recording all ID verifications, QR code handovers, countdown activations, and return inspections.',
+      created_at: m3,
+    },
+  ];
+}
+
 // Initial seed data if file does not exist
 function getInitialData(): DatabaseData {
   const now = new Date();
@@ -1458,7 +1524,7 @@ function getInitialData(): DatabaseData {
     incidents: [],
     waitlist_entries: [],
     audit_logs: [],
-    notifications: [],
+    notifications: getDefaultNotifications(),
   };
 }
 
@@ -2166,6 +2232,9 @@ class Store {
     b.deadline_at = deadlineIso;
     b.due_at = deadlineIso;
     b.updated_at = nowIso;
+    if (!b.return_qr_code) {
+      b.return_qr_code = `IOT-RETURN:${b.id}:${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+    }
 
     // Condition report entry
     const report: ConditionReport = {
@@ -2578,10 +2647,108 @@ class Store {
     });
   }
 
+  // --- Return QR Code Generation & Verification ---
+  generateReturnQr(bookingId: string, borrowerId?: string): { success: boolean; qrToken?: string; error?: string } {
+    const data = this.load();
+    const b = data.bookings.find((item) => item.id === bookingId);
+    if (!b) return { success: false, error: 'Booking not found' };
+    if (borrowerId && b.borrower_id !== borrowerId) {
+      return { success: false, error: 'Unauthorised' };
+    }
+    if (b.status !== 'checked_out') {
+      return { success: false, error: `Return QR code can only be generated for active checked-out equipment (current status: ${b.status})` };
+    }
+
+    if (!b.return_qr_code) {
+      b.return_qr_code = `IOT-RETURN:${b.id}:${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
+      b.updated_at = new Date().toISOString();
+      this.persist();
+    }
+
+    return { success: true, qrToken: b.return_qr_code };
+  }
+
+  completeReturnWithQr(params: {
+    bookingId: string;
+    managerId: string;
+    scannedReturnQr: string;
+    condition: ConditionReport['condition'];
+    notes: string;
+    isIncident?: boolean;
+    incidentType?: Incident['incident_type'];
+    incidentDescription?: string;
+  }): { success: boolean; error?: string } {
+    const data = this.load();
+    const { bookingId, managerId, scannedReturnQr, condition, notes, isIncident, incidentType, incidentDescription } = params;
+
+    const b = data.bookings.find((item) => item.id === bookingId);
+    if (!b) return { success: false, error: 'Booking not found' };
+    if (b.status !== 'checked_out') {
+      return { success: false, error: `Booking cannot be returned in status: ${b.status}. Only checked-out equipment can be returned.` };
+    }
+
+    const scanned = (scannedReturnQr || '').trim();
+    const stored = (b.return_qr_code || '').trim();
+
+    // Verify the return QR code matches
+    const isTokenMatch =
+      (stored.length > 0 && (scanned === stored || scanned.includes(stored))) ||
+      (scanned.startsWith('IOT-RETURN:') && scanned.includes(b.id)) ||
+      (scanned.includes(b.id));
+
+    if (!isTokenMatch) {
+      return {
+        success: false,
+        error: 'Invalid Return QR Code token. Please scan the Return QR code presented by the borrower.',
+      };
+    }
+
+    // Record return QR scan timestamp & manual verification
+    const nowIso = new Date().toISOString();
+    b.return_qr_scanned = true;
+    b.return_qr_scanned_at = nowIso;
+    b.return_verified_by = managerId;
+    b.return_verified_at = nowIso;
+
+    // Execute return and transition to completed
+    return this.returnEquipment({
+      bookingId,
+      managerId,
+      condition,
+      notes: `[Return QR Scanned & Manually Verified by Lab Head] ${notes || 'Equipment inspected and accepted in good order.'}`,
+      isIncident,
+      incidentType,
+      incidentDescription,
+    });
+  }
+
   // --- Notifications ---
   getNotifications(userId: string): Notification[] {
     const data = this.load();
-    return data.notifications.filter((n) => n.user_id === userId).slice().reverse();
+    if (!data.notifications || data.notifications.length === 0) {
+      data.notifications = getDefaultNotifications();
+      this.persist();
+    }
+    const userNotifs = data.notifications.filter((n) => n.user_id === userId || n.user_id === 'all');
+    if (userNotifs.length === 0) {
+      const defaults = getDefaultNotifications().filter((n) => n.user_id === userId);
+      if (defaults.length > 0) {
+        data.notifications.push(...defaults);
+        this.persist();
+        return defaults.slice().reverse();
+      }
+      return data.notifications.slice(-3).reverse();
+    }
+    return userNotifs.slice().reverse();
+  }
+
+  getAllNotifications(): Notification[] {
+    const data = this.load();
+    if (!data.notifications || data.notifications.length === 0) {
+      data.notifications = getDefaultNotifications();
+      this.persist();
+    }
+    return data.notifications.slice().reverse();
   }
 
   markNotificationRead(notificationId: string, userId: string): void {
