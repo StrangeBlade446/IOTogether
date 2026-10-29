@@ -39,11 +39,11 @@ export default async function ManageLoansPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <CheckCircle2 className="w-8 h-8 text-emerald-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <CheckCircle2 className="w-8 h-8 text-emerald-600" />
           Check-Out Handover & Equipment Issue
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-slate-600">
           Hand over approved equipment to students. Record unit asset tags, inspect physical condition, capture initial photos, and issue handover status.
         </p>
       </div>

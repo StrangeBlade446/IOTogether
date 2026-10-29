@@ -20,13 +20,13 @@ export default async function ProfilePage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 w-full">
       <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <User className="w-8 h-8 text-cyan-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <User className="w-8 h-8 text-cyan-600" />
           User Profile & Institutional Memberships
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-slate-600">
           Identity credentials, laboratory safety certifications, and institution access policies for{' '}
-          <strong className="text-white">{session.user.display_name}</strong>.
+          <strong className="text-slate-900">{session.user.display_name}</strong>.
         </p>
       </div>
 

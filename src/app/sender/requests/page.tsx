@@ -21,9 +21,9 @@ export default async function SenderRequestsPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-2xl bg-neutral-900 border border-neutral-800 shadow-xl">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40 mb-2">
-            <ShieldCheck className="w-3.5 h-3.5 text-amber-400" /> Lab Head Verification Center
+            <ShieldCheck className="w-3.5 h-3.5 text-amber-400" /> Keeper Verification Center
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white flex items-center gap-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-amber-100 flex items-center gap-2">
             <QrCode className="w-7 h-7 text-amber-400" /> ID Verification & Handover QR Generator
           </h1>
           <p className="mt-1 text-xs text-slate-400 max-w-2xl leading-relaxed">

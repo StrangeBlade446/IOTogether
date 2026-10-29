@@ -41,11 +41,11 @@ export default async function ManageRequestsPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <Clock className="w-8 h-8 text-amber-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <Clock className="w-8 h-8 text-amber-600" />
           Booking Requests Review Queue
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-slate-600">
           Review borrower eligibility, purpose, and project timelines. Approve or decline with recorded audit reasons.
         </p>
       </div>

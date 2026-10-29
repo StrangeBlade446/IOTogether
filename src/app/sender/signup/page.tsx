@@ -43,8 +43,8 @@ export default function KeeperSignupPage() {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#263447] text-[#C49A55] border border-[#C49A55]/30 mb-2">
           <Shield className="w-3.5 h-3.5 fill-current" /> Keeper Platform
         </div>
-        <h1 className="font-serif text-3xl font-bold text-[#F1E7D0] tracking-tight">Register as a Keeper</h1>
-        <p className="text-xs text-[#F1E7D0]/70 mt-1 font-sans">
+        <h1 className="font-serif text-3xl font-bold text-slate-900 tracking-tight">Register as a Keeper</h1>
+        <p className="text-xs text-slate-600 mt-1 font-sans">
           Register your academic laboratory or makerspace to list electronics, inspect borrower photo IDs, and manage equipment checkouts.
         </p>
       </div>

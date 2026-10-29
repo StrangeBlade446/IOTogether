@@ -305,10 +305,10 @@ export function InteractiveScrollSearch({
               <Cpu className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="font-serif text-xl sm:text-2xl font-bold text-[#F1E7D0]">
+              <h2 className="font-serif text-xl sm:text-2xl font-bold text-slate-900">
                 Available Electronics ({filteredResources.length})
               </h2>
-              <p className="text-xs text-[#F1E7D0]/60">
+              <p className="text-xs text-slate-600">
                 Click any hardware item to review specifications, safety requirements, and request borrowing.
               </p>
             </div>
@@ -419,10 +419,10 @@ export function InteractiveScrollSearch({
           <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#263447] text-[#C49A55] border border-[#C49A55]/30 mb-2">
             <Shield className="w-3.5 h-3.5" /> Guild Portals
           </div>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F1E7D0]">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900">
             Choose Your Platform Portal
           </h2>
-          <p className="text-xs sm:text-sm text-[#F1E7D0]/70 mt-2">
+          <p className="text-xs sm:text-sm text-slate-600 mt-2">
             Login as a Keeper to manage laboratory inventory and verify photo IDs, or as a Seeker to discover and borrow components.
           </p>
         </div>
@@ -682,7 +682,7 @@ export function InteractiveScrollSearch({
           <span className="text-xs font-mono font-bold uppercase tracking-wider text-[#C49A55]">
             Accountability Protocol
           </span>
-          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-[#F1E7D0] mt-2">
+          <h2 className="font-serif text-3xl sm:text-4xl font-bold text-slate-900 mt-2">
             The Three Pillars of Guild Integrity
           </h2>
         </div>

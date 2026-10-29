@@ -20,11 +20,11 @@ export default async function InstitutionsPage() {
           <Sparkles className="w-3.5 h-3.5" />
           Verified Institutional Network
         </div>
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <Building2 className="w-8 h-8 text-cyan-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <Building2 className="w-8 h-8 text-cyan-600" />
           Participating Institutions & Makerspaces
         </h1>
-        <p className="mt-1 text-sm text-slate-400 max-w-2xl">
+        <p className="mt-1 text-sm text-slate-600 max-w-2xl">
           Discover certified universities, autonomous engineering colleges, and open fabrication makerspaces sharing electronics hardware on IOTogether.
         </p>
       </div>

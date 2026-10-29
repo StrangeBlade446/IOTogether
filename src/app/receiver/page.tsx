@@ -40,9 +40,9 @@ export default async function ReceiverPortalPage() {
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 mb-3">
-              <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> Receiver Platform — Students & Teachers
+              <Sparkles className="w-3.5 h-3.5 text-cyan-400" /> Seeker Platform — Students &amp; Teachers
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-cyan-100 tracking-tight">
               Welcome back, <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-teal-300">{profile?.display_name || session.user.display_name}</span>
             </h1>
             <p className="text-slate-300 text-sm mt-2 max-w-2xl leading-relaxed">

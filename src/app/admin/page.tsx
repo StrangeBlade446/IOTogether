@@ -52,9 +52,9 @@ export default async function AdminDashboardPage() {
           <ShieldAlert className="w-3.5 h-3.5" />
           Network Platform Administrator
         </div>
-        <h1 className="text-3xl font-extrabold text-white">Platform Administration Console</h1>
-        <p className="text-xs text-slate-400 mt-1">
-          Logged in as <strong className="text-white">{session.user.display_name}</strong>. Oversight of institutional credentials, disputes, and immutable audit logs.
+        <h1 className="text-3xl font-extrabold text-slate-900">Platform Administration Console</h1>
+        <p className="text-xs text-slate-600 mt-1">
+          Logged in as <strong className="text-slate-900">{session.user.display_name}</strong>. Oversight of institutional credentials, disputes, and immutable audit logs.
         </p>
       </div>
 

@@ -33,9 +33,9 @@ export default async function SenderInventoryPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 p-6 rounded-2xl bg-gradient-to-r from-neutral-900 via-amber-950/30 to-neutral-900 border border-amber-500/30 shadow-lg">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40 mb-2">
-            <Package className="w-3.5 h-3.5 text-amber-400" /> Lab Inventory Management
+            <Package className="w-3.5 h-3.5 text-amber-400" /> Keeper Inventory Management
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white">Listed Products with Photos</h1>
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-amber-100">Listed Products with Photos</h1>
           <p className="mt-1 text-xs text-slate-300 max-w-2xl">
             List and maintain electronics equipment available for borrowing. High-resolution photos, condition, specifications, and loan duration policies.
           </p>

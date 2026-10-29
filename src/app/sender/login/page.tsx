@@ -49,8 +49,8 @@ export default function KeeperLoginPage() {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#263447] text-[#C49A55] border border-[#C49A55]/30 mb-2">
           <Shield className="w-3.5 h-3.5 fill-current" /> Keeper Portal
         </div>
-        <h1 className="font-serif text-3xl font-bold text-[#F1E7D0] tracking-tight">Keeper Sign In</h1>
-        <p className="text-xs text-[#F1E7D0]/70 mt-1 font-sans">
+        <h1 className="font-serif text-3xl font-bold text-slate-900 tracking-tight">Keeper Sign In</h1>
+        <p className="text-xs text-slate-600 mt-1 font-sans">
           For institutions and laboratories that possess electronics equipment. Inspect borrower ID cards and display Handover QR codes.
         </p>
       </div>

@@ -15,11 +15,11 @@ export default function ProjectMatcherPage() {
           <Sparkles className="w-3.5 h-3.5" />
           Deterministic Component Compatibility Engine
         </div>
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <Cpu className="w-8 h-8 text-teal-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <Cpu className="w-8 h-8 text-teal-600" />
           Project-to-Inventory Matcher
         </h1>
-        <p className="mt-1 text-sm text-slate-400 max-w-2xl">
+        <p className="mt-1 text-sm text-slate-600 max-w-2xl">
           Describe your engineering prototype or select a sample build. Our curated compatibility engine maps your requirements directly to available laboratory stock across institutions.
         </p>
       </div>

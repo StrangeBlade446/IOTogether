@@ -13,13 +13,11 @@ import {
   Cpu,
   Info,
   MapPin,
-  QrCode,
   ShieldAlert,
   ShieldCheck,
   Sparkles,
   Users,
 } from 'lucide-react';
-import QRCode from 'qrcode';
 
 export const revalidate = 0;
 
@@ -38,15 +36,6 @@ export default async function ResourceDetailPage({ params }: PageProps) {
   const eligibility = db.getEligibility(session.user.id, resource.institution_id);
   const memberships = db.getMemberships(session.user.id, resource.institution_id);
   const isMember = memberships.some((m) => m.status === 'verified');
-
-  // Generate QR code data URL for this resource
-  let qrCodeDataUrl = '';
-  try {
-    const resourceUrl = `${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/resources/${resource.id}`;
-    qrCodeDataUrl = await QRCode.toDataURL(resourceUrl, { margin: 1, width: 140, color: { dark: '#06b6d4', light: '#0a0f1d' } });
-  } catch (err) {
-    console.error('QR code generation error:', err);
-  }
 
   const cond = getStatusBadge(resource.condition);
   const isFree = resource.daily_rate_paise === 0;
@@ -90,7 +79,7 @@ export default async function ResourceDetailPage({ params }: PageProps) {
               <span className="text-xs uppercase tracking-wider text-cyan-400 font-semibold">
                 {resource.category.replace('_', ' ')}
               </span>
-              <h1 className="text-2xl sm:text-3xl font-extrabold text-white mt-1">{resource.name}</h1>
+              <h1 className="text-2xl sm:text-3xl font-extrabold text-cyan-100 mt-1">{resource.name}</h1>
 
               <p className="mt-4 text-sm text-slate-300 leading-relaxed">{resource.description}</p>
 
@@ -165,23 +154,6 @@ export default async function ResourceDetailPage({ params }: PageProps) {
                   </p>
                 </div>
               </div>
-
-              {/* QR Code Identification Card */}
-              {qrCodeDataUrl && (
-                <div className="mt-4 pt-4 border-t border-slate-800 flex items-center gap-4">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={qrCodeDataUrl} alt="Equipment QR Code" className="w-20 h-20 rounded-lg bg-navy-950 p-1 border border-cyan-800/60" />
-                  <div>
-                    <span className="text-[11px] font-semibold text-cyan-400 flex items-center gap-1">
-                      <QrCode className="w-3.5 h-3.5" />
-                      Physical Asset Tag QR
-                    </span>
-                    <p className="text-[11px] text-slate-400 mt-1">
-                      Scan at checkout counter to verify inventory record, serial numbers, and check-in status.
-                    </p>
-                  </div>
-                </div>
-              )}
             </div>
           </div>
         </div>

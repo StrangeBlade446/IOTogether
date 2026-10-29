@@ -123,8 +123,8 @@ export default function SenderNewProductPage() {
           <ArrowLeft className="w-4 h-4" />
         </Link>
         <div>
-          <h1 className="text-2xl font-bold text-white">List Electronics Product with Photos</h1>
-          <p className="text-xs text-slate-400">Add equipment to your laboratory&apos;s resource sharing catalog.</p>
+          <h1 className="text-2xl font-bold text-slate-900">List Electronics Product with Photos</h1>
+          <p className="text-xs text-slate-600">Add equipment to your laboratory&apos;s resource sharing catalog.</p>
         </div>
       </div>
 

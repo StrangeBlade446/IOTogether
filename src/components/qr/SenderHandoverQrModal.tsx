@@ -32,9 +32,10 @@ export function SenderHandoverQrModal({
     if (qrToken) {
       QRCode.toDataURL(qrToken, {
         width: 320,
-        margin: 2,
+        margin: 3,
+        errorCorrectionLevel: 'M',
         color: {
-          dark: '#0f172a',
+          dark: '#000000',
           light: '#ffffff',
         },
       })

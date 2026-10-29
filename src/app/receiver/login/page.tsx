@@ -49,8 +49,8 @@ export default function SeekerLoginPage() {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#263447] text-[#67C7D4] border border-[#67C7D4]/30 mb-2">
           <Compass className="w-3.5 h-3.5" /> Seeker Portal
         </div>
-        <h1 className="font-serif text-3xl font-bold text-[#F1E7D0] tracking-tight">Seeker Sign In</h1>
-        <p className="text-xs text-[#F1E7D0]/70 mt-1 font-sans">
+        <h1 className="font-serif text-3xl font-bold text-slate-900 tracking-tight">Seeker Sign In</h1>
+        <p className="text-xs text-slate-600 mt-1 font-sans">
           For students, teachers, and project builders who seek electronics equipment. Discover hardware, generate AI project recipes, and submit photo ID booking requests.
         </p>
       </div>

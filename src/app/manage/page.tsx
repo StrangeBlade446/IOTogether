@@ -64,9 +64,9 @@ export default async function ManagePortalPage() {
             <Settings className="w-3.5 h-3.5" />
             Institution Equipment Manager
           </div>
-          <h1 className="text-3xl font-extrabold text-white">Laboratory Management Portal</h1>
-          <p className="text-xs text-slate-400 mt-1">
-            Logged in as <strong className="text-white">{session.user.display_name}</strong>. Managing equipment approvals, checkout inspections, and inventory records.
+          <h1 className="text-3xl font-extrabold text-slate-900">Laboratory Management Portal</h1>
+          <p className="text-xs text-slate-600 mt-1">
+            Logged in as <strong className="text-slate-900">{session.user.display_name}</strong>. Managing equipment approvals, checkout inspections, and inventory records.
           </p>
         </div>
 

@@ -32,9 +32,9 @@ export default async function SenderLoansPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 p-6 rounded-2xl bg-neutral-900 border border-neutral-800 shadow-xl">
         <div>
           <div className="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full text-xs font-semibold bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 mb-2">
-            <Clock className="w-3.5 h-3.5 text-cyan-400" /> Active Handovers
+            <Clock className="w-3.5 h-3.5 text-cyan-400" /> Keeper Active Loans
           </div>
-          <h1 className="text-2xl sm:text-3xl font-extrabold text-white flex items-center gap-2">
+          <h1 className="text-2xl sm:text-3xl font-extrabold text-cyan-100 flex items-center gap-2">
             <Clock className="w-7 h-7 text-cyan-400" /> Live Loan Deadline Countdown Timers
           </h1>
           <p className="mt-1 text-xs text-slate-400 max-w-2xl leading-relaxed">

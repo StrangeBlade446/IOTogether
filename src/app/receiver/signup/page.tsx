@@ -43,8 +43,8 @@ export default function SeekerSignupPage() {
         <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-[#263447] text-[#67C7D4] border border-[#67C7D4]/30 mb-2">
           <Compass className="w-3.5 h-3.5" /> Seeker Platform
         </div>
-        <h1 className="font-serif text-3xl font-bold text-[#F1E7D0] tracking-tight">Register as a Seeker</h1>
-        <p className="text-xs text-[#F1E7D0]/70 mt-1 font-sans">
+        <h1 className="font-serif text-3xl font-bold text-slate-900 tracking-tight">Register as a Seeker</h1>
+        <p className="text-xs text-slate-600 mt-1 font-sans">
           Join the electronics sharing network to borrow verified laboratory equipment, sensors, and microcontrollers.
         </p>
       </div>

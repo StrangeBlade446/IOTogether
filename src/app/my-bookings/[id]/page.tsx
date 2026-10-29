@@ -76,7 +76,7 @@ export default async function BookingDetailPage({ params }: PageProps) {
               </span>
               <span className="text-xs text-slate-400">ID: {booking.id.slice(0, 8)}...</span>
             </div>
-            <h1 className="text-2xl font-black text-white mt-2">
+            <h1 className="text-2xl font-black text-cyan-100 mt-2">
               {booking.quantity}x {booking.resource?.name}
             </h1>
             <p className="text-xs text-slate-400 mt-1 flex items-center gap-1.5">

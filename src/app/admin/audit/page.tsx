@@ -35,11 +35,11 @@ export default async function AdminAuditLogPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <FileText className="w-8 h-8 text-teal-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <FileText className="w-8 h-8 text-teal-600" />
           Append-Only Platform Audit Ledger
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-slate-600">
           Cryptographically aligned, non-repudiable audit logs recording equipment reservations, staff checkouts, condition sign-offs, and administrative actions.
         </p>
       </div>

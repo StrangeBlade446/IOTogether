@@ -1,20 +1,24 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   Home,
+  Compass,
   Search,
   Cpu,
   Layers,
   Shield,
+  ClipboardList,
   ScrollText,
   Bell,
   User,
+  ChevronLeft,
+  ChevronRight,
+  Sparkles,
 } from 'lucide-react';
-import { Dock, DockIcon, DockItem, DockLabel } from '@/components/core/dock';
 import { cn } from '@/lib/utils';
 
 interface SideDockProps {
@@ -23,8 +27,9 @@ interface SideDockProps {
 
 export function SideDock({ unreadNotifs = 0 }: SideDockProps) {
   const pathname = usePathname();
+  const [collapsed, setCollapsed] = useState(false);
 
-  // Keep landing page minimal with only the 2 login options; display dock after login / inner pages
+  // Keep landing page minimal with only the 3D cable interaction; display dock after login / inner pages
   if (pathname === '/') {
     return null;
   }
@@ -32,56 +37,90 @@ export function SideDock({ unreadNotifs = 0 }: SideDockProps) {
   const navItems = [
     {
       title: 'Guild Home',
+      label: 'Home',
+      category: 'General',
       icon: Home,
       href: '/',
       active: pathname === '/',
       color: '#C49A55',
     },
     {
-      title: 'Interactive Search',
+      title: 'Seeker 3D Lab',
+      label: 'Seeker Lab',
+      category: 'Seeker',
+      icon: Compass,
+      href: '/receiver',
+      active: pathname === '/receiver',
+      color: '#0891B2',
+    },
+    {
+      title: 'Seeker Equipment Catalog',
+      label: 'Seeker Catalog',
+      category: 'Seeker',
       icon: Search,
       href: '/receiver/explore',
       active: pathname.startsWith('/receiver/explore') || pathname === '/explore',
-      color: '#67C7D4',
+      color: '#0891B2',
     },
     {
-      title: 'AI Project Recipe',
+      title: 'AI Project Recipe Chef',
+      label: 'AI Recipe',
+      category: 'Seeker',
       icon: Cpu,
       href: '/receiver/project-recipe',
       active: pathname.startsWith('/receiver/project-recipe'),
-      color: '#67C7D4',
+      color: '#0D9488',
     },
     {
-      title: 'My Bookings & Timers',
+      title: 'Seeker Bookings & QR Claim',
+      label: 'My Bookings',
+      category: 'Seeker',
       icon: Layers,
       href: '/receiver/bookings',
       active: pathname.startsWith('/receiver/bookings') || pathname === '/my-bookings',
-      color: '#C49A55',
+      color: '#0891B2',
     },
     {
-      title: 'Keeper Lab Head Portal',
+      title: 'Keeper 3D Desk',
+      label: 'Keeper Desk',
+      category: 'Keeper',
       icon: Shield,
       href: '/sender',
-      active: pathname.startsWith('/sender'),
+      active: pathname === '/sender',
       color: '#C49A55',
     },
     {
-      title: 'Audit Ledger & Log',
+      title: 'Keeper Requests & ID Verify',
+      label: 'Keeper Requests',
+      category: 'Keeper',
+      icon: ClipboardList,
+      href: '/sender/requests',
+      active: pathname.startsWith('/sender/requests') || pathname.startsWith('/manage/requests'),
+      color: '#D97706',
+    },
+    {
+      title: 'Immutable Audit Ledger',
+      label: 'Audit Ledger',
+      category: 'Ledger',
       icon: ScrollText,
       href: '/admin/audit',
       active: pathname.startsWith('/admin/audit'),
-      color: '#67C7D4',
+      color: '#475569',
     },
     {
-      title: 'Notifications',
+      title: 'Notification Center',
+      label: 'Notifications',
+      category: 'System',
       icon: Bell,
       href: '/notifications',
       active: pathname === '/notifications',
       badge: unreadNotifs > 0 ? unreadNotifs : null,
-      color: '#C49A55',
+      color: '#E11D48',
     },
     {
-      title: 'Profile & Memberships',
+      title: 'Account & Memberships',
+      label: 'Profile',
+      category: 'System',
       icon: User,
       href: '/profile',
       active: pathname === '/profile',
@@ -91,114 +130,155 @@ export function SideDock({ unreadNotifs = 0 }: SideDockProps) {
 
   return (
     <>
-      {/* Desktop / Tablet Vertical Side Dock (Left Side) with distinctive interactive enlargement */}
+      {/* ========================================================================= */}
+      {/* DESKTOP / TABLET LABELED SIDE DOCK (LEFT SIDE) */}
+      {/* ========================================================================= */}
       <aside
         aria-label="Side Dock Navigation"
-        className="fixed left-5 top-1/2 -translate-y-1/2 z-50 hidden md:block"
+        className="fixed left-4 top-1/2 -translate-y-1/2 z-50 hidden lg:block"
       >
-        <Dock
-          orientation="vertical"
-          magnification={60}
-          distance={110}
-          className="bg-white/90 backdrop-blur-2xl border-2 border-slate-200/90 shadow-[0_8px_30px_rgba(0,0,0,0.1)] py-4 px-2.5 rounded-3xl"
+        <motion.div
+          animate={{ width: collapsed ? 68 : 220 }}
+          transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+          className="relative bg-white/95 backdrop-blur-2xl border-2 border-slate-200 shadow-[0_12px_40px_rgba(15,23,42,0.12)] p-2.5 rounded-3xl flex flex-col gap-1 overflow-hidden"
         >
-          {navItems.map((item) => {
-            const Icon = item.icon;
-            return (
-              <Link key={item.title} href={item.href} className="outline-none">
-                <motion.div
-                  whileHover={{
-                    scale: 1.3,
-                    x: 10,
-                    boxShadow: `0 0 24px ${item.color}40, 0 0 48px ${item.color}15`,
-                    transition: { type: 'spring', stiffness: 450, damping: 16 },
-                  }}
-                  whileTap={{ scale: 0.9 }}
-                  className="rounded-2xl"
+          {/* Header & Collapse Toggle */}
+          <div className="flex items-center justify-between px-2 py-1.5 border-b border-slate-100 mb-1">
+            <div className={cn('flex items-center gap-1.5 overflow-hidden transition-opacity', collapsed ? 'opacity-0 w-0' : 'opacity-100')}>
+              <span className="w-2 h-2 rounded-full bg-[#ba4d2b] animate-pulse shrink-0" />
+              <span className="text-[10px] font-mono uppercase font-bold tracking-wider text-slate-800 truncate">
+                PORTAL DOCK
+              </span>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCollapsed(!collapsed)}
+              title={collapsed ? 'Expand side dock with labels' : 'Collapse side dock'}
+              className="p-1 rounded-lg text-slate-400 hover:text-slate-800 hover:bg-slate-100 transition shrink-0 ml-auto"
+            >
+              {collapsed ? <ChevronRight className="w-3.5 h-3.5" /> : <ChevronLeft className="w-3.5 h-3.5" />}
+            </button>
+          </div>
+
+          {/* Navigation Items with Persistent Visible Labels */}
+          <nav className="flex flex-col gap-1">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className="outline-none"
+                  title={item.title}
                 >
-                  <DockItem
+                  <motion.div
+                    whileHover={{ x: 3 }}
+                    whileTap={{ scale: 0.97 }}
                     className={cn(
-                      'aspect-square rounded-2xl transition-all duration-200 border-2 relative group overflow-hidden',
+                      'group relative flex items-center gap-2.5 px-2.5 py-2 rounded-2xl transition-all duration-150',
                       item.active
-                        ? 'bg-amber-50/90 border-[#C49A55] text-[#A17A38] shadow-md shadow-[#C49A55]/20'
-                        : 'bg-white/95 border-slate-200 text-slate-600 hover:text-slate-900 hover:border-[#0891B2] hover:bg-slate-50'
+                        ? 'bg-slate-900 text-white shadow-md shadow-slate-900/20'
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100/80'
                     )}
                   >
-                    {/* Glowing background aura upon hover */}
-                    <span
-                      aria-hidden="true"
-                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none rounded-2xl blur-md"
-                      style={{ backgroundColor: `${item.color}15` }}
-                    />
+                    {/* Active Accent Pill */}
+                    {item.active && (
+                      <motion.span
+                        layoutId="activeDockPill"
+                        className="absolute left-1 top-2 bottom-2 w-1 rounded-full"
+                        style={{ backgroundColor: item.color }}
+                      />
+                    )}
 
-                    <DockLabel className="border border-slate-200 bg-white/95 backdrop-blur-md text-slate-900 shadow-xl font-mono text-[11px] px-3 py-1.5 rounded-xl">
-                      <span className="flex items-center gap-1.5">
-                        <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: item.color }} />
-                        {item.title}
+                    {/* Icon */}
+                    <div
+                      className={cn(
+                        'relative flex items-center justify-center w-8 h-8 rounded-xl shrink-0 transition-colors',
+                        item.active
+                          ? 'text-white'
+                          : 'bg-slate-50 text-slate-600 group-hover:text-slate-900 group-hover:bg-slate-200/70 border border-slate-200/80'
+                      )}
+                      style={item.active ? { backgroundColor: `${item.color}25`, color: item.color } : {}}
+                    >
+                      <Icon className="w-4 h-4" />
+                      {item.badge && (
+                        <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[16px] h-[16px] px-1 text-[9px] font-bold text-white bg-rose-600 rounded-full border border-white animate-pulse">
+                          {item.badge}
+                        </span>
+                      )}
+                    </div>
+
+                    {/* Visible Label */}
+                    <div className={cn('flex flex-col overflow-hidden text-left', collapsed ? 'hidden' : 'block')}>
+                      <span
+                        className={cn(
+                          'text-xs font-bold tracking-tight truncate leading-tight',
+                          item.active ? 'text-white' : 'text-slate-800 group-hover:text-slate-950'
+                        )}
+                      >
+                        {item.label}
                       </span>
-                    </DockLabel>
+                      <span
+                        className={cn(
+                          'text-[9px] font-mono tracking-wider uppercase truncate leading-tight',
+                          item.active ? 'text-slate-300' : 'text-slate-600'
+                        )}
+                      >
+                        {item.category}
+                      </span>
+                    </div>
 
-                    <DockIcon>
-                      <div className="relative flex items-center justify-center w-full h-full">
-                        <Icon className="w-5 h-5 transition-transform duration-200 group-hover:scale-110" />
-                        {item.badge && (
-                          <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[17px] h-[17px] px-1 text-[9px] font-bold text-white bg-[#C49A55] rounded-full border-2 border-white animate-pulse">
-                            {item.badge}
-                          </span>
-                        )}
-                        {item.active && (
-                          <span
-                            className="absolute -bottom-1.5 w-2 h-2 rounded-full shadow-[0_0_8px_currentColor]"
-                            style={{ backgroundColor: item.color, color: item.color }}
-                          />
-                        )}
-                      </div>
-                    </DockIcon>
-                  </DockItem>
-                </motion.div>
-              </Link>
-            );
-          })}
-        </Dock>
+                    {/* Mini role chip when expanded */}
+                    {!collapsed && item.active && (
+                      <span
+                        className="ml-auto text-[9px] font-bold uppercase tracking-wider px-1.5 py-0.5 rounded-full shrink-0"
+                        style={{ backgroundColor: `${item.color}35`, color: item.color }}
+                      >
+                        Live
+                      </span>
+                    )}
+                  </motion.div>
+                </Link>
+              );
+            })}
+          </nav>
+        </motion.div>
       </aside>
 
-      {/* Mobile Horizontal Bottom Dock */}
+      {/* ========================================================================= */}
+      {/* MOBILE / COMPACT HORIZONTAL BOTTOM DOCK (WITH LABELS) */}
+      {/* ========================================================================= */}
       <nav
         aria-label="Mobile Bottom Dock"
-        className="fixed bottom-3 left-1/2 -translate-x-1/2 z-50 md:hidden max-w-[94vw]"
+        className="fixed bottom-2 left-1/2 -translate-x-1/2 z-50 lg:hidden max-w-[96vw] w-full px-2"
       >
-        <Dock
-          orientation="horizontal"
-          magnification={52}
-          distance={85}
-          className="bg-white/95 backdrop-blur-xl border border-slate-200 shadow-xl px-2 py-1.5 rounded-2xl"
-        >
+        <div className="bg-white/95 backdrop-blur-2xl border-2 border-slate-200 shadow-[0_8px_30px_rgba(15,23,42,0.15)] px-2 py-1.5 rounded-2xl flex items-center justify-around gap-1">
           {navItems.slice(0, 6).map((item) => {
             const Icon = item.icon;
             return (
-              <Link key={item.title} href={item.href} className="outline-none">
-                <motion.div
-                  whileHover={{ scale: 1.25, y: -6 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  <DockItem
-                    className={cn(
-                      'aspect-square rounded-xl transition-all border',
-                      item.active
-                        ? 'bg-amber-50 border-[#C49A55] text-[#A17A38]'
-                        : 'bg-white border-slate-200 text-slate-600'
-                    )}
-                  >
-                    <DockLabel>{item.title}</DockLabel>
-                    <DockIcon>
-                      <Icon className="w-4 h-4" />
-                    </DockIcon>
-                  </DockItem>
-                </motion.div>
+              <Link
+                key={item.label}
+                href={item.href}
+                className={cn(
+                  'flex flex-col items-center justify-center p-1.5 rounded-xl transition-all flex-1 text-center',
+                  item.active
+                    ? 'bg-slate-900 text-white shadow-sm'
+                    : 'text-slate-600 hover:text-slate-900 hover:bg-slate-100'
+                )}
+              >
+                <div className="relative">
+                  <Icon className="w-4 h-4" />
+                  {item.badge && (
+                    <span className="absolute -top-1 -right-1.5 w-2 h-2 bg-rose-500 rounded-full" />
+                  )}
+                </div>
+                <span className="text-[9px] font-bold truncate max-w-[54px] mt-0.5 leading-tight">
+                  {item.label.replace('Seeker ', '').replace('Keeper ', '')}
+                </span>
               </Link>
             );
           })}
-        </Dock>
+        </div>
       </nav>
     </>
   );

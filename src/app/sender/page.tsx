@@ -62,9 +62,9 @@ export default async function SenderPortalPage() {
         <div className="relative z-10 flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/20 text-amber-300 border border-amber-500/40 mb-3">
-              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" /> Equipment Sender & Lab Head Platform
+              <ShieldCheck className="w-3.5 h-3.5 text-amber-400" /> Keeper Platform — Lab Heads &amp; Custodians
             </div>
-            <h1 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold text-amber-100 tracking-tight">
               Lab Head Portal:{' '}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-cyan-300">
                 {profile?.display_name || session.user.display_name}

@@ -38,11 +38,11 @@ export default async function ManageReturnsPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <RotateCcw className="w-8 h-8 text-cyan-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <RotateCcw className="w-8 h-8 text-cyan-600" />
           Equipment Returns & Final Inspection
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-slate-600">
           Inspect returned hardware, record final condition grading, confirm undamaged return or escalate damage/loss incidents to resolution.
         </p>
       </div>

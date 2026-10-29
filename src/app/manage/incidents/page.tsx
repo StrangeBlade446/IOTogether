@@ -41,11 +41,11 @@ export default async function ManageIncidentsPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <AlertTriangle className="w-8 h-8 text-rose-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <AlertTriangle className="w-8 h-8 text-rose-600" />
           Hardware Incidents & Dispute Resolution
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-slate-600">
           Investigate reported hardware damage, missing leads, and condition disputes. Record resolution findings and complete transactions.
         </p>
       </div>

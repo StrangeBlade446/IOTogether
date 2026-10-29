@@ -17,11 +17,11 @@ export default function RegisterInstitutionPage() {
       </Link>
 
       <div className="mb-8">
-        <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-          <Building2 className="w-8 h-8 text-cyan-400" />
+        <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+          <Building2 className="w-8 h-8 text-cyan-600" />
           Register an Institution or Makerspace
         </h1>
-        <p className="mt-1 text-sm text-slate-400">
+        <p className="mt-1 text-sm text-slate-600">
           Apply to connect your school, university department, or community makerspace. Upon administrator verification, you can list equipment and accept student bookings.
         </p>
       </div>

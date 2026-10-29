@@ -39,11 +39,11 @@ export default async function ManageInventoryPage() {
 
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-8">
         <div>
-          <h1 className="text-3xl font-extrabold text-white flex items-center gap-3">
-            <Cpu className="w-8 h-8 text-cyan-400" />
+          <h1 className="text-3xl font-extrabold text-slate-900 flex items-center gap-3">
+            <Cpu className="w-8 h-8 text-cyan-600" />
             Laboratory Equipment Inventory
           </h1>
-          <p className="mt-1 text-sm text-slate-400">
+          <p className="mt-1 text-sm text-slate-600">
             List and configure active boards, components, test equipment, and borrowing rules for your laboratory.
           </p>
         </div>

@@ -485,7 +485,7 @@ export function Scene3DLanding() {
             </h3>
             <div className="space-y-3 text-xs text-[#77786c] leading-relaxed font-sans">
               <p>
-                <strong>1. Anchored Base:</strong> The cable emerges from the floor terminal. It obeys real position-based Verlet dynamics with gravity and friction.
+                <strong>1. Wall Conduit Hinge:</strong> The cable hangs hinged from the wall conduit outside the frame. It obeys real position-based Verlet dynamics with gravity and friction.
               </p>
               <p>
                 <strong>2. Free Grabbable Plug:</strong> Click and drag the single dark plug on the floor. Scroll your mouse wheel or use the floating depth buttons to push the plug closer to or further from the wall.
