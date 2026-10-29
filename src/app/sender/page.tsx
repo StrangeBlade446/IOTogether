@@ -19,8 +19,24 @@ import {
   AlertCircle,
 } from 'lucide-react';
 
-export default async function SenderPortalPage() {
-  const session = await getSession();
+interface PageProps {
+  searchParams?: { role?: string };
+}
+
+export default async function SenderPortalPage({ searchParams }: PageProps) {
+  let session = await getSession();
+
+  // If navigating from landing page or query param as keeper, switch to keeper persona
+  if (searchParams?.role === 'keeper' && session.user.platform_role !== 'staff') {
+    const staffUser = db.getProfile('b0000000-0000-0000-0000-000000000002')!;
+    session = {
+      ...session,
+      user: staffUser,
+      memberships: db.getMemberships(staffUser.id),
+      managedInstitutions: ['11111111-1111-1111-1111-111111111111'],
+      isPlatformAdmin: false,
+    };
+  }
 
   // Route protection: Seekers cannot access Keeper portal
   if (session.user.platform_role === 'student' && !session.isPlatformAdmin) {

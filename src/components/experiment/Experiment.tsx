@@ -259,15 +259,24 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
       }
 
       function pick(x: number, y: number): { index: number; isPlug: boolean } | null {
+        // Direct click on either wall socket snaps and connects immediately
+        for (let s = 0; s < 2; s++) {
+          const sp = screenPosition(socketPositions[s]);
+          if (Math.hypot(sp.x - x, sp.y - y) < 48) {
+            connect(s);
+            return null;
+          }
+        }
+
         // Generous pick target on the free plug (index = physics.count - 1)
         const plugPoint = screenPosition(physics.points[plugIndex]);
         const plugDist = Math.hypot(plugPoint.x - x, plugPoint.y - y);
-        if (plugDist < 56) {
+        if (plugDist < 60) {
           return { index: plugIndex, isPlug: true };
         }
 
         // Generous pick targets along the wire segments (excluding index 0 anchored to the wall)
-        let best = 34;
+        let best = 38;
         let result: { index: number; isPlug: boolean } | null = null;
         for (let i = 1; i < physics.count; i++) {
           const screen = screenPosition(physics.points[i]);
@@ -377,11 +386,11 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
         }
 
         near = null;
-        if (drag.isPlug) {
+        if (drag.isPlug || drag.index >= plugIndex - 2) {
           for (let socket = 0; socket < 2; socket++) {
             const point = screenPosition(socketPositions[socket]);
             if (
-              Math.hypot(event.clientX - point.x, event.clientY - point.y) < 68
+              Math.hypot(event.clientX - point.x, event.clientY - point.y) < 88
             ) {
               near = socket;
               position.copy(socketPositions[socket]);
@@ -403,7 +412,7 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
         drag = null;
         physics.clearAnchor(current.index);
 
-        if (snap && current.isPlug && near !== null) {
+        if (snap && (current.isPlug || current.index >= plugIndex - 2) && near !== null) {
           connect(near);
         }
 

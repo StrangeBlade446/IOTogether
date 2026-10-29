@@ -19,8 +19,24 @@ import {
   BookOpen,
 } from 'lucide-react';
 
-export default async function ReceiverPortalPage() {
-  const session = await getSession();
+interface PageProps {
+  searchParams?: { role?: string };
+}
+
+export default async function ReceiverPortalPage({ searchParams }: PageProps) {
+  let session = await getSession();
+
+  // If navigating from landing page or query param as seeker, switch to seeker persona
+  if (searchParams?.role === 'seeker' && session.user.platform_role !== 'student') {
+    const studentUser = db.getProfile('c0000000-0000-0000-0000-000000000001')!;
+    session = {
+      ...session,
+      user: studentUser,
+      memberships: db.getMemberships(studentUser.id),
+      managedInstitutions: [],
+      isPlatformAdmin: false,
+    };
+  }
 
   // Route protection: Keepers cannot access Seeker portal
   if (session.user.platform_role === 'staff' && !session.isPlatformAdmin) {

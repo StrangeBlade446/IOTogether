@@ -6,7 +6,7 @@ import Link from 'next/link';
 import { Experiment } from '@/components/experiment/Experiment';
 import type { ExperimentHandle, ExperimentState } from '@/components/experiment/types';
 import { DEMO_USERS } from '@/lib/auth/demo-users';
-import { switchDemoUser } from '@/app/actions/auth';
+import { switchDemoUser, enterPortalAction } from '@/app/actions/auth';
 import {
   MousePointer2,
   ArrowUpRight,
@@ -47,18 +47,28 @@ export function Scene3DLanding() {
 
   // Navigate when a socket connects
   useEffect(() => {
+    let timer: NodeJS.Timeout;
     if (state.connectedSocket === 'keeper') {
-      const timer = setTimeout(() => {
-        router.push('/sender');
-      }, 1400);
-      return () => clearTimeout(timer);
+      timer = setTimeout(async () => {
+        try {
+          await enterPortalAction('keeper');
+        } catch (e) {
+          console.error(e);
+        }
+        window.location.href = '/sender?role=keeper';
+      }, 950);
     } else if (state.connectedSocket === 'seeker') {
-      const timer = setTimeout(() => {
-        router.push('/receiver');
-      }, 1400);
-      return () => clearTimeout(timer);
+      timer = setTimeout(async () => {
+        try {
+          await enterPortalAction('seeker');
+        } catch (e) {
+          console.error(e);
+        }
+        window.location.href = '/receiver?role=seeker';
+      }, 950);
     }
-  }, [state.connectedSocket, router]);
+    return () => clearTimeout(timer);
+  }, [state.connectedSocket]);
 
   function start() {
     setGuide(true);
@@ -79,17 +89,18 @@ export function Scene3DLanding() {
         : 'A perfect fit. Release to connect to Seeker Portal.'
       : 'A little closer. Bring the plug to Socket 01 or 02.'
     : state.connectedSocket === 'keeper'
-    ? '⚡ Circuit Complete! Keeper Portal Activated. Navigating...'
+    ? '⚡ Circuit Complete! Keeper Portal Activated (Prof. Alistair Vance). Entering Keeper Desk...'
     : state.connectedSocket === 'seeker'
-    ? '⚡ Circuit Complete! Seeker Portal Activated. Navigating...'
+    ? '⚡ Circuit Complete! Seeker Portal Activated (Rohan Verma). Entering Seeker Lab...'
     : 'Pick up the single plug from the floor to connect.';
 
   const handleDemoLogin = async (userId: string, targetPath: string) => {
     setLoadingDemoId(userId);
     try {
-      await switchDemoUser(userId, targetPath);
+      await switchDemoUser(userId);
+      window.location.href = targetPath;
     } catch {
-      router.push(targetPath);
+      window.location.href = targetPath;
     }
   };
 

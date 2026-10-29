@@ -430,6 +430,9 @@ export function SeekerLab3D() {
       element.setPointerCapture(e.pointerId);
     };
 
+    let isDroidHovering = false;
+    let lastStationId: string | null = null;
+
     const onPointerMove = (e: PointerEvent) => {
       const rect = element.getBoundingClientRect();
       const pointer = new THREE.Vector2(
@@ -440,9 +443,8 @@ export function SeekerLab3D() {
       raycaster.setFromCamera(pointer, camera);
       const hits = raycaster.intersectObject(droidHitBox, false);
 
-      const isHovering = hits.length > 0;
-      setDroidHovered(isHovering);
-      element.style.cursor = isHovering ? 'pointer' : isDragging ? 'grabbing' : 'grab';
+      isDroidHovering = hits.length > 0;
+      element.style.cursor = isDroidHovering ? 'pointer' : isDragging ? 'grabbing' : 'grab';
 
       if (isDragging) {
         const deltaX = e.clientX - prevMouseX;
@@ -536,7 +538,10 @@ export function SeekerLab3D() {
           nearestStation = station;
         }
       });
-      setActiveStation(nearestStation);
+      if ((nearestStation as StationInfo | null)?.id !== lastStationId) {
+        lastStationId = (nearestStation as StationInfo | null)?.id || null;
+        setActiveStation(nearestStation);
+      }
 
       // Animate Billboards to face camera
       stationMeshes.forEach((s) => {
@@ -549,7 +554,7 @@ export function SeekerLab3D() {
       droidGroup.position.y = 1.35 + bob;
       levitationRing.rotation.z = time * 0.004;
 
-      if (droidHovered) {
+      if (isDroidHovering) {
         droidGroup.rotation.y += dt * 4.0;
         droidLight.intensity = 3.5;
       } else {
@@ -589,7 +594,7 @@ export function SeekerLab3D() {
       renderer.dispose();
       renderer.domElement.remove();
     };
-  }, [router, droidHovered]);
+  }, [router]);
 
   return (
     <div className="relative w-full h-[620px] rounded-3xl overflow-hidden border border-[#dcd7cb] bg-[#ede7dc] shadow-2xl select-none">
