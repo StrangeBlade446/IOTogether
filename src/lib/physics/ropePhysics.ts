@@ -8,13 +8,13 @@ import { ROPE_WALL_CENTER_Z } from "./sceneGeometry";
  */
 export class RopePhysics {
   public readonly count = 61;
-  public readonly totalLength = 10.8;
+  public readonly totalLength = 12.2;
   public points: Vector3[] = [];
   public previous: Vector3[] = [];
   public anchors = new Map<number, Vector3>();
 
-  // Fixed floor origin for the single-sided cable
-  public readonly baseAnchor = new Vector3(0, 0.08, 2.5);
+  // Wall-mounted swivel hinge anchor (hooked high on the wall / outside left frame)
+  public readonly baseAnchor = new Vector3(-4.4, 3.4, -1.38);
 
   private readonly segmentLength = this.totalLength / (this.count - 1);
   private readonly fixedStep = 1 / 120;
@@ -34,14 +34,15 @@ export class RopePhysics {
   public reset(): void {
     this.anchors.clear();
 
-    // Natural resting S-curve on the floor starting from the floor base terminal
+    // Natural catenary drape from the wall hinge down onto the floor
     const controls = [
       this.baseAnchor.clone(),
-      new Vector3(-0.9, 0.09, 2.1),
-      new Vector3(-1.4, 0.09, 1.2),
-      new Vector3(-0.2, 0.09, 0.6),
-      new Vector3(1.2, 0.09, 1.1),
-      new Vector3(1.6, 0.09, 0.5),
+      new Vector3(-3.8, 2.3, -0.7),
+      new Vector3(-3.1, 0.9, 0.1),
+      new Vector3(-2.2, 0.09, 1.1),
+      new Vector3(-0.8, 0.09, 1.7),
+      new Vector3(0.9, 0.09, 1.4),
+      new Vector3(1.9, 0.09, 0.6),
     ];
     const curve = new CatmullRomCurve3(controls, false, "centripetal");
     curve.arcLengthDivisions = 2000;
@@ -54,14 +55,14 @@ export class RopePhysics {
       if (i === 0) return this.baseAnchor.clone();
       return new Vector3(
         this.baseAnchor.x + (p.x - this.baseAnchor.x) * scale,
-        0.09,
+        Math.max(0.08, p.y),
         this.baseAnchor.z + (p.z - this.baseAnchor.z) * scale
       );
     });
 
     this.previous = this.points.map(p => p.clone());
 
-    // Permanently pin the single-sided cable's floor terminal (Index 0)
+    // Permanently pin the single-sided cable's wall hinge (Index 0)
     this.anchors.set(0, this.baseAnchor.clone());
   }
 

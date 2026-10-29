@@ -12,7 +12,7 @@ import { RopePhysics } from "@/lib/physics/ropePhysics";
 import { ConnectionSound } from "@/lib/physics/connectionSound";
 import { ROPE_WALL_CENTER_Z, WALL_FRONT_Z } from "@/lib/physics/sceneGeometry";
 import { CableMesh } from "./CableMesh";
-import { createBulb, createFloorTerminal, createPlug, createSocket } from "./models";
+import { createBulb, createPlug, createSocket, createWallHinge } from "./models";
 import type { ExperimentHandle, ExperimentState } from "./types";
 
 type Props = {
@@ -75,9 +75,9 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
       element.appendChild(renderer.domElement);
 
       const scene = new THREE.Scene();
-      const camera = new THREE.OrthographicCamera(-6, 6, 4, -4, 0.1, 60);
-      camera.position.set(4.5, 5.8, 12.5);
-      camera.lookAt(0, 1.3, 0.55);
+      const camera = new THREE.OrthographicCamera(-7.5, 7.5, 5, -5, 0.1, 70);
+      camera.position.set(2.4, 5.0, 13.0);
+      camera.lookAt(-0.1, 1.85, 0.2);
 
       const hemisphere = new THREE.HemisphereLight("#fff8e8", "#8c8071", 2.1);
       scene.add(hemisphere);
@@ -149,9 +149,9 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
       const cable = new CableMesh();
       scene.add(cable);
 
-      // Floor base terminal collar where cable emerges
-      const floorTerminal = createFloorTerminal(physics.baseAnchor);
-      scene.add(floorTerminal);
+      // Wall-mounted swivel hinge where cable enters from outside the frame
+      const wallHinge = createWallHinge(physics.baseAnchor);
+      scene.add(wallHinge);
 
       // Single free plug at the end of the cable (index = physics.count - 1)
       const plugIndex = physics.count - 1;
@@ -225,7 +225,7 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
         const height = element.clientHeight;
         if (!width || !height) return;
         const aspect = width / height;
-        const viewWidth = aspect < 1 ? 9.8 : 11.4;
+        const viewWidth = aspect < 1 ? 12.0 : 13.8;
         camera.left = -viewWidth / 2;
         camera.right = viewWidth / 2;
         camera.top = viewWidth / aspect / 2;
@@ -259,15 +259,15 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
       }
 
       function pick(x: number, y: number): { index: number; isPlug: boolean } | null {
-        // First check the single free plug (index = physics.count - 1)
+        // Generous pick target on the free plug (index = physics.count - 1)
         const plugPoint = screenPosition(physics.points[plugIndex]);
         const plugDist = Math.hypot(plugPoint.x - x, plugPoint.y - y);
-        if (plugDist < 38) {
+        if (plugDist < 56) {
           return { index: plugIndex, isPlug: true };
         }
 
-        // Then check cable segments (excluding index 0 which is floor-anchored)
-        let best = 22;
+        // Generous pick targets along the wire segments (excluding index 0 anchored to the wall)
+        let best = 34;
         let result: { index: number; isPlug: boolean } | null = null;
         for (let i = 1; i < physics.count; i++) {
           const screen = screenPosition(physics.points[i]);
@@ -354,20 +354,20 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
 
         if (!raycaster.ray.intersectPlane(drag.plane, world)) return;
         const position = world.clone().add(drag.offset);
-        position.x = THREE.MathUtils.clamp(position.x, -4.8, 4.8);
+        position.x = THREE.MathUtils.clamp(position.x, -5.5, 5.5);
         position.y = THREE.MathUtils.clamp(
           position.y,
           drag.isPlug ? 0.18 : 0.08,
-          4.5
+          4.6
         );
         position.z = THREE.MathUtils.clamp(
           position.z,
           drag.isPlug ? -1.17 : ROPE_WALL_CENTER_Z,
-          5
+          5.5
         );
 
-        // Enforce reach from the base anchor (index 0)
-        const maxReach = physics.totalLength * 0.98;
+        // Enforce reach from the wall hinge base anchor (index 0)
+        const maxReach = physics.totalLength * 0.99;
         if (position.distanceTo(physics.baseAnchor) > maxReach) {
           position
             .copy(physics.baseAnchor)
@@ -381,7 +381,7 @@ export const Experiment = forwardRef<ExperimentHandle, Props>(
           for (let socket = 0; socket < 2; socket++) {
             const point = screenPosition(socketPositions[socket]);
             if (
-              Math.hypot(event.clientX - point.x, event.clientY - point.y) < 52
+              Math.hypot(event.clientX - point.x, event.clientY - point.y) < 68
             ) {
               near = socket;
               position.copy(socketPositions[socket]);

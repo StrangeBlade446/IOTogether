@@ -137,6 +137,40 @@ export function createFloorTerminal(position: THREE.Vector3) {
   return group;
 }
 
+export function createWallHinge(position: THREE.Vector3) {
+  const group = new THREE.Group();
+  group.position.copy(position);
+
+  // Wall mounting bracket flange
+  const plate = mesh(
+    new THREE.CylinderGeometry(0.26, 0.26, 0.06, 24),
+    brass,
+    group,
+    [0, 0, -0.08]
+  );
+  plate.rotation.x = Math.PI / 2;
+
+  // Swivel hinge barrel
+  const hinge = mesh(
+    new THREE.CylinderGeometry(0.14, 0.14, 0.32, 20),
+    graphite,
+    group,
+    [0, 0, 0.06]
+  );
+  hinge.rotation.z = Math.PI / 2;
+
+  // Metallic conduit elbow curving the cable out into the room
+  const collar = mesh(
+    new THREE.CylinderGeometry(0.085, 0.095, 0.18, 16),
+    copper,
+    group,
+    [0.1, -0.06, 0.12]
+  );
+  collar.rotation.z = Math.PI / 4;
+
+  return group;
+}
+
 export function createSocket(position: THREE.Vector3, index: number, accentColor: string = "#bd5a35") {
   const group = new THREE.Group();
   group.position.copy(position);

@@ -134,82 +134,15 @@ export function Scene3DLanding() {
       </header>
 
       {/* ========================================================================= */}
-      {/* 2. HERO SECTION: EDITORIAL COPY (LEFT) & 3D EXPERIMENT (RIGHT/FILL) */}
+      {/* 2. HERO SECTION: EDITORIAL OVERLAY & FULL 3D EXPERIMENT */}
       {/* ========================================================================= */}
-      <section className="relative flex-1 min-h-[620px] lg:h-[calc(100vh-180px)] max-h-[860px] flex flex-col lg:flex-row">
-        {/* Left Hero Copy */}
-        <div className="w-full lg:w-[38%] xl:w-[35%] pt-8 sm:pt-12 pb-6 px-6 sm:px-10 lg:pl-12 lg:pr-4 flex flex-col justify-center z-10 pointer-events-none">
-          <div className="eyebrow flex items-center gap-3 font-mono text-[9px] tracking-wider text-[#7f7b6d] uppercase mb-4">
-            <span className="text-[#ba4d2b] font-bold">N° 001</span>
-            <span className="w-6 h-px bg-[#c7bcaa]" />
-            <span>SINGLE-SIDED PHYSICAL CABLE</span>
-          </div>
-
-          <h1 className="font-serif text-5xl sm:text-6xl xl:text-7xl leading-[0.98] tracking-tight font-normal text-[#2b3029] mb-6">
-            Make a<br />
-            <em className="text-[#ba4d2b] not-italic font-normal">connection.</em>
-          </h1>
-
-          <p className="text-sm sm:text-base text-[#77786c] leading-relaxed max-w-sm mb-8 font-light">
-            Sometimes, all it takes is a physical connection to spark new innovation. Grab the 3D plug and insert it into either wall socket.
-          </p>
-
-          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 pointer-events-auto">
-            <button
-              type="button"
-              onClick={start}
-              className="inline-flex items-center gap-2.5 px-5 py-3 rounded-md bg-[#ba4d2b] hover:bg-[#9d442b] text-[#fff6e9] text-xs font-semibold shadow-sm transition-transform hover:-translate-y-0.5"
-            >
-              <MousePointer2 className="w-4 h-4" />
-              <span>Pick up the plug</span>
-              <ArrowUpRight className="w-4 h-4 ml-2" />
-            </button>
-
-            <button
-              type="button"
-              onClick={() => experiment.current?.connectTo(0)}
-              className="inline-flex items-center gap-1.5 text-xs text-[#77786c] hover:text-[#ba4d2b] transition font-mono underline underline-offset-4"
-            >
-              Test Keeper (01)
-            </button>
-            <span className="text-[#c7bcaa] font-mono text-xs">•</span>
-            <button
-              type="button"
-              onClick={() => experiment.current?.connectTo(1)}
-              className="inline-flex items-center gap-1.5 text-xs text-[#77786c] hover:text-[#0891B2] transition font-mono underline underline-offset-4"
-            >
-              Test Seeker (02)
-            </button>
-          </div>
-
-          <div className="flex items-center gap-2 mt-5 text-[10px] text-[#8c8b7e] font-sans">
-            <span className="w-3.5 h-px bg-[#bbb5a5]" />
-            <span>Drag in 3D. Connect. Let there be light.</span>
-          </div>
-
-          <div className="flex items-center gap-3.5 mt-8 sm:mt-12 text-[10px] text-[#8d8b7d] font-mono leading-tight">
-            <span className="text-2xl text-[#b9ae9b] font-light leading-none">+</span>
-            <div>
-              Multi-institution verified inventory.
-              <br />
-              Lab Custodians &amp; Student Innovators.
-            </div>
-          </div>
-        </div>
-
-        {/* Right 3D Scene Wrap */}
-        <div className="relative flex-1 w-full lg:w-[62%] xl:w-[65%] h-[480px] sm:h-[540px] lg:h-full">
-          {/* Three.js Canvas Container */}
+      <section className="relative flex-1 min-h-[640px] h-[calc(100vh-185px)] max-h-[880px] w-full overflow-hidden">
+        {/* Full-bleed Three.js Canvas Container */}
+        <div className="absolute inset-0 w-full h-full z-10">
           <Experiment ref={experiment} onState={setState} sound={sound} />
 
-          {/* Architectural Light Gradient Overlays */}
-          <div
-            aria-hidden="true"
-            className="absolute inset-0 pointer-events-none bg-gradient-to-r from-[#f3efe6] via-transparent to-transparent opacity-80 lg:opacity-100 w-24"
-          />
-
           {/* Floating 3D Scene Label */}
-          <div className="absolute top-5 right-6 sm:right-10 flex items-center gap-2 text-[9px] font-mono tracking-wider text-[#8d897b] pointer-events-none">
+          <div className="absolute top-5 right-6 sm:right-10 flex items-center gap-2 text-[9px] font-mono tracking-wider text-[#8d897b] pointer-events-none z-20">
             <span className="w-1.5 h-1.5 rounded-full bg-[#ba4d2b]" />
             <span>LIVE IN 3D</span>
             <span className="text-[#c2bbaa]">/</span>
@@ -218,7 +151,7 @@ export function Scene3DLanding() {
 
           {/* Floating Depth Controls while Dragging */}
           {state.dragging && (
-            <div className="absolute top-14 right-6 sm:right-10 flex items-center gap-1.5 bg-[#f5f1e5]/90 border border-[#d5cebd] px-2.5 py-1.5 rounded-lg shadow-sm backdrop-blur-md text-[10px] font-mono text-[#77786c]">
+            <div className="absolute top-14 right-6 sm:right-10 flex items-center gap-1.5 bg-[#f5f1e5]/90 border border-[#d5cebd] px-2.5 py-1.5 rounded-lg shadow-sm backdrop-blur-md text-[10px] font-mono text-[#77786c] z-20">
               <span className="mr-1 text-[9px] font-bold text-[#ba4d2b]">DEPTH</span>
               <button
                 type="button"
@@ -249,10 +182,10 @@ export function Scene3DLanding() {
 
           {/* Guidance Callout */}
           {guide && !state.dragging && !state.connectedSocket && (
-            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 sm:left-24 sm:translate-x-0 flex items-center gap-3 bg-[#faf7ee] border border-[#d9ceba] shadow-lg rounded-lg px-4 py-2.5 text-xs text-[#88816e] max-w-xs animate-in fade-in slide-in-from-bottom-2">
+            <div className="absolute bottom-24 left-1/2 -translate-x-1/2 sm:left-auto sm:right-48 sm:translate-x-0 flex items-center gap-3 bg-[#faf7ee] border border-[#d9ceba] shadow-lg rounded-lg px-4 py-2.5 text-xs text-[#88816e] max-w-xs animate-in fade-in slide-in-from-bottom-2 z-20">
               <MousePointer2 className="w-4 h-4 text-[#ba4d2b] shrink-0" />
               <div className="text-[11px] leading-snug">
-                Grab the dark physical plug.
+                Grab the physical plug on the floor.
                 <br />
                 <strong className="text-[#414b38] font-semibold">Drag it up to Socket 01 or 02.</strong>
               </div>
@@ -269,7 +202,7 @@ export function Scene3DLanding() {
 
           {/* Live Dynamic Status Message Pill */}
           <div
-            className={`absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono backdrop-blur-md shadow-sm transition-all pointer-events-none ${
+            className={`absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-2 px-4 py-2 rounded-full border text-xs font-mono backdrop-blur-md shadow-sm transition-all pointer-events-none z-20 ${
               state.dragging || state.connectedSocket
                 ? 'bg-white/95 border-[#ba4d2b]/60 text-[#ba4d2b]'
                 : 'bg-[#f5f1e5]/90 border-[#d5cebd]/80 text-[#77796b]'
@@ -288,9 +221,75 @@ export function Scene3DLanding() {
           </div>
 
           {/* Subtle Chamber Coordinates */}
-          <span className="absolute bottom-6 right-8 font-mono text-[9px] tracking-widest text-[#b0a995] pointer-events-none hidden sm:block">
+          <span className="absolute bottom-6 right-8 font-mono text-[9px] tracking-widest text-[#b0a995] pointer-events-none hidden sm:block z-20">
             01 — 02
           </span>
+        </div>
+
+        {/* Soft feathering overlay behind left editorial copy */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-y-0 left-0 w-full sm:w-[480px] lg:w-[560px] bg-gradient-to-r from-[#f3efe6] via-[#f3efe6]/90 to-transparent pointer-events-none z-15"
+        />
+
+        {/* Left Hero Editorial Copy */}
+        <div className="absolute left-6 sm:left-10 lg:left-14 top-8 sm:top-12 z-20 max-w-sm sm:max-w-md pointer-events-none">
+          <div className="eyebrow flex items-center gap-3 font-mono text-[9px] tracking-wider text-[#7f7b6d] uppercase mb-4">
+            <span className="text-[#ba4d2b] font-bold">N° 001</span>
+            <span className="w-6 h-px bg-[#c7bcaa]" />
+            <span>WALL-HINGED SINGLE-SIDED CABLE</span>
+          </div>
+
+          <h1 className="font-serif text-5xl sm:text-6xl xl:text-7xl leading-[0.96] tracking-tight font-normal text-[#2b3029] mb-5">
+            Make a<br />
+            <em className="text-[#ba4d2b] not-italic font-normal">connection.</em>
+          </h1>
+
+          <p className="text-xs sm:text-sm text-[#77786c] leading-relaxed max-w-xs sm:max-w-sm mb-6 font-light">
+            The cable hangs hinged from the wall. Pick up the free plug and connect it to either wall socket to enter the Keeper or Seeker chamber.
+          </p>
+
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 pointer-events-auto">
+            <button
+              type="button"
+              onClick={start}
+              className="inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-[#ba4d2b] hover:bg-[#9d442b] text-[#fff6e9] text-xs font-semibold shadow-sm transition-transform hover:-translate-y-0.5"
+            >
+              <MousePointer2 className="w-3.5 h-3.5" />
+              <span>Pick up the plug</span>
+              <ArrowUpRight className="w-3.5 h-3.5 ml-1" />
+            </button>
+
+            <button
+              type="button"
+              onClick={() => experiment.current?.connectTo(0)}
+              className="inline-flex items-center gap-1.5 text-xs text-[#77786c] hover:text-[#ba4d2b] transition font-mono underline underline-offset-4"
+            >
+              Test Keeper (01)
+            </button>
+            <span className="text-[#c7bcaa] font-mono text-xs">•</span>
+            <button
+              type="button"
+              onClick={() => experiment.current?.connectTo(1)}
+              className="inline-flex items-center gap-1.5 text-xs text-[#77786c] hover:text-[#0891B2] transition font-mono underline underline-offset-4"
+            >
+              Test Seeker (02)
+            </button>
+          </div>
+
+          <div className="flex items-center gap-2 mt-4 text-[10px] text-[#8c8b7e] font-sans">
+            <span className="w-3.5 h-px bg-[#bbb5a5]" />
+            <span>Drag in 3D. Connect. Let there be light.</span>
+          </div>
+
+          <div className="flex items-center gap-3 mt-6 sm:mt-10 text-[10px] text-[#8d8b7d] font-mono leading-tight">
+            <span className="text-2xl text-[#b9ae9b] font-light leading-none">+</span>
+            <div>
+              Multi-institution verified inventory.
+              <br />
+              Lab Custodians &amp; Student Innovators.
+            </div>
+          </div>
         </div>
       </section>
 

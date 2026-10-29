@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { CountdownTimer } from '@/components/timer/CountdownTimer';
+import { KeeperDesk3D } from '@/components/keeper/KeeperDesk3D';
 import {
   ShieldCheck,
   PlusCircle,
@@ -37,9 +38,23 @@ export default async function SenderPortalPage() {
   const pendingRequests = myInstitutionBookings.filter((b) => b.status === 'pending');
   const activeLoans = myInstitutionBookings.filter((b) => b.status === 'checked_out');
   const readyHandoverQrs = myInstitutionBookings.filter((b) => b.status === 'approved');
+  const unreadNotifs = db.getNotifications(session.user.id).filter((n) => !n.read_at).length;
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8 animate-in fade-in duration-300">
+      {/* 3D First-Person Perspective (FPP) Desk View */}
+      <section aria-label="3D First-Person Perspective Custodian Desk">
+        <KeeperDesk3D
+          pendingRequestsCount={pendingRequests.length}
+          activeLoansCount={activeLoans.length}
+          inventoryCount={myResources.length}
+          unreadNotifsCount={unreadNotifs}
+          profileName={profile?.display_name || session.user.display_name}
+          instituteName={profile?.institute_name || 'Northstar Institute of Technology'}
+          roleDesignation={profile?.post || 'Head of Electronics Lab'}
+        />
+      </section>
+
       {/* Sender Hero Banner */}
       <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-amber-950/50 via-slate-900 to-navy-950 border border-amber-500/30 p-8 shadow-2xl">
         <div className="absolute top-0 right-0 -mt-10 -mr-10 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
