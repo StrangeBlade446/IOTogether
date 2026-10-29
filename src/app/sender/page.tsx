@@ -6,6 +6,7 @@ import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { CountdownTimer } from '@/components/timer/CountdownTimer';
 import { KeeperDesk3D } from '@/components/keeper/KeeperDesk3D';
+import { PortalProfileSwitcher } from '@/components/navigation/PortalProfileSwitcher';
 import {
   ShieldCheck,
   PlusCircle,
@@ -147,6 +148,9 @@ export default async function SenderPortalPage({ searchParams }: PageProps) {
           </div>
         </div>
       </div>
+
+      {/* Change Profile Option between Keeper Demo Profiles */}
+      <PortalProfileSwitcher portal="keeper" currentUserId={session.user.id} variant="banner" />
 
       {/* Metrics Row */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">

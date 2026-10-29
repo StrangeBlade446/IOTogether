@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { ReceiverBookingsClient } from './ReceiverBookingsClient';
+import { PortalProfileSwitcher } from '@/components/navigation/PortalProfileSwitcher';
 import { Layers, Sparkles, ShieldCheck } from 'lucide-react';
 
 export const revalidate = 0;
@@ -39,6 +40,8 @@ export default async function ReceiverBookingsPage() {
           </p>
         </div>
       </div>
+
+      <PortalProfileSwitcher portal="seeker" currentUserId={session.user.id} variant="pills" />
 
       <ReceiverBookingsClient initialBookings={bookings} currentUserId={session.user.id} />
     </div>

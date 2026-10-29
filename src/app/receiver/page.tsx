@@ -6,6 +6,7 @@ import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { CountdownTimer } from '@/components/timer/CountdownTimer';
 import { SeekerLab3D } from '@/components/seeker/SeekerLab3D';
+import { PortalProfileSwitcher } from '@/components/navigation/PortalProfileSwitcher';
 import {
   Compass,
   Cpu,
@@ -123,6 +124,9 @@ export default async function ReceiverPortalPage({ searchParams }: PageProps) {
           </div>
         </div>
       </div>
+
+      {/* Change Profile Option between Seeker Demo Profiles */}
+      <PortalProfileSwitcher portal="seeker" currentUserId={session.user.id} variant="banner" />
 
       {/* Active Loan Timers Section (if any equipment is checked out) */}
       {activeLoansWithTimers.length > 0 && (

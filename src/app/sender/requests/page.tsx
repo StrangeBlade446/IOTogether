@@ -3,6 +3,7 @@ import { redirect } from 'next/navigation';
 import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { SenderRequestsClient } from './SenderRequestsClient';
+import { PortalProfileSwitcher } from '@/components/navigation/PortalProfileSwitcher';
 import { ShieldCheck, QrCode, Sparkles } from 'lucide-react';
 
 export const revalidate = 0;
@@ -46,6 +47,8 @@ export default async function SenderRequestsPage() {
           </p>
         </div>
       </div>
+
+      <PortalProfileSwitcher portal="keeper" currentUserId={session.user.id} variant="pills" />
 
       <SenderRequestsClient initialBookings={myBookings} currentUserId={session.user.id} />
     </div>

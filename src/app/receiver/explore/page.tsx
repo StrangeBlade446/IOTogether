@@ -5,6 +5,7 @@ import { getSession } from '@/lib/auth/session';
 import { db } from '@/lib/db/store';
 import { ExploreClient } from '@/app/explore/ExploreClient';
 import { Breadcrumbs } from '@/components/navigation/Breadcrumbs';
+import { PortalProfileSwitcher } from '@/components/navigation/PortalProfileSwitcher';
 import Link from 'next/link';
 import { Sparkles, Cpu, Clock, ShieldCheck } from 'lucide-react';
 
@@ -57,6 +58,8 @@ export default async function ReceiverExplorePage() {
           <Cpu className="w-4 h-4 text-teal-400" /> Need Project Ideas? Try Chef Recipes
         </Link>
       </div>
+
+      <PortalProfileSwitcher portal="seeker" currentUserId={session.user.id} variant="pills" />
 
       <ExploreClient initialResources={resources} institutions={institutions} />
     </div>

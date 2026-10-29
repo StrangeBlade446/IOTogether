@@ -15,6 +15,7 @@ import {
   ArrowRight,
 } from 'lucide-react';
 import { formatCurrency } from '@/lib/utils';
+import { PortalProfileSwitcher } from '@/components/navigation/PortalProfileSwitcher';
 
 export const revalidate = 0;
 
@@ -53,6 +54,8 @@ export default async function SenderInventoryPage() {
           <PlusCircle className="w-4 h-4" /> Add Product with Photos
         </Link>
       </div>
+
+      <PortalProfileSwitcher portal="keeper" currentUserId={session.user.id} variant="pills" />
 
       {/* Grid of Equipment with Photos */}
       {myResources.length === 0 ? (
