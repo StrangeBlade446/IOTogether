@@ -25,7 +25,7 @@ export default async function ReceiverProjectRecipePage() {
           <Cpu className="w-7 h-7 text-teal-600" /> Scientific Chef Project Recipes
         </h1>
         <p className="mt-1 text-xs text-slate-600 max-w-2xl leading-relaxed">
-          Select a laboratory-tested project recipe or describe your custom hardware concept. Scientific Chef designs your Bill of Materials, verifies live stock across partner institutions, and provides step-by-step wiring instructions.
+          Select from 24 pre-verified laboratory project recipes. Scientific Chef provides the complete Bill of Materials, verifies live stock across partner institutions, and details pin-to-pin wiring instructions and starter code.
         </p>
       </div>
 
